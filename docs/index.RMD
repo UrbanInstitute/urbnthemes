@@ -1,0 +1,969 @@
+---
+output:
+  html_document:
+    css: styles.css
+    self_contained: TRUE
+    code_folding: hide
+    toc: TRUE
+    toc_float: TRUE
+---
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" />
+
+<div id="header">
+![](images/urban-institute-logo.png)
+</div>
+
+## Urban Institute R Graphics Guide
+
+```{r setup, include=FALSE}
+library(knitr)
+
+opts_chunk$set(echo = TRUE)
+opts_chunk$set(warning = FALSE)
+
+library(datasets)
+library(tidyverse)
+
+options(scipen = 999)
+
+# Source ggplot2 theme
+#source("../urban_theme_windows.R")
+#source("../urban_theme_mac.R")
+
+library(uithemes)
+set_urban_defaults()
+```
+
+
+R is a powerful, open-source programming language and environment. R excels at data management and munging, traditional statistical analysis, machine learning, and reproducible research, but it is probably best known for its graphics. This .html file made with [R Markdown](http://rmarkdown.rstudio.com/) contains examples and instructions for popular and lesser-known plotting techniques in R. Furthermore, it includes instructions on how to leverage the Urban Institute's ggplot2 theme which will create near-publication-ready plots.
+
+The greatest strength of R is its vibrant and open community of users, developers, and educators. If you ever hit a wall, there are plenty of places to look for help. Hadley Wickham's book, [R for Data Science](http://r4ds.had.co.nz/), is a comprehensive text for beginners. [Stackoverflow](http://stackoverflow.com/) is full of questions and answers (be sure to include "[r]" in the search). Finally, don't hesitate to contact Aaron Williams (awilliams@urban.org). 
+
+#### Installation
+
+**R** can be added on any Urban Institute computer by IT.
+
+**R Studio** is an Integrated Development Environment that greatly expands the interface and capabilites of R. Loading R Studio is the preferred way of loading R. 
+
+**R Packages** are collections of open-source code developed by R users that contain useful functions and data that expand the power and applicability of R. Packages are regularly added on [CRAN](https://cran.r-project.org/) and [GitHub](https://github.com/). Most packages can be installed with `install.packages("package name")`. This only needs to happen once on each computer for each version of the package. Packages can be loaded using `library(package name)`. This needs to happen at the beginning of each script for each package used. **Note:** `install.packages()` uses quotation marks while `library()` does not. 
+
+There are thousands of packages, but most tasks can be accomplished with a handful of important packages:
+
+  * `ggplot2` data visualization
+  * `dplyr` data management
+  * `tidyr` data tidying
+  * `readr` data import 
+  * `purrr` functional programming
+  * `tibble` data frames
+  * `hms` times
+  * `stringr` character strings
+  * `lubridate` dates/times  
+  * `forcats` factors
+  * `DBI` databases 
+  * `haven` SPSS, SAS, and Stata files
+  * `httr` web apis
+  * `jsonlite` JSON
+  * `readxl`.xls and .xlsx
+  * `rvest` web scraping
+  * `xml2` XML
+  * `modelr` simple modeling within a pipeline
+  * `broom` turning models into tidy data
+  * `tidyverse` loads all of the packages listed up to this point; see Hadley Wichkham's "[tidyverse](https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/)"
+  * `shiny` interactive web applications
+  
+#### Using the Urban R Theme
+
+Depending on your operating system, run one of the following scripts once per R session:
+
+**Windows**
+```
+source('https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/master/urban_theme_windows.R')
+```
+
+**Mac**
+```
+source('https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/master/urban_theme_mac.R')
+```
+
+This is an `R` script that makes `ggplot2` output align more closely with [the Urban Institute's Data Visualization style guide](http://urbaninstitute.github.io/graphics-styleguide/).
+
+* This script does **not produce publication ready graphics**. Visual styles must still be edited using your project/paper's normal editing workflow.
+	*  ***Exporting charts as a pdf will allow them to be more easily edited***
+	*  You may need to tweak pdf export options to preserve fonts. For example, in RStudio on OSX, check this option in the export pdf window: `r knitr::include_graphics("images/pdf_export_option.png")`
+
+
+* The theme has been tested against `ggplot2 version 2.2.0`. It will not function properly with older (`< 2.0.0`) versions of `ggplot2`
+
+* If it is not already installed, please install the free [Lato font from Google fonts](https://www.google.com/fonts/specimen/Lato).
+  * If you're on Windows, you'll first need to [install Ghostscript](http://ghostscript.com/download/). You may need to have IT enter an admin password for this installation. Then, in R, tell R where your ghostscript file is.
+  * Edit the file path if yours is in a different place
+```
+Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.05/bin/gswin32c.exe")`
+```
+
+**Run this script once:**
+
+```
+install.packages(c("ggplot2", "reshape2", "RColorBrewer", "extrafont"))
+library(extrafont)
+port()
+loadfonts()
+```
+
+Loading and importing fonts may take a few minutes.
+
+After the initial installation, to use Lato just load the library in each R session:
+```
+library(extrafont)
+```
+
+#### Grammar of Graphics and Conventions
+
+Hadley Wickham's ggplot2 is based on Leland Wilkinson's [*The Grammar of Graphics*](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448) and Wickham's [*A Layered Grammar of Graphics*](http://vita.had.co.nz/papers/layered-grammar.html). The layered grammar of graphics is a structured way of thinking about the components of a plot, which then lend themselves to the simple structure of ggplot2. 
+
+
+* **Data** are what are visualizaed in a plot and **mappings** are directions for how data are mapped in a plot in a way that can be perceived by humans.  
+* **Geoms** are representations of the actual data like points, lines, and bars. 
+* **Stats** are statistical transformations that represent summaries of the data like histograms. 
+* **Scales** map values in the data space to values in the aesthetic space. Scales draw legends and axes.
+* **Coordinate Systems** describe how geoms are mapped to the plane of the graphic.  
+* **Facets** break the data into meaningful subsets like small multiples. 
+* **Themes** control the finer points of a plot such as fonts, font sizes, and background colors. 
+
+More information: [ggplot2: Elegant Graphics for Data Analysis](https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403) 
+
+#### Tips and Tricks
+
+* `ggplot2` expects data to be in data frames. It is preferable for the data frames to be "tidy" with each variable as a column, each obseravtion as a row, and each observational unit as a separate table. `dplyr` and `tidyr` contain concise and effective tools for "tidying" data.
+
+* R allows function arguments to be called explicitly by name and implicitly by position. The coding examples in this guide only contain named arguments for clarity.
+
+* Continuous legends should be switched to vertical using `theme(legend.direction = "vertical")`.
+
+* Graphics will sometimes render differently on different operating systems. This is because anti-aliasing is activated in R on Mac and Linux but not activated in R on Windows. [This blog post](https://www.r-bloggers.com/exporting-nice-plots-in-r/) outlines several fixes for this problem.
+
+* Most features of plots can be adjusted by adding `theme()` to the end of a ggplot call. For example, a plot with a continuous legend would look like this:
+
+```
+ggplot(diamonds, aes(carat, price)) +
+  stat_binhex(aes(colour = ..count..)) +
+  theme(legend.position = "right",
+        legend.direction = "vertical")
+```
+
+## Bar Plots
+
+### One Color
+
+```{r barplots}
+ggplot(data = mtcars, mapping = aes(factor(cyl))) +
+  geom_bar() + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 20)) +
+  labs(title = "Number of Cars By Number of Cylinders",
+       caption = "Urban Institute",
+       x = "Number of Cylinders",
+       y = "Count")
+```
+
+### Three Colors 
+
+This is identical to the previous plot except colors and a legend are added with `fill = factor(cyl)`. Turning `x` into a factor with `factor(cyl)` skips 5 and 7 on the `x-axis`. Adding `fill = cyl` without `factor()` would have created a continuous color scheme and legend.   
+
+``` {r 3-color-barplot}
+ggplot(data = mtcars, mapping = aes(x = factor(cyl), fill = factor(cyl))) +
+  geom_bar() +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Number of Cars By Number of Cylinders",
+       caption = "Urban Institute",
+       x = "Number of Cylinders",
+       y = "Count"
+       ) 
+```
+
+### Stacked Bar Plot
+
+An additional aesthetic can easily be added to bar plots by adding `fill = categorical variable` to the mapping. Here, diamond quality subsets each bar showing the count of diamonds with each level of clarity. 
+
+```{r stacked-bar-plot}
+ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
+  geom_bar() +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 15000), labels = scales::comma) +
+  labs(
+    title = "Diamond Clarity",
+    subtitle = "Something Informative About Diamonds",
+    caption = "The Source of Diamond Data",
+    x = "Clarity",
+    y = "Count"
+    )
+```
+
+### Stacked Bar Plot With Position = Fill
+
+`position = "fill"` in `geom_bar()` changes the y-axis from count to the proportion of each bar. 
+
+```{r stacked-bar-plot-fill}
+#5 colors (stacked)
+ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
+  geom_bar(position = "fill") +
+  scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+  labs(title = "Better Cut Diamonds have Better Clarity",
+      subtitle = "Share of Diamonds with Different Qualities by Clarity of Cut",
+      caption = "The Source of Diamond Data",
+      x = "Clarity",
+      y = "Count")
+```
+
+### Dodged Bar Plot
+
+Subsetted bar charts in ggplot2 are stacked by default. `position = "dodge"` in `geom_bar()` expands the bar chart so the bars appear next to each other.
+
+```{r dodged-bar-plot}
+#5 colors (dodged)
+ggplot(data = diamonds, mapping = aes(clarity, fill = cut)) + 
+  geom_bar(position = "dodge") +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 6000), labels = scales::comma) +
+  labs(title = "Diamond Clarity",
+       subtitle = "Something Informative About Diamonds",
+       caption = "The Source of Diamond Data",
+       x = "Clarity",
+       y = "Count")
+```
+
+### Lollipop plot/Cleveland dot plot{.tabset}
+
+Lollipop plots and Cleveland dot plots are minimalist alternatives to bar plots. The key to both plots is to order the data based on the continuous variable using `arrange()` and then turn the discrete variable into a factor with the ordered levels of the continuous variable using `mutate()`. This step "stores" the order of the data. 
+
+#### Lollipop plot
+
+```{r lollipop-plot}
+mtcars %>%
+	rownames_to_column("model") %>%
+	arrange(mpg) %>%
+	mutate(model = factor(model, levels = .$model)) %>%
+	ggplot(aes(mpg, model)) +
+		geom_segment(aes(x = 0, xend = mpg, y = model, yend = model)) +	
+		geom_point() +
+		scale_x_continuous(expand = c(0, 0), limits = c(0, max(mtcars$mpg) * 1.1)) +
+		labs(title = "Miles Per Gallon of Popular Cars",
+				 subtitle = "1974 Motor Trend US magazine",
+				 x = NULL, 
+				 y = "Miles Per Gallon",
+				 caption = "Urban Institute") +
+	theme(axis.text.y = element_text(size = 8))
+```
+
+#### Cleveland dot plot
+
+```{r cleveland-dot-plot}
+mtcars %>%
+	rownames_to_column("model") %>%
+	arrange(mpg) %>%
+	mutate(model = factor(model, levels = .$model)) %>%
+	ggplot(aes(mpg, model)) +
+		geom_point() +
+		scale_x_continuous(expand = c(0, 0), limits = c(0, max(mtcars$mpg) * 1.1)) +
+		labs(title = "Miles Per Gallon of Popular Cars",
+				 subtitle = "1974 Motor Trend US magazine",
+				 x = NULL, 
+				 y = "Miles Per Gallon",
+				 caption = "Urban Institute") +
+	theme(axis.text.y = element_text(size = 8))
+```
+
+### Dumbell plot
+
+
+
+## Scatter Plots
+
+### One Color Scatter Plot
+
+Scatter plots are useful for showing relationships between two or more variables. 
+
+```{r one-color-scatter-plot}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
+  geom_point() + 
+  scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
+  labs(title = "Diamond Prices Increase With Size",
+       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
+       caption = "Urban Institute",
+       x = "Carat",
+       y = "Price"
+       )
+```
+
+### High-Density Scatter Plot with Transparency
+
+Large numbers of observations can sometimes make scatter plots tough to interpret because points overlap. Adding `alpha = ` with a number between 0 and 1 adds transparency to points and clarity to plots. Now it's easy to see that jewelry stores are probably rounding up but not rounding down carats!
+
+```{r alpha-scatter-plot}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
+  geom_point(alpha = 0.05) + 
+  scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
+  labs(title = "Diamond Prices Increase With Size",
+       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
+       caption = "Urban Institute",
+       x = "Carat",
+       y = "Price"
+       )
+```
+
+### Hex Scatter Plot
+
+Sometimes transparency isn't enough to bring clarity to a scatter plot with many observations. As n increases into the hundreds of thousands and even millions, `geom_hex` can be one of the best ways to display relationships between two variables. 
+
+``` {r scatter-plot-hex}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
+  geom_hex(mapping = aes(fill = ..count..)) + 
+  scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
+	scale_fill_gradientn(labels = scales::comma) +
+  labs(title = "Title",
+       subtitle = "geom_hex adds clarity to overlapping points",
+       x = "Carat",
+       y = "Price") +
+  theme(legend.position = "right",
+        legend.direction = "vertical")
+```
+
+
+### Scatter Plots With Random Noise{.tabset}
+
+Sometimes scatter plots have many overlapping points but a reasonable number of observations. `geom_jitter` adds a small amount of random noise so points are less likely to overlap. `width` and `height` control the amount of noise that is added. In the following before-and-after, notice how many more points are visible after adding jitter.
+
+#### Before
+```{r before-scatter-plot}
+ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
+  geom_point() + 
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Displacement and City MPG",
+       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
+       caption = "Urban Institute",
+       x = "Displacement",
+       y = "City MPG"
+       )
+```
+
+#### After
+```{r jitter-plot}
+set.seed(2017)
+ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
+  geom_jitter(width = 0.2, height = 0.2) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Displacement and City MPG",
+       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
+       caption = "Urban Institute",
+       x = "Displacement",
+       y = "City MPG"
+       )
+```
+
+### Scatter Plot with Counts
+
+Another option is to use `geom_count()` to add a size dimension to overlapping points.
+
+```{r geom_count}
+ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
+  geom_count() + 
+  scale_y_continuous() +
+  labs(title = "Displacement and City MPG",
+       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
+       caption = "Urban Institute",
+       x = "Displacement",
+       y = "City MPG"
+  )
+```
+
+### Scatter Plots with Fill
+
+A third aesthetic can be added to scatter plots. Here, color signifies the number of cylinders in each car. Before `ggplot()` is called, Cylinders is created using `library(dplyr)` and the piping operator `%>%`.
+
+``` {r filled-scatter-plot}
+mtcars %>%
+  mutate(Cylinders = factor(cyl)) %>%
+  ggplot(mapping = aes(x = wt, y = mpg, colour = Cylinders)) + 
+  geom_point(size = 3) + 
+  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon") +
+  theme(legend.title = element_text(hjust = 0))
+```
+
+### Bubble Scatter Plot
+
+`size =` can be used as a mapping to plot a fourth dimension. 
+
+```{r bubble-chart}
+mtcars %>%
+  mutate(Cylinders = factor(cyl), `Automatic Transmission` = factor(am)) %>%
+  ggplot(mapping = aes(x = wt, y = mpg, color = `Automatic Transmission`, size = Cylinders)) + 
+  geom_point() + 
+  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon") +
+  theme(legend.title = element_text(hjust = 0))
+```
+
+## Line Plots
+```{r line-plots}
+
+ggplot(data = economics, mapping = aes(x = date, y = unemploy)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::comma) +
+  labs(title = "Unemployment in the United States",
+       subtitle = "Number of Unemployed Americans in the U.S.",
+       caption = "Urban Institute",
+       x = "Year", 
+       y = "Number Unemployed (1,000s)")
+```
+
+### Lines Plots With Multiple Lines
+
+Plotting more than one line can be useful for seeing the relationship of variables over time, but it takes a small amount of data munging. 
+
+This is because `ggplot2` wants data in a "long" format instead of a "wide" format for line plots with multiple lines. `gather()` and `spread()` from the `tidyr` package make switching back-and-forth between "long" and "wide" painless. Essentially, variable titles go into "key" and variable values go into "value". Then ggplot2, turns the different levels of the key variable (population, unemployment) into colors. 
+
+```{r multiple-line-charts}
+library(tidyverse)
+
+economics %>%
+  select(date, pop, unemploy) %>%
+  gather(pop, unemploy, key = "variable", value = "value") %>%
+  ggplot(mapping = aes(x = date, y = value, color = variable)) +
+  geom_line(size = 1) +
+  scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
+  labs(title = "Unemployment and Population",
+       subtitle = "Total Population and Total Unemployment in the U.S. Over Time",
+       caption = "Urban Institute",
+       x = "Year",
+       y = "People (1,000s)")
+```
+
+### Slope plots
+
+```{r slope-plot}
+# https://www.bls.gov/lau/
+
+library(ggrepel)
+
+unemployment <- tibble(
+	time = c("October 2009", "October 2009", "October 2009", "August 2017", "August 2017", "August 2017"),
+	rate = c(7.4, 7.1, 10.0, 3.9, 3.8, 6.4),
+	state = c("Maryland", "Virginia", "Washington D.C.", "Maryland", "Virginia", "Washington D.C.")
+)
+
+label <- tibble(label = c("October 2009", "August 2017"))
+october <- filter(unemployment, time == "October 2009")
+august <- filter(unemployment, time == "August 2017")
+
+unemployment %>%
+	mutate(time = factor(time, levels = c("October 2009", "August 2017"))) %>%
+	ggplot() + 
+		geom_line(aes(time, rate, group = state, color = state)) +
+		geom_point(aes(x = time, y = rate, color = state)) +
+		labs(subtitle = "Unemployment Rate",
+				 caption = "Source: BLS Local Area Unemployment Statistics") +
+		theme(axis.ticks.x = element_blank(),
+					axis.title.x = element_blank(),
+					axis.ticks.y = element_blank(),
+  	      axis.title.y = element_blank(), 
+  	      axis.text.y = element_blank(),
+					panel.grid.major.y = element_blank(),
+  	      panel.grid.minor.y = element_blank(),
+  	      panel.grid.major.x = element_blank(),
+					axis.line = element_blank()) +
+		geom_text_repel(data = october, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = -0.06, family = "Lato") + 
+		geom_text_repel(data = august, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = 0.06, family = "Lato")
+```
+
+## Binning
+
+Histograms and frequency polygons show the distribution of a single numeric variable. Both bin variables and then count the number of observations in a bin. Histograms display distributions with a bar as a geom and frequency polygons show distributions with the line geom. Frequency polygons can be easily layered.
+
+### Histogram
+```{r histogram}
+ggplot(data = diamonds, mapping = aes(x = depth)) + 
+  geom_histogram(bins = 100) +
+  scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
+  labs(title = "Distribution of Diamond Depths",
+       caption = "Urban Institute", 
+       x = "Depth",
+       y = "Count")
+
+diamonds %>%
+  filter(cut == "Fair" | cut == "Premium") %>%
+  ggplot(mapping = aes(x = depth, fill = cut)) + 
+  geom_histogram(bins = 100) +
+  scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
+  labs(title = "Distribution of Diamond Depths and Quality",
+       caption = "Urban Institute", 
+       x = "Depth",
+       y = "Count")
+```
+
+### Frequency Polygon
+```{r frequency-polygon}
+population %>%
+  filter(year == 2013 & population < 3000000) %>%
+  ggplot(mapping = aes(x = population)) + 
+  geom_freqpoly() +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(labels = scales::comma) +
+  labs(title = "Populations of World Countries",
+       caption = "Urban Institute",
+       x = "Population",
+       y = "Count")
+
+diamonds %>%
+  filter(cut == "Ideal" | cut == "Premium") %>%
+  ggplot(aes(x = price, color = cut)) +
+  geom_freqpoly(size = 1) +
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(title = "Distribution of Diamond Prices and Diamond Cut",
+       caption = "Urban Institue",
+       x = "Price",
+       y = "Count")
+```
+
+### Ridgeline plots
+
+Ridgeline plots are partially overlapping histograms faceted by a categorical variable that pack a lot of information into one compact plot. 
+
+```{r ridgeline-plots}
+library(ggridges)
+
+ggplot(diamonds, mapping = aes(x = price, y = cut)) +
+	geom_density_ridges(fill = "#1696d2") +
+	scale_x_continuous(labels = scales::dollar) +
+  labs(title = "Distribution of Diamond Prices by Diamond Cut",
+       caption = "Urban Institue",
+       x = "Price",
+       y = "Cut")
+```
+
+### Categorical Variables
+
+The following plots are effective at displaying how a continuous or discrete variable varies across different levels of a categorical variable. 
+
+### Box Plot
+```{r box-plot}
+ggplot(InsectSprays, aes(x = spray, y = count)) +
+  geom_boxplot() +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Number of Insects Killed by Insect Sprays",
+       caption = "Urban Institute", 
+       x = "Type of Insect Spray",
+       y = "Number of Dead Insects")
+```
+
+### Violin Plot
+```{r violin plot}
+ggplot(InsectSprays, aes(x = spray, y = count, fill = spray)) +
+  geom_violin() +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Number of Insects Killed by Insect Sprays",
+       caption = "Urban Institute",
+       x = "Type of Insect Spray",
+       y = "Number of Dead Insects")
+```
+
+### Binned dot plots
+TODO(aaron): 
+
+### Bean Plots
+TODO(aaron): Add bean plots
+
+## Area Plot
+
+### Stacked Area
+```{r area plot stack}
+txhousing %>%
+  filter(city %in% c("Austin","Houston","Dallas","San Antonio","Fort Worth")) %>%
+  group_by(city, year) %>%
+  summarize(sales = sum(sales)) %>%
+  ggplot(aes(x = year, y = sales, fill = city)) +
+    geom_area(position = "stack") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
+    labs(title = "Home Sales in Texas Cities",
+         caption = "Urban Institute",
+         x = "Year",
+         y = "Home Sales")
+```
+
+### Filled Area
+```{r area plot fill}
+txhousing %>%
+  filter(city == "Austin" | city == "Houston"| city == "Dallas"| city == "San Antonio" | city == "Fort Worth") %>%
+  group_by(city, year) %>%
+  summarize(listings = sum(listings)) %>%
+  mutate(listings = ifelse(is.na(listings), lag(listings), listings)) %>%
+  ggplot(aes(x = year, y = listings, fill = city)) +
+    geom_area(position = "fill") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
+    labs(title = "Home Listings in Texas Cities",
+         caption = "Urban Institute",
+         x = "Year",
+         y = "Proportion of Home Listings")
+```
+
+## Waffle Chart / Square Pie Chart
+
+The waffle package {[CRAN](https://cran.r-project.org/web/packages/waffle/waffle.pdf) and [Github](https://github.com/hrbrmstr/waffle)} creates suare pie charts. It can also be combined with [glyphs](http://fontawesome.io/) for more elegant shapes than squares. This example uses data pulled from [A Vision for an Equitable DC](http://www.urban.org/features/vision-equitable-dc).
+
+Waffle charts will require a little extra tinkering since they are called from `library(waffle)` instead of `library(ggplot2)`. Most importantly, waffle charts require `theme_urban(text = element_text(family = "Lato"))` for the Lato font. 
+
+### Single Waffle Chart
+
+```{r single waffle}
+library(waffle)
+
+parts <- c(`Virginia\nClinics` = (1000 - 208 - 105), `Maryland\nClinics` = 208, `D.C.\nClinics` = 105)
+waffle(parts, rows = 25, size = 1, colors = c("#1696d2", "#fdbf11", "#000000"), legend_pos = "bottom") +
+  labs(title = "Free Clinics in the D.C.-Maryland-Virginia Area",
+       subtitle = "1 Square == 1 Clinic",
+       caption = "Urban Institute") +
+  theme(text = element_text(family = "Lato"))
+```
+
+### Waffle Charts with Glyphs
+
+Waffle charts can be enhanced by replacing squares qith glyphs. Two important arguments to know are `glyph_size =` and `use_glyph =`. Both are called in the `waffle()` function. Note: `size = 1` is sensible and `glyph_size = 12` is sensible. 
+
+Using glyphs requires downloading fontawesome. That can be done [here](https://github.com/hrbrmstr/waffle/tree/master/inst/fonts). Then run `library(extrafont)`, 
+`port(<font-location>)`, and `loadfonts()` once. After that, building waffle charts with glpyhs should be as easy as one function call. 
+
+```{r waffle with glyphs}
+#library(extrafont)
+#font_import("H:/IT/urban_R_theme/docs")
+#loadfonts()
+
+parts <- c(`Virginia\nClinics` = (50 - 10 - 5), `Maryland\nClinics` = 10, `D.C.\nClinics` = 5)
+waffle(parts, rows = 5, glyph_size = 12, colors = c("#1696d2", "#fdbf11", "#000000"), legend_pos = "bottom", use_glyph = "medkit") +
+  labs(title = "Free Clinics in the D.C.-Maryland-Virginia Area",
+       subtitle = "1 Square == 20 Clinics",
+       caption = "Urban Institute") +
+  theme(text = element_text(family = "Lato"))
+
+```
+
+### Multiple Waffle Charts
+
+`library(waffle)` allows multiple waffle charts to be ironed together using `iron()`. Ironing multiple charts together requires some trial-and-error to get the sizes and resolution to look good, but the results can be worth the work. Don't forget `theme(text = element_text(family = "Lato"))`!
+
+```{r ironed waffle}
+library(waffle)
+
+white <- c(`With Degree` = 169300, `Without Degree` = 800)
+black <- c(`With Degree` = 174900, `Without Degree` = 34700)
+hispanic <- c(`With Degree` = 27700, `Without Degree` = 12400)
+
+iron(
+  waffle(white / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "White", keep = FALSE, pad = 10) + 
+  theme(text = element_text(family = "Lato")),
+  waffle(black / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "Black", keep = FALSE) + 
+  theme(text = element_text(family = "Lato")),
+  waffle(hispanic / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "Hispanic", keep = FALSE, pad = 59, xlab = "1 Square == 83 People") + 
+  theme(text = element_text(family = "Lato"))
+) 
+```
+
+## Heat map
+```{r heat map, fig.height=10}
+library(fivethirtyeight)
+
+bad_drivers %>%
+  mutate(`Number of Drivers` = scale(num_drivers),
+         `Percent Speeding` = scale(perc_speeding),
+         `Percent Alcohol` = scale(perc_alcohol),
+         `Percent Not Distracted` = scale(perc_not_distracted),
+         `Percent No Previous` = scale(perc_no_previous),
+         state = factor(state, levels = rev(state))
+         ) %>%
+  select(-insurance_premiums, -losses, -(num_drivers:losses)) %>%
+  gather(`Number of Drivers`:`Percent No Previous`, key = "variable", value = "SD's from Mean") %>%
+  ggplot(aes(variable, state)) +
+    geom_tile(aes(fill = `SD's from Mean`)) +
+    labs(title = "Drivers Involved in Fatal Collisions By Behavior",
+      subtitle = "As a share of scaled fatal collisions per billion miles, 2009",
+      caption = "Source: fivethirtyeight R package",
+      x = NULL,
+      y = NULL) + 
+    scale_fill_gradient(low = "white", high = "#1696d2") +
+    theme(legend.position = "right",
+      legend.direction = "vertical",
+      axis.text.x = element_text(angle = 45))
+#https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/
+
+```
+
+## Faceting and Small Multiples
+
+### facet_wrap()
+
+R's faceting system is a powerful way to make "small multiples".
+
+Some edits to the theme may be necessary depending upon how many rows and columns are in the plot. 
+
+```{r small multiples, message = FALSE, warning = FALSE, fig.height = 9}
+# Facet Wrap
+txhousing %>%
+  filter(!city %in% c("Brazoria County", "Brownsville", "San Angelo", "Denton County")) %>%
+  ggplot(aes(x = median)) +
+  geom_histogram() +
+  facet_wrap(~city) +
+  scale_x_continuous(labels = scales::dollar) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Median Monthly Home Prices in Selected Texas Cities",
+       x = "Median Monthly Home Value",
+       y = "Count") + 
+  theme(axis.text.x = element_text(angle = 90),
+        strip.text = element_text(face = "plain", 
+                              size = rel(0.5)))
+```
+
+### facet_grid()
+
+``` {r faceting}
+## Facet Grid
+mtcars %>%
+	mutate(vs = factor(vs, levels = 0:1, labels = c("Normal Transmission", "V/S Transmission")),
+				 am = factor(am, levels = 0:1, labels = c("Automatic Transmission", "Manual Transmission"))) %>%
+	ggplot(aes(wt, mpg)) +
+		geom_point(alpha = 0.5) +
+		scale_y_continuous(expand = c(0, 0), limits = c(0, 45)) +
+  	labs(title = "Determinants of Fuel Efficiency", 
+  			 subtitle = "1974 Motor Trends US magazine data", 
+  		caption = "Urban Institute") +
+  	facet_grid(vs ~ am, margins = TRUE) +
+		theme(panel.border = element_rect(colour = "black", fill = NA, size = 0.3))
+```
+
+## Smoothers
+
+`geom_smooth()` fits and plots models to data with two or more dimensions. 
+
+```{r geom_smooth}
+ggplot(data = mpg) +
+	geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+Understanding and manipulating defaults is more important for `geom_smooth()` than other geoms because it contains a number of assumptions. `geom_smooth()` automatically uses loess for datasets with fewer than 1,000 observations and 
+a generalized additive model with `formula = y ~ s(x, bs = "cs")` for datasets with greater than 1,000 observations. Both default to a 95% confidence interval with the confidence interval displayed. 
+
+Models are chosen with `method = ` and can be set to lm(), glm(), gam(), loess(), rlm(), and more. Formulas can be specified with `formula = ` and `y ~ x` syntax. Plotting the standard error is toggled with `se = TRUE` and `se = FALSE`, and level is specificed with `level = `. As always, more information can be seen in RStudio with `?geom_smooth()`.
+
+`geom_point()` adds a scatterplot to `geom_smooth()`. The order of the function calls is important. The function called second will be layed on top of the function called first. 
+
+```{r geom_smooth2}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
+	geom_point(alpha = 0.1) +
+	geom_smooth(color =  "#ec008b") +
+	scale_y_continuous(expand = c(0, 0), labels = scales::dollar)
+```
+
+`geom_smooth` can be subset by categorical and factor variables. This requires subgroups to have a decent number of observations and and a fair amount of variability across the x-axis. Confidence intervals often widen at the ends so special care is needed for the chart to be meaningful and readable. 
+
+```{r subset geom_smooth}
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
+	geom_point(alpha = 0.2) +
+	geom_smooth() +
+	labs(title = "Engine Displacement and City MPG by Number of Cylinders",
+			 subtitle = "Loess: MPG = Displacement",
+			 caption = "Urban Institute",
+			 x = "Engine Displacement",
+			 y = "Highway MPG")
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+	geom_smooth(method = "lm") +
+	geom_point(alpha = 0.2) +
+	labs(title = "Engine Displacement and City MPG by Drive",
+			 subtitle = "Linear Model: MPG = Displacement",
+			 caption = "Urban Institute",
+			 x = "Engine Displacement",
+			 y = "Highway MPG")
+
+```
+
+
+## Highlighting
+
+points
+polygons
+lines
+
+## Text
+
+### library(ggplot2){.tabset}
+
+`geom_text()` and `geom_label()` annotate points on scatterplots. Both functions need `x` values, `y` values, and a vector of labels. It's rarely useful to label every point. Use `filter()` to create a second data set that is subsetted and pass it into the labelling function. 
+
+`geom_text()` labels points without backgrounds. `geom_label()` labels points with backgrounds. 
+
+*Note:* `family = "Lato"` is required to turn `geom_text()` into Lato.
+
+#### geom_text()
+
+```{r scatterplot-geom_text}
+labels <- mtcars %>%
+	rownames_to_column("model") %>%
+	filter(model %in% c("Toyota Corolla", "Merc 240D", "Datsun 710"))
+
+mtcars %>%
+	ggplot(mapping = aes(x = wt, y = mpg)) +
+		geom_point() +
+		geom_text(data = labels, mapping = aes(x = wt, y = mpg, label = model), nudge_x = 0.38, family = "Lato") +
+	  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon")
+```
+
+#### geom_label()
+
+```{r scatterplot-geom_label}
+labels <- mtcars %>%
+	rownames_to_column("model") %>%
+	filter(model %in% c("Toyota Corolla", "Merc 240D", "Datsun 710"))
+
+mtcars %>%
+	ggplot(mapping = aes(x = wt, y = mpg)) +
+		geom_point() +
+		geom_label(data = labels, mapping = aes(x = wt, y = mpg, label = model), family = "Lato", nudge_x = 0.35) +
+	  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon")
+```
+
+### library(ggrepel){.tabset}
+
+Text too often overlaps when using `geom_text()` or `geom_label()`. `library(ggrepel)` is a `library(ggplot2)` add-on that automatically positions text so it doesn't overlap with geoms or other text.
+
+To add this functionalit simple load `library(ggrepel)` and then use `geom_text_repel()` and `geom_text_label()` with the same syntax as `geom_text()` and `geom_label()`. Don't roget to add `family = "Lato"`.
+
+#### geom_text_repel()
+
+```{r scatterplot-geom_text_repel}
+library(ggrepel)
+
+labels <- mtcars %>%
+	rownames_to_column("model") %>%
+	filter(model %in% c("Toyota Corolla", "Merc 240D", "Datsun 710"))
+
+mtcars %>%
+	ggplot(mapping = aes(x = wt, y = mpg)) +
+		geom_point() +
+		geom_text_repel(data = labels, mapping = aes(x = wt, y = mpg, label = model), nudge_x = 0.38, family = "Lato") +
+	  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon")
+```
+
+#### geom_label_repel()
+
+```{r scatterplot-geom_label_repel}
+labels <- mtcars %>%
+	rownames_to_column("model") %>%
+	filter(model %in% c("Toyota Corolla", "Merc 240D", "Datsun 710"))
+
+mtcars %>%
+	ggplot(mapping = aes(x = wt, y = mpg)) +
+		geom_point() +
+		geom_label_repel(data = labels, mapping = aes(x = wt, y = mpg, label = model), family = "Lato", nudge_x = 0.35) +
+	  labs(title = "Fuel Efficiency Declines as Weight Increases",
+       caption = "Urban Institute",
+       x = "Weight (Tons)",
+       y = "Miles Per Gallon")
+```
+
+
+
+
+
+## Layered Geoms
+
+Geoms can be layered in `ggplot2`. This is useful for design and analysis. 
+
+It is often useful to add points to line plots with a small number of values across the x-axis. This example from [R for Data Science](http://r4ds.had.co.nz/tidy-data.html) shows how changing the line to grey can be appealing. 
+
+### Design{.tabset}
+
+#### Before
+```{r layering geoms design}
+table1 %>%
+	ggplot(aes(x = year, y = cases)) +
+		geom_line(aes(color = country)) +
+		geom_point(aes(color = country)) +
+		scale_y_continuous(labels = scales::comma) +
+		scale_x_continuous(breaks = c(1999, 2000)) +
+		labs(title = "Changes in Tuberculosis Cases in Three Countries",
+					 caption = "Source: World Health Organization Global Tuberculosis Report")
+```
+
+#### After
+```{r layering geoms design grey}
+table1 %>%
+	ggplot(aes(year, cases)) +
+		geom_line(aes(group = country), color = "grey50") +
+		geom_point(aes(color = country)) +
+		scale_y_continuous(labels = scales::comma) +
+		scale_x_continuous(breaks = c(1999, 2000)) +
+		labs(title = "Changes in Tuberculosis Cases in Three Countries",
+					 caption = "Source: World Health Organization Global Tuberculosis Report")
+```
+
+Layering geoms is also useful for adding trend lines and centroids to scatter plots. 
+
+```{r layers}
+# Simple line
+# Regression model
+# Centroids
+```
+
+
+### Centroids
+
+```{r centroids}
+
+mpg_summary <- mpg %>%
+	group_by(cyl) %>%
+	summarize(displ = mean(displ), cty = mean(cty))
+
+mpg %>%
+	ggplot() +
+		geom_point(aes(x = displ, y = cty, color = factor(cyl)), alpha = 0.5) +
+		geom_point(data = mpg_summary, aes(x = displ, y = cty), size = 5, color = "red") +
+		geom_text(data = mpg_summary, aes(x = displ, y = cty, label = cyl)) +
+		labs(title = "City MPG, Engine Displacement, and Number of Cylinders", 
+				 subtitle = "Subgroup Means in Red", 
+				 caption = "Source: EPA Fuel Economy Dataset", 
+				 x = "Displacement",
+				 y = "City MPG")
+
+
+```
+
+## Shiny
+
+## ggvis
+
+[ggvis](http://ggvis.rstudio.com/) is Hadley Wickham's successor to `ggplot2 `. It incorporates what he has learned over the past decade and extends to include web and interactive graphics. The package is available, but it is still very much in development. `ggplot2` is still the best way to make graphics in R. 
+
+Functionality that is added to `ggvis` that isn't possible in `ggplot` will be added to this section in the future. 
+## Saving plots
+
+todo(aaron): make the case for svg and pdf
+png
+
+## Appendix
+
+### System Info and Package Versioning
+
+```{r System Info and Package Versioning}
+sessionInfo()
+```
