@@ -3,6 +3,8 @@
 #' \code{theme_urban_web} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
 #'
+#' @import extrafont
+#' @import ggrepel
 #' @md
 #' @param base_family,base_size base font family and size
 #' @param base_line_size,base_rect_size base line and rectangle sizes
@@ -42,6 +44,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
     plot.title = element_text(size = base_size * 1.5,
                               hjust = 0L,
                               vjust = 0L,
+                              face = "bold",
                               margin = margin(b = 8L)),
     plot.subtitle = element_text(size = base_size * 7L / 6L,
                                  hjust = 0L,
@@ -138,7 +141,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
                                     colour = NA,
                                     size = 10L),
     strip.text = element_text(face = "bold",
-                              size = base_size * (2 / 3),
+                              size = base_size,
                               margin = margin(t = 0L, r = 0L, b = 0L, l = 0L)),
 
     strip.text.x = element_text(margin = margin(t = 4.5, b = 4.5)),

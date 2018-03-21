@@ -23,7 +23,7 @@ ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
   geom_point() +
   labs(title = 'Title', subtitle = 'Subtitle', caption = 'Caption',
        x = 'X Variable', y = 'Y Variable') +
-  theme_urban() +
+  theme_urban_web() +
   scale_color_urban()
 
 ```

@@ -1,0 +1,55 @@
+#' A [ggplot2] theme formatted in the Urban Institute style
+#'
+#' \code{set_urban_defaults} provides a [ggplot2] theme formatted according to the
+#' Urban Institute style guide for web, with sensible defaults.
+#'
+#' @import extrafont
+#' @import ggrepel
+#' @md
+#' @export
+
+set_urban_defaults <- function() {
+
+  # set default theme to theme_urban_web() ----------------------------------
+
+  ggplot2::theme_set(theme_urban_web())
+
+  # add Lato font to text and label geoms ---------------------------
+
+  ggplot2::update_geom_defaults("text", list(family = "Lato"))
+  ggplot2::update_geom_defaults("label", list(family = "Lato"))
+  ggplot2::update_geom_defaults("text_repel", list(family = "Lato"))
+  ggplot2::update_geom_defaults("label_repel", list(family = "Lato"))
+
+  # set default colours for monochromatic geoms -----------------------------
+
+  ggplot2::update_geom_defaults("bar", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("col", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("point", list(colour = "#1696d2"))
+  ggplot2::update_geom_defaults("line", list(colour = "#1696d2"))
+  ggplot2::update_geom_defaults("boxplot", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("density", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("violin", list(fill = "#1696d2"))
+
+  # set default colours for monochromatic stats -----------------------------
+
+  ggplot2::update_stat_defaults("count", list(fill = "#1696d2"))
+  ggplot2::update_stat_defaults("boxplot", list(fill = "#1696d2"))
+  ggplot2::update_stat_defaults("density", list(fill = "#1696d2"))
+  ggplot2::update_stat_defaults("ydensity", list(fill = "#1696d2"))
+
+  # set default colors for discrete color scales ----------------------------
+
+  # redefine default discrete colours, up to 9 colours.
+
+  assign("scale_color_discrete", function(...) scale_color_urban(), envir = globalenv())
+  assign("scale_colour_discrete", function(...)  scale_color_urban(), envir = globalenv())
+  assign("scale_fill_discrete", function(...)  scale_fill_urban(), envir = globalenv())
+
+  # set default colors for continuous color scales --------------------------
+
+  assign("scale_fill_gradientn", function(...)  scale_fill_gradientn_urban(), envir = globalenv())
+  assign("scale_color_gradientn", function(...)  scale_color_gradientn_urban(), envir = globalenv())
+  assign("scale_colour_gradientn", function(...) scale_colour_gradientn_urban(), envir = globalenv())
+
+}

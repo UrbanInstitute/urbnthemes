@@ -12,8 +12,8 @@ Description: Align "ggplot2" output more closely with the Urban Institute
 Depends: R (>= 3.1.0)
 Imports:
     ggplot2 (>= 2.2.1),
-    extrafont (>= 0.17),
-    ggrepel (>= 0.7.0)
+    extrafont,
+    ggrepel
 License: GPL-3
 URL: https://github.com/UI-Research/uithemes
 BugReports: https://github.com/UI-Research/uithemes/issues
