@@ -26,13 +26,14 @@ devtools::install_github("hadley/tidyverse")
 * scale_color_urban()
 * scale_fill_urban()
 * scale_gradientn()
+* lato_test()
 
 ### In development
 
 * urban_logo_text()
 * urban_logo_image()
 * install_lato()
-* test_lato()
+
 * undo_urban_defaults()
 * theme_urban_map()
 * save_urban_print()
