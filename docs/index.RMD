@@ -33,6 +33,7 @@ options(scipen = 999)
 
 library(uithemes)
 set_urban_defaults()
+undo_urban_defaults()
 ```
 
 

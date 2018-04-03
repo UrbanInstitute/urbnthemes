@@ -9,7 +9,7 @@ palette_urban <- {
   palette <- list(
     categorical = list(
       c("#1696d2"),
-      c("#1696d2", "#000000"),
+      c("#1696d2", "#fdbf11"),
       c("#1696d2", "#fdbf11", "#000000"),
       c("#000000", "#d2d2d2", "#fdbf11", "#1696d2"),
       c("#1696d2", "#fdbf11", "#d2d2d2", "#ec008b", "#000000"),
@@ -20,7 +20,7 @@ palette_urban <- {
         "#5c5859","#db2b27")
     ),
 
-    sequential = list (
+    sequential = list(
       c("#1696d2"),
       c("#a2d4ec", "#1696d2"),
       c("#a2d4ec", "#1696d2", "#0a4c6a"),

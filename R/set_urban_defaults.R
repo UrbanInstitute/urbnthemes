@@ -40,6 +40,18 @@ set_urban_defaults <- function() {
 
   # set default colors for discrete color scales ----------------------------
 
+  # save
+
+  assign("saved_scale_color_discrete", function(...) scale_color_discrete(), envir = globalenv())
+  assign("saved_scale_colour_discrete", function(...)  scale_colour_discrete(), envir = globalenv())
+  assign("saved_scale_fill_discrete", function(...)  scale_fill_discrete(), envir = globalenv())
+
+  # save default colors for continuous color scales --------------------------
+
+  assign("saved_scale_fill_gradientn", function(...)  scale_fill_gradientn(), envir = globalenv())
+  assign("saved_scale_color_gradientn", function(...)  scale_color_gradientn(), envir = globalenv())
+  assign("saved_scale_colour_gradientn", function(...) scale_colour_gradientn(), envir = globalenv())
+
   # redefine default discrete colours, up to 9 colours.
 
   assign("scale_color_discrete", function(...) scale_color_urban(), envir = globalenv())

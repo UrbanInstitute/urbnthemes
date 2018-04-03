@@ -45,7 +45,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
                               hjust = 0L,
                               vjust = 0L,
                               face = "bold",
-                              margin = margin(b = 8L)),
+                              margin = margin(b = 10L)),
     plot.subtitle = element_text(size = base_size * 7L / 6L,
                                  hjust = 0L,
                                  vjust = 0L,
@@ -56,7 +56,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
                                 margin = margin(t = half_line * 0.9)),
     plot.background = NULL,
 
-    plot.margin = margin(t = 10L, r = 10L, b = 10L, l = 10L),
+    plot.margin = margin(half_line, half_line, half_line, half_line),
 
     # axis attributes
 
