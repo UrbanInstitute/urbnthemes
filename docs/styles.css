@@ -1,0 +1,55 @@
+/* Global Formats */
+.main-container {
+  font-family: Lato;
+}
+
+/* Hyper-links */
+.a {
+	color: #1696d2;
+}
+
+/* Header image formatting */
+#header {
+	padding-top: 12px;
+}
+
+/* Legend Formatting */
+.list-group-item.active {
+	background-color: #1696d2;
+  border-color: #1696d2;
+}
+
+.list-group-item.active:hover {
+	background-color: #000000;
+  border-color: #000000;
+}
+
+.tocify {
+	border-radius: 0px;
+}
+
+/* In-line code formatting */
+code {
+    white-space: pre;
+    font-family: "Monaco", Helvetica, Arial, sans-serif;
+}
+
+/* Code box format */
+.pre {
+	font-family: "Monaco", Helvetica, Arial, sans-serif;	
+}
+
+/* Button Formatting */
+.btn {
+	border-radius: 0;	
+}
+
+/* Kable Formatting
+caption {
+	font-size: 18px;
+	color: #000000;
+} */
+
+.table.header {
+	text-align: center;
+}
