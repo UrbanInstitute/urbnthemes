@@ -1,4 +1,4 @@
-#' Color Palettes based on Urban Institute theme
+#' The Urban Institute [ggplot2] theme
 #'
 #' Color palettes used in the Urban Institute.
 #'

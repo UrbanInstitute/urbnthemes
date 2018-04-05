@@ -7,8 +7,8 @@
 lato_test()
 }
 \description{
-\code{lato_test} tests to see if Lato is installed and loaded. Lato is the Urban Institute's main font and can be installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
+\code{lato_test} tests to see if Lato is imported and registered. Lato is the Urban Institute's main font and can be installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
 }
 \details{
-Import Lato into R with lato_install().
+Import and register Lato in R with lato_install().
 }
