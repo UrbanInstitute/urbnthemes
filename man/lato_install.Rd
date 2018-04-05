@@ -2,7 +2,7 @@
 % Please edit documentation in R/lato_install.R
 \name{lato_install}
 \alias{lato_install}
-\title{A \link{ggplot2} theme formatted in the Urban Institute style}
+\title{The Urban Institute \link{ggplot2} theme}
 \usage{
 lato_install()
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/undo_urban_defaults.R
 \name{undo_urban_defaults}
 \alias{undo_urban_defaults}
-\title{Resets all the \link{ggplot2} theme to its default settings}
+\title{The Urban Institute \link{ggplot2} theme}
 \usage{
 undo_urban_defaults()
 }

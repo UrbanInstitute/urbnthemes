@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_urban_defaults.R
 \name{set_urban_defaults}
 \alias{set_urban_defaults}
-\title{A \link{ggplot2} theme formatted in the Urban Institute style}
+\title{The Urban Institute \link{ggplot2} theme}
 \usage{
 set_urban_defaults()
 }

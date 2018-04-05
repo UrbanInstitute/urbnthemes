@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_urban_web.R
 \name{theme_urban_web}
 \alias{theme_urban_web}
-\title{A \link{ggplot2} theme formatted in the Urban Institute style}
+\title{The Urban Institute \link{ggplot2} theme}
 \usage{
 theme_urban_web(base_size = 12L, base_family = "Lato",
   base_line_size = base_size/24L, base_rect_size = base_size/24L)
