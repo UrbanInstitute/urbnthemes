@@ -1,3 +1,5 @@
+#' The Urban Institute [ggplot2] theme
+#'
 #' Palette data for the Urban Institute
 #'
 #' Data used by the palettes in the uithemes package.

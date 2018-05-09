@@ -1,4 +1,4 @@
-#' A [ggplot2] theme formatted in the Urban Institute style
+#' The Urban Institute [ggplot2] theme
 #'
 #' \code{theme_urban_web} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
@@ -16,7 +16,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
 
   half_line <- base_size / 2L
 
-  theme(
+  ggplot2::theme(
 
     # main attributes
 

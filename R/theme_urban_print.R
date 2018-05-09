@@ -16,7 +16,8 @@ theme_urban_print <- function(base_size = 8.5, base_family = "Lato",
 
   theme_urban_web(base_size = 8.5, base_family = "Lato",
                   base_line_size = 0.5,
-                  base_rect_size = 0.5) + theme(
+                  base_rect_size = 0.5) +
+    ggplot2::theme(
 
     # main attributes
 
