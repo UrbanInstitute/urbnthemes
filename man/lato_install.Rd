@@ -2,7 +2,7 @@
 % Please edit documentation in R/lato_install.R
 \name{lato_install}
 \alias{lato_install}
-\title{The Urban Institute \link{ggplot2} theme}
+\title{Import and register Lato font}
 \usage{
 lato_install()
 }
@@ -12,5 +12,5 @@ lato_install()
 \details{
 Note: Lato must be installed on your computer for \code{lato_install} to work. Lato is the Urban Institute's main font and can be installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
 
-Test Lato to see if Lato is imported and registered with \code{lato_test()}.
+Test to see if Lato is imported and registered with \code{lato_test()}.
 }

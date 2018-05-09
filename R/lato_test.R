@@ -1,4 +1,4 @@
-#' The Urban Institute [ggplot2] theme
+#' Test for Lato import and registration
 #'
 #' \code{lato_test} tests to see if Lato is imported and registered. Lato is the Urban Institute's main font and can be installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
 #'

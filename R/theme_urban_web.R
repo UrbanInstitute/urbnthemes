@@ -16,7 +16,7 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
 
   half_line <- base_size / 2L
 
-  theme(
+  ggplot2::theme(
 
     # main attributes
 

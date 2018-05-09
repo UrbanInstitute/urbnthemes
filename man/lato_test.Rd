@@ -2,7 +2,7 @@
 % Please edit documentation in R/lato_test.R
 \name{lato_test}
 \alias{lato_test}
-\title{The Urban Institute \link{ggplot2} theme}
+\title{Test for Lato import and registration}
 \usage{
 lato_test()
 }
