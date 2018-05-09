@@ -1,3 +1,5 @@
+#' The Urban Institute [ggplot2] theme
+#'
 #' Palette data for the Urban Institute
 #'
 #' Data used by the palettes in the uithemes package.
@@ -11,13 +13,13 @@ palette_urban <- {
       c("#1696d2"),
       c("#1696d2", "#fdbf11"),
       c("#1696d2", "#fdbf11", "#000000"),
-      c("#000000", "#d2d2d2", "#fdbf11", "#1696d2"),
-      c("#1696d2", "#fdbf11", "#d2d2d2", "#ec008b", "#000000"),
-      c("#1696d2", "#ec008b", "#fdbf11", "#000000", "#d2d2d2", "#55b748"),
-      c("#1696d2", "#fdbf11", "#000000", "#ec008b", "#d2d2d2", "#55b748",
+      c("#1696d2", "#fdbf11", "#000000", "#d2d2d2"),
+      c("#1696d2", "#fdbf11", "#000000", "#d2d2d2", "#ec008b"),
+      c("#1696d2", "#fdbf11", "#000000", "#d2d2d2", "#ec008b", "#55b748"),
+      c("#1696d2", "#fdbf11", "#000000", "#d2d2d2", "#ec008b", "#55b748",
         "#5c5859"),
-      c("#1696d2", "#fdbf11", "#000000", "#ec008b", "#d2d2d2", "#55b748",
-        "#5c5859","#db2b27")
+      c("#1696d2", "#fdbf11", "#000000", "#d2d2d2", "#ec008b", "#55b748",
+        "#5c5859", "#db2b27")
     ),
 
     sequential = list(

@@ -3,12 +3,15 @@
 \docType{data}
 \name{palette_urban}
 \alias{palette_urban}
-\title{Palette data for the Urban Institute}
+\title{The Urban Institute [ggplot2] theme}
 \format{A \code{list}.}
 \usage{
 palette_urban
 }
 \description{
+Palette data for the Urban Institute
+}
+\details{
 Data used by the palettes in the uithemes package.
 }
 \keyword{datasets}

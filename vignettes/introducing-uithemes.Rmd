@@ -17,7 +17,7 @@ Make ggplot2 graphics that align closely with the Urban Institute style guide.
 
 ```{r theme}
 library(ggplot2)
-library(uithemes)
+library(urbnthemes)
 
 ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
   geom_point() +
