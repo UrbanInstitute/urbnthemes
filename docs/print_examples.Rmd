@@ -32,7 +32,7 @@ options(scipen = 999)
 
 # Source ggplot2 theme
 
-library(uithemes)
+library(urbnthemes)
 set_urban_defaults(style = params$theme_version)
 ```
 
@@ -129,7 +129,8 @@ ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   labs(title = "Number of Cars By Number of Cylinders",
        caption = "Urban Institute",
        x = "Number of Cylinders",
-       y = "Count")
+       y = "Count") +
+  remove_ticks()
 ```
 
 ### Three Colors 

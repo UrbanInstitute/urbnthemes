@@ -2,13 +2,13 @@
 % Please edit documentation in R/fontawesome_test.R
 \name{fontawesome_test}
 \alias{fontawesome_test}
-\title{Test for fontawesome import and registration}
+\title{Test for FontAwesome import and registration}
 \usage{
 fontawesome_test()
 }
 \description{
-\code{fontawesome_test} tests to see if fontawesome is imported and registered. fontawesome is used for glyphs with \code{library(waffle)} and can be installed from \href{https://github.com/hrbrmstr/waffle/tree/master/inst/fonts}{Bob Rudis's GitHub}.
+\code{fontawesome_test} tests to see if FontAwesome is imported and registered. FontAwesome is used for glyphs with \code{library(waffle)} and can be installed from \href{https://github.com/hrbrmstr/waffle/tree/master/inst/fonts}{Bob Rudis's GitHub}.
 }
 \details{
-Import and register fontawesome in R with fontawesome_install().
+Import and register FontAwesome in R with fontawesome_install().
 }
