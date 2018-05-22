@@ -6,18 +6,22 @@
 #' @import extrafont
 #' @import ggrepel
 #' @md
+#' @param scale "continuous" creates a vertical legend to the right of the map. "discrete" creates a horizontal legend above the map.
 #' @param base_family,base_size base font family and size
 #' @param base_line_size,base_rect_size base line and rectangle sizes
 #' @export
 
-theme_urban_map <- function(base_size = 8.5, base_family = "Lato",
-                              base_line_size = 0.5,
-                              base_rect_size = 0.5) {
+theme_urban_map <- function(scale = "continuous",
+                            base_size = 8.5,
+                            base_family = "Lato",
+                            base_line_size = 0.5,
+                            base_rect_size = 0.5) {
 
-  theme_urban_print(base_size = 8.5, base_family = "Lato",
+  gg <- theme_urban_print(base_size = 8.5, base_family = "Lato",
                   base_line_size = 0.5,
-                  base_rect_size = 0.5) +
-    ggplot2::theme(
+                  base_rect_size = 0.5)
+
+  gg <- gg +  ggplot2::theme(
 
       # make changes for mapping styles
       axis.text = element_blank(),
@@ -25,10 +29,16 @@ theme_urban_map <- function(base_size = 8.5, base_family = "Lato",
       axis.title = element_blank(),
       panel.grid = element_blank(),
       axis.line = element_blank(),
-
-      # don't create a complete format
-      complete = FALSE
-
+      legend.margin = margin(t = 6L, r = 6L, b = 6L, l = 6L, "pt")
     )
 
+  if (scale == "continuous") {
+    gg <- gg + theme(
+      legend.position = "right",
+      legend.direction = "vertical",
+      legend.title = element_text(size = base_size)
+    )
+  }
+  # return gg
+  gg
 }

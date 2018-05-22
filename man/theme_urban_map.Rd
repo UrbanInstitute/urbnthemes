@@ -4,10 +4,12 @@
 \alias{theme_urban_map}
 \title{A \link{ggplot2} theme formatted in the Urban Institute style}
 \usage{
-theme_urban_map(base_size = 8.5, base_family = "Lato",
-  base_line_size = 0.5, base_rect_size = 0.5)
+theme_urban_map(scale = "continuous", base_size = 8.5,
+  base_family = "Lato", base_line_size = 0.5, base_rect_size = 0.5)
 }
 \arguments{
+\item{scale}{"continuous" creates a vertical legend to the right of the map. "discrete" creates a horizontal legend above the map.}
+
 \item{base_family, base_size}{base font family and size}
 
 \item{base_line_size, base_rect_size}{base line and rectangle sizes}
