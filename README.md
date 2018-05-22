@@ -26,7 +26,7 @@ library(ggplot2)
 library(urbnthemes)
 ```
 
-    #> Setting Windows options...
+    #> Setting Mac/Linux options...
 
 ``` r
 set_urban_defaults()
@@ -58,6 +58,7 @@ Core themes:
 -   `set_urban_defaults()`
 -   `theme_urban_web()`
 -   `theme_urban_print()`
+-   `theme_urban_map()`
 
 Color scales:
 
@@ -73,12 +74,13 @@ Utility functions:
 
 -   `lato_test()`
 -   `lato_install()`
+-   `fontawesome_test()`
+-   `fontawesome_install()`
 
 In development:
 
 -   `urban_logo_image()`
 -   `undo_urban_defaults()`
--   `theme_urban_map()`
 -   `save_urban_print()`
 -   `save_urban_web()`
 -   `urban_rmarkdown_header()`
