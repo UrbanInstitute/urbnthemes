@@ -7,7 +7,7 @@
 set_urban_defaults(style = "print")
 }
 \arguments{
-\item{style}{The default theme style for the R session. "web" or "print".}
+\item{style}{The default theme style for the R session. "web", "print", or "map".}
 }
 \description{
 \code{set_urban_defaults} provides a \link{ggplot2} theme formatted according to the

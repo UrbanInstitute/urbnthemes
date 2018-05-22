@@ -3,7 +3,7 @@
 #' \code{set_urban_defaults} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
 #'
-#' @param style The default theme style for the R session. "web" or "print".
+#' @param style The default theme style for the R session. "web", "print", or "map".
 #' @import extrafont
 #' @import ggrepel
 #' @md
@@ -14,8 +14,10 @@ set_urban_defaults <- function(style = "print") {
 
   if (style == "print") {
     ggplot2::theme_set(theme_urban_print())
-  } else {
+  } else if (style == "print") {
     ggplot2::theme_set(theme_urban_web())
+  } else if (style == "map") {
+    ggplot2::theme_set(theme_urban_map())
   }
 
   # add Lato font to text and label geoms ---------------------------
