@@ -61,8 +61,8 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
     # axis attributes
 
     axis.text = element_text(size = base_size),
-    axis.text.x = element_text(margin = margin(t = 4L)),
-    axis.text.y = NULL,
+    axis.text.x = element_text(vjust = 1, margin = margin(t = 4L)),
+    axis.text.y = element_text(hjust = 1),
     axis.text.x.top = NULL,
     axis.text.y.right = NULL,
 

@@ -8,6 +8,8 @@ output:
     toc_float: TRUE
 params:
   theme_version: "print"
+editor_options: 
+  chunk_output_type: console
 ---
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" />
@@ -32,56 +34,57 @@ options(scipen = 999)
 
 # Source ggplot2 theme
 
-library(uithemes)
+library(urbnthemes)
 set_urban_defaults(style = params$theme_version)
 ```
 
-R is a powerful, open-source programming language and environment. R excels at data management and munging, traditional statistical analysis, machine learning, and reproducible research, but it is probably best known for its graphics. This .html file made with [R Markdown](http://rmarkdown.rstudio.com/) contains examples and instructions for popular and lesser-known plotting techniques in R. Furthermore, it includes instructions on how to leverage the Urban Institute's ggplot2 theme which will create near-publication-ready plots. If you have any questions, please don't hesitate to contact Aaron Williams (awilliams@urban.org) or Kyle Ueyama (kueyama@urban.org). 
+R is a powerful, open-source programming language and environment. R excels at data management and munging, traditional statistical analysis, machine learning, and reproducible research, but it is probably best known for its graphics. This .html file made with [R Markdown](http://rmarkdown.rstudio.com/) contains examples and instructions for popular and lesser-known plotting techniques in R. Furthermore, it includes instructions on how to leverage `library(urbnthemes)` theme which will create near-publication-ready plots. If you have any questions, please don't hesitate to contact Aaron Williams (awilliams@urban.org) or Kyle Ueyama (kueyama@urban.org). 
 
-#### Using the Urban Institute ggplot2 Theme
+#### library(urbnthemes)
 
-Depending on your operating system, run one of the following scripts once per R session:
+`library(urbnthemes)` is an R package created by Aaron Williams, Kyle Ueyama, and Ben Chartoff that makes `ggplot2` output align more closely with [the Urban Institute's Data Visualization style guide](http://urbaninstitute.github.io/graphics-styleguide/).
 
-**Windows**
+Follow the instructions in the [`library(urbnthemes)` GitHub repository](https://github.com/UI-Research/urbnthemes) to install the package. This only needs to be done once for each computer for each release of the package. 
+
+Each session that uses `library(urbnthemes)` should start with:
+
 ```
-source('https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/master/urban_theme_windows.R')
+library(urbnthemes)
+set_urban_defaults()
 ```
 
-**Mac**
-```
-source('https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/master/urban_theme_mac.R')
-```
-
-This is an `R` script that makes `ggplot2` output align more closely with [the Urban Institute's Data Visualization style guide](http://urbaninstitute.github.io/graphics-styleguide/).
-
-* This script does **not produce publication ready graphics**. Visual styles must still be edited using your project/paper's normal editing workflow.
+* `library(urbnthemes)` does not produce publication ready graphics. Visual styles must still be edited using your project/paper's normal editing workflow.
 	*  ***Exporting charts as a pdf will allow them to be more easily edited***
 	*  You may need to tweak pdf export options to preserve fonts. For example, in RStudio on OSX, check this option in the export pdf window: `r knitr::include_graphics("images/pdf_export_option.png")`
-
 * The theme has been tested against `ggplot2 version 2.2.1`. It will not function properly with older (`< 2.0.0`) versions of `ggplot2`
 
+#### Fonts
+
+
+
 * If it is not already installed, please install the free [Lato font from Google fonts](https://www.google.com/fonts/specimen/Lato).
-  * If you're on Windows, you'll first need to [install Ghostscript](http://ghostscript.com/download/). You may need to have IT enter an admin password for this installation. Then, in R, tell R where your ghostscript file is.
-  * Edit the file path if yours is in a different place
-```
-Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.05/bin/gswin32c.exe")`
-```
+* If you're on Windows, you'll first need to [install Ghostscript](http://ghostscript.com/download/). You may need to have IT enter an admin password for this installation. Then, in R, tell R where your ghostscript file is.
+
 
 **Run this script once:**
 
 ```
-install.packages(c("ggplot2", "ggrepel", "RColorBrewer", "extrafont"))
+install.packages(c("tidyverse", "ggrepel", "RColorBrewer", "extrafont"))
 library(extrafont)
-port()
+font_import()
 loadfonts()
 ```
 
 Loading and importing fonts may take a few minutes.
 
-After the initial installation, to use Lato just load the library in each R session:
+
+
 ```
-library(extrafont)
+lato_test() lato_install() fontawesome_test() fontawesome_install()
 ```
+
+
+
 
 #### Grammar of Graphics and Conventions
 
@@ -124,12 +127,12 @@ ggplot(diamonds, aes(carat, price)) +
 
 ```{r barplots}
 ggplot(data = mtcars, mapping = aes(factor(cyl))) +
-  geom_bar() + 
+  geom_bar(width = 2 / 3) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 20)) +
-  labs(title = "Number of Cars By Number of Cylinders",
-       caption = "Urban Institute",
-       x = "Number of Cylinders",
-       y = "Count")
+  labs(title = "Number of Cars by Number of Cylinders",
+       x = "Number of cylinders",
+       y = "Count") +
+  remove_ticks()
 ```
 
 ### Three Colors 
@@ -138,13 +141,12 @@ This is identical to the previous plot except colors and a legend are added with
 
 ``` {r 3-color-barplot}
 ggplot(data = mtcars, mapping = aes(x = factor(cyl), fill = factor(cyl))) +
-  geom_bar() +
+  geom_bar(width = 2 / 3) +
   scale_y_continuous(expand = c(0, 0)) +
   labs(title = "Number of Cars By Number of Cylinders",
-       caption = "Urban Institute",
-       x = "Number of Cylinders",
-       y = "Count"
-       ) 
+       x = "Number of cylinders",
+       y = "Count") +
+  remove_ticks()
 ```
 
 ### Stacked Bar Plot
@@ -153,15 +155,13 @@ An additional aesthetic can easily be added to bar plots by adding `fill = categ
 
 ```{r stacked-bar-plot}
 ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
-  geom_bar() +
+  geom_bar(width = 2 / 3) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 15000), labels = scales::comma) +
-  labs(
-    title = "Diamond Clarity",
-    subtitle = "Something Informative About Diamonds",
-    caption = "The Source of Diamond Data",
-    x = "Clarity",
-    y = "Count"
-    )
+  labs(title = "Diamond Clarity",
+       subtitle = "Something informative about diamonds",
+       x = "Clarity",
+       y = "Count") +
+  remove_ticks()
 ```
 
 ### Stacked Bar Plot With Position = Fill
@@ -171,13 +171,13 @@ ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) +
 ```{r stacked-bar-plot-fill}
 #5 colors (stacked)
 ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
-  geom_bar(position = "fill") +
+  geom_bar(position = "fill", width = 2 / 3) +
   scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
   labs(title = "Better Cut Diamonds have Better Clarity",
-      subtitle = "Share of Diamonds with Different Qualities by Clarity of Cut",
-      caption = "The Source of Diamond Data",
+  subtitle = "Share of diamonds with different qualities by clarity of cut",
       x = "Clarity",
-      y = "Count")
+      y = "Count") +
+  remove_ticks()
 ```
 
 ### Dodged Bar Plot
@@ -187,13 +187,13 @@ Subsetted bar charts in ggplot2 are stacked by default. `position = "dodge"` in 
 ```{r dodged-bar-plot}
 #5 colors (dodged)
 ggplot(data = diamonds, mapping = aes(clarity, fill = cut)) + 
-  geom_bar(position = "dodge") +
+  geom_bar(position = "dodge", width = 2 / 3) +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 6000), labels = scales::comma) +
   labs(title = "Diamond Clarity",
-       subtitle = "Something Informative About Diamonds",
-       caption = "The Source of Diamond Data",
+       subtitle = "Something informative about diamonds",
        x = "Clarity",
-       y = "Count")
+       y = "Count") +
+  remove_ticks()
 ```
 
 ### Lollipop plot/Cleveland dot plot{.tabset}
@@ -214,9 +214,7 @@ mtcars %>%
 		labs(title = "Miles Per Gallon of Popular Cars",
 				 subtitle = "1974 Motor Trend US magazine",
 				 x = NULL, 
-				 y = "Miles Per Gallon",
-				 caption = "Urban Institute") +
-	theme(axis.text.y = element_text(size = 8))
+				 y = "Miles per gallon")
 ```
 
 #### Cleveland dot plot
@@ -232,9 +230,7 @@ mtcars %>%
 		labs(title = "Miles Per Gallon of Popular Cars",
 				 subtitle = "1974 Motor Trend US magazine",
 				 x = NULL, 
-				 y = "Miles Per Gallon",
-				 caption = "Urban Institute") +
-	theme(axis.text.y = element_text(size = 8))
+				 y = "Miles per gallon")
 ```
 
 ### Dumbell plot
@@ -254,11 +250,9 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
   geom_point() + 
   scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
   labs(title = "Diamond Prices Increase With Size",
-       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
-       caption = "Urban Institute",
+       subtitle = "Diamond prices in dollars and sizes in carats",
        x = "Carat",
-       y = "Price"
-       )
+       y = "Price")
 ```
 
 ### High-Density Scatter Plot with Transparency
@@ -270,11 +264,9 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
   geom_point(alpha = 0.05) + 
   scale_y_continuous(expand = c(0, 0), labels = scales::dollar) +
   labs(title = "Diamond Prices Increase With Size",
-       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
-       caption = "Urban Institute",
+       subtitle = "Diamond prices in dollars and sizes in carats",
        x = "Carat",
-       y = "Price"
-       )
+       y = "Price")
 ```
 
 ### Hex Scatter Plot
@@ -294,7 +286,6 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
         legend.direction = "vertical")
 ```
 
-
 ### Scatter Plots With Random Noise{.tabset}
 
 Sometimes scatter plots have many overlapping points but a reasonable number of observations. `geom_jitter` adds a small amount of random noise so points are less likely to overlap. `width` and `height` control the amount of noise that is added. In the following before-and-after, notice how many more points are visible after adding jitter.
@@ -305,11 +296,9 @@ ggplot(data = mpg, mapping = aes(x = displ, y = cty)) +
   geom_point() + 
   scale_y_continuous() +
   labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       caption = "Urban Institute",
+       subtitle = "Cars With less displacement generally get better city MPG",
        x = "Displacement",
-       y = "City MPG"
-       )
+       y = "City MPG")
 ```
 
 #### After
@@ -319,11 +308,9 @@ ggplot(data = mpg, mapping = aes(x = displ, y = cty)) +
   geom_jitter(width = 0.2, height = 0.2) + 
   scale_y_continuous() +
   labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       caption = "Urban Institute",
+       subtitle = "Cars with less displacement generally get better city MPG",
        x = "Displacement",
-       y = "City MPG"
-       )
+       y = "City MPG")
 ```
 
 ### Scatter Plot with Counts
@@ -335,12 +322,12 @@ ggplot(data = mpg, mapping = aes(x = displ, y = cty)) +
   geom_count() + 
   scale_y_continuous() +
   labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       caption = "Urban Institute",
+       subtitle = "Cars with less displacement generally get better city MPG",
        x = "Displacement",
-       y = "City MPG"
-  )
+       y = "City MPG")
 ```
+
+todo(aaron): only use size with a continuous variable
 
 ### Scatter Plots with Fill
 
@@ -352,9 +339,8 @@ mtcars %>%
   ggplot(mapping = aes(x = wt, y = mpg, colour = Cylinders)) + 
   geom_point(size = 3) + 
   labs(title = "Fuel Efficiency Declines as Weight Increases",
-       caption = "Urban Institute",
        x = "Weight (Tons)",
-       y = "Miles Per Gallon") +
+       y = "Miles per gallon") +
   theme(legend.title = element_text(hjust = 0))
 ```
 
@@ -368,11 +354,12 @@ mtcars %>%
   ggplot(mapping = aes(x = wt, y = mpg, color = `Automatic Transmission`, size = Cylinders)) + 
   geom_point() + 
   labs(title = "Fuel Efficiency Declines as Weight Increases",
-       caption = "Urban Institute",
        x = "Weight (Tons)",
-       y = "Miles Per Gallon") +
+       y = "Miles per gallon") +
   theme(legend.title = element_text(hjust = 0))
 ```
+
+todo(aaron): fix this
 
 ## Line Plots
 
@@ -383,8 +370,6 @@ ggplot(data = economics, mapping = aes(x = date, y = unemploy)) +
   geom_line() +
   scale_y_continuous(labels = scales::comma) +
   labs(title = "Unemployment in the United States",
-       subtitle = "Number of Unemployed Americans in the U.S.",
-       caption = "Urban Institute",
        x = "Year", 
        y = "Number Unemployed (1,000s)")
 ```
@@ -399,17 +384,13 @@ library(gapminder)
 gapminder %>%
 	filter(country %in% c("Australia", "Canada", "New Zealand", "Japan")) %>%
 	ggplot(aes(year, gdpPercap, color = country)) +
-	geom_line() +
+	geom_line(size = 1) +
 	scale_y_continuous(expand = c(0, 0),
 										 labels = scales::dollar) +
 	labs(title = "Per Capita GDP in Selected Countries",
 			 subtitle = "From the gapminder data set",
-			 caption = "Urban Institute",
 			 x = "Year",
 			 y = "Per capita GDP")
-
-
-
 ```
 
 Plotting more than one variable can be useful for seeing the relationship of variables over time, but it takes a small amount of data munging. 
@@ -423,13 +404,12 @@ as_tibble(EuStockMarkets) %>%
 	mutate(date = time(EuStockMarkets)) %>%
 	gather(key = "key", value = "value", -date) %>%
 	ggplot(aes(date, value, color = key)) +
-	geom_line() +
+	geom_line(size = 1) +
   scale_y_continuous(expand = c(0, 0), 
   									 labels = scales::dollar,
   									 limits = c(0, 10000)) +
 	labs(title = "Major European Stock Indices",
 			 subtitle = "Based on daily closing prices",
-			 caption = "Urban Institute",
 			 x = "Date",
 			 y = "Value")
 ```
@@ -557,7 +537,6 @@ ggplot(data = diamonds, mapping = aes(x = depth)) +
   geom_histogram(bins = 100) +
   scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
   labs(title = "Distribution of Diamond Depths",
-       caption = "Urban Institute", 
        x = "Depth",
        y = "Count")
 ```
@@ -571,16 +550,16 @@ ggplot(InsectSprays, aes(x = spray, y = count)) +
   geom_boxplot() +
   scale_y_continuous(expand = c(0, 0)) +
   labs(title = "Number of Insects Killed by Insect Sprays",
-       caption = "Urban Institute", 
-       x = "Type of Insect Spray",
-       y = "Number of Dead Insects")
+       x = "Type of insect spray",
+       y = "Number of dead insects") +
+  remove_ticks()
 ```
 
 ### Smoothed Kernel Density Plots
 
 Continuous variables with smooth distributions are sometimes better represented with smoothed kernel density estimates than histograms or boxplots. `geom_density()` computes and plots a kernel density estimate. Notice the lumps around integers and halves in the following distribution because of rounding. 
 
-```{r kernel density plot}
+```{r kernel-density-plot}
 diamonds %>%
   ggplot(aes(carat)) +
   geom_density() +
@@ -590,7 +569,7 @@ diamonds %>%
        y = "Density")
 ```
 
-```{r kernel density plot filled}
+```{r kernel-density-plot-filled}
 diamonds %>%
   mutate(cost = ifelse(price > 5500, "More than $5,500 +", "$0 to $5,500")) %>%
   ggplot(aes(carat, fill = cost)) +
@@ -612,7 +591,6 @@ ggplot(diamonds, mapping = aes(x = price, y = cut)) +
 	geom_density_ridges(fill = "#1696d2") +
 	scale_x_continuous(labels = scales::dollar) +
   labs(title = "Distribution of Diamond Prices by Diamond Cut",
-       caption = "Urban Institue",
        x = "Price",
        y = "Cut")
 ```
@@ -626,9 +604,9 @@ ggplot(InsectSprays, aes(x = spray, y = count, fill = spray)) +
   geom_violin() +
   scale_y_continuous(expand = c(0, 0)) +
   labs(title = "Number of Insects Killed by Insect Sprays",
-       caption = "Urban Institute",
-       x = "Type of Insect Spray",
-       y = "Number of Dead Insects")
+       x = "Type of insect spray",
+       y = "Number of dead insects") +
+  remove_ticks()
 ```
 
 ### Bean Plot
@@ -661,6 +639,7 @@ msleep %>%
        caption = "Data from V. M. Savage and G. B. West",
        x = NULL,
        y = "Total sleep time (hours)") +
+  remove_ticks() +
   theme(legend.position = "none")
 ```
 
@@ -678,9 +657,8 @@ txhousing %>%
     geom_area(position = "stack") +
     scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
     labs(title = "Home Sales in Texas Cities",
-         caption = "Urban Institute",
          x = "Year",
-         y = "Home Sales")
+         y = "Home sales")
 ```
 
 ### Filled Area
@@ -694,9 +672,8 @@ txhousing %>%
     geom_area(position = "fill") +
     scale_y_continuous(expand = c(0, 0), labels = scales::comma) +
     labs(title = "Home Listings in Texas Cities",
-         caption = "Urban Institute",
          x = "Year",
-         y = "Proportion of Home Listings")
+         y = "Proportion of home listings")
 ```
 
 ## Waffle Chart / Square Pie Chart
@@ -712,11 +689,10 @@ Waffle charts will require a little extra tinkering since they are called from `
 ```{r single waffle}
 library(waffle)
 
-parts <- c(`Virginia\nClinics` = (1000 - 208 - 105), `Maryland\nClinics` = 208, `D.C.\nClinics` = 105)
+parts <- c(`Virginia\nclinics` = (1000 - 208 - 105), `Maryland\nclinics` = 208, `D.C.\nclinics` = 105)
 waffle(parts, rows = 25, size = 1, colors = c("#1696d2", "#fdbf11", "#000000"), legend_pos = "bottom") +
   labs(title = "Free Clinics in the D.C.-Maryland-Virginia Area",
-       subtitle = "1 Square == 1 Clinic",
-       caption = "Urban Institute") +
+       subtitle = "1 square == 1 clinic") +
   theme(text = element_text(family = "Lato"))
 ```
 
@@ -732,11 +708,10 @@ library(extrafont)
 #font_import("H:/IT/urban_R_theme/docs")
 #loadfonts()
 
-parts <- c(`Virginia\nClinics` = (50 - 10 - 5), `Maryland\nClinics` = 10, `D.C.\nClinics` = 5)
+parts <- c(`Virginia\nclinics` = (50 - 10 - 5), `Maryland\nclinics` = 10, `D.C.\nclinics` = 5)
 waffle(parts, rows = 5, glyph_size = 12, colors = c("#1696d2", "#fdbf11", "#000000"), legend_pos = "bottom", use_glyph = "medkit") +
   labs(title = "Free Clinics in the D.C.-Maryland-Virginia Area",
-       subtitle = "1 Square == 20 Clinics",
-       caption = "Urban Institute") +
+       subtitle = "1 square == 20 clinics") +
   theme(text = element_text(family = "Lato"))
 
 ```
@@ -748,16 +723,16 @@ waffle(parts, rows = 5, glyph_size = 12, colors = c("#1696d2", "#fdbf11", "#0000
 ```{r ironed waffle}
 library(waffle)
 
-white <- c(`With Degree` = 169300, `Without Degree` = 800)
-black <- c(`With Degree` = 174900, `Without Degree` = 34700)
-hispanic <- c(`With Degree` = 27700, `Without Degree` = 12400)
+white <- c(`With degree` = 169300, `Without degree` = 800)
+black <- c(`With degree` = 174900, `Without degree` = 34700)
+hispanic <- c(`With degree` = 27700, `Without degree` = 12400)
 
 iron(
   waffle(white / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "White", keep = FALSE, pad = 10) + 
   theme(text = element_text(family = "Lato")),
   waffle(black / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "Black", keep = FALSE) + 
   theme(text = element_text(family = "Lato")),
-  waffle(hispanic / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "Hispanic", keep = FALSE, pad = 59, xlab = "1 Square == 83 People") + 
+  waffle(hispanic / 83, rows = 40, size = 0.25, colors = c("#1696d2", "#fdbf11"), title = "Hispanic", keep = FALSE, pad = 59, xlab = "1 Square == 83 people") + 
   theme(text = element_text(family = "Lato"))
 ) 
 ```
@@ -770,15 +745,15 @@ iron(
 library(fivethirtyeight)
 
 bad_drivers %>%
-  mutate(`Number of Drivers` = scale(num_drivers),
-         `Percent Speeding` = scale(perc_speeding),
-         `Percent Alcohol` = scale(perc_alcohol),
-         `Percent Not Distracted` = scale(perc_not_distracted),
-         `Percent No Previous` = scale(perc_no_previous),
+  mutate(`Number of drivers` = scale(num_drivers),
+         `Percent speeding` = scale(perc_speeding),
+         `Percent alcohol` = scale(perc_alcohol),
+         `Percent not distracted` = scale(perc_not_distracted),
+         `Percent no previous` = scale(perc_no_previous),
          state = factor(state, levels = rev(state))
          ) %>%
   select(-insurance_premiums, -losses, -(num_drivers:losses)) %>%
-  gather(`Number of Drivers`:`Percent No Previous`, key = "variable", value = "SD's from Mean") %>%
+  gather(`Number of drivers`:`Percent no previous`, key = "variable", value = "SD's from Mean") %>%
   ggplot(aes(variable, state)) +
     geom_tile(aes(fill = `SD's from Mean`)) +
     labs(title = "Drivers Involved in Fatal Collisions By Behavior",
@@ -793,6 +768,8 @@ bad_drivers %>%
 #https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/
 
 ```
+
+todo(aaron): replace this terrible heat map
 
 ## Faceting and Small Multiples
 
@@ -814,12 +791,14 @@ txhousing %>%
   scale_x_continuous(labels = scales::dollar) +
   scale_y_continuous(expand = c(0, 0)) +
   labs(title = "Median Monthly Home Prices in Selected Texas Cities",
-       x = "Median Monthly Home Value",
+       x = "Median monthly home value",
        y = "Count") + 
   theme(axis.text.x = element_text(angle = 90),
         strip.text = element_text(face = "plain", 
                               size = rel(0.5)))
 ```
+
+todo(aaron): replace these terrible small multiples
 
 ### facet_grid()
 
@@ -832,8 +811,7 @@ mtcars %>%
 		geom_point(alpha = 0.5) +
 		scale_y_continuous(expand = c(0, 0), limits = c(0, 45)) +
   	labs(title = "Determinants of Fuel Efficiency", 
-  			 subtitle = "1974 Motor Trends US magazine data", 
-  		caption = "Urban Institute") +
+  			 subtitle = "1974 Motor Trends US magazine data") +
   	facet_grid(vs ~ am, margins = TRUE) +
 		theme(panel.border = element_rect(colour = "black", fill = NA, size = 0.3))
 ```
@@ -871,18 +849,16 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
 	geom_point(alpha = 0.2) +
 	geom_smooth() +
 	labs(title = "Engine Displacement and City MPG by Number of Cylinders",
-			 subtitle = "Loess: MPG = Displacement",
-			 caption = "Urban Institute",
-			 x = "Engine Displacement",
+			 subtitle = "Loess: MPG = displacement",
+			 x = "Engine displacement",
 			 y = "Highway MPG")
 
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
 	geom_smooth(method = "lm") +
 	geom_point(alpha = 0.2) +
 	labs(title = "Engine Displacement and City MPG by Drive",
-			 subtitle = "Linear Model: MPG = Displacement",
-			 caption = "Urban Institute",
-			 x = "Engine Displacement",
+			 subtitle = "Linear Model: MPG = displacement",
+			 x = "Engine displacement",
 			 y = "Highway MPG")
 
 ```
@@ -913,14 +889,15 @@ diamonds %>%
   group_by(cut) %>%
   summarize(price = mean(price)) %>%
   ggplot(aes(cut, price)) +
-  geom_bar(stat = "identity") +
+  geom_col(width = 2 / 3) +
   geom_text(aes(label = scales::dollar(price)), vjust = -1) +
   scale_y_continuous(expand = c(0, 0),
   									 labels = scales::dollar,
                      limits = c(0, 5000)) +
   labs(title = "Average Diamond Price by Diamond Cut",
        x = "Cut",
-       y = "Price")
+       y = "Price") +
+  remove_ticks()
 ```
 
 It can also be used to label points in a scatter plot. 
@@ -937,9 +914,8 @@ mtcars %>%
 		geom_point() +
 		geom_text(data = labels, mapping = aes(x = wt, y = mpg, label = model), nudge_x = 0.38) +
 	  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       caption = "Urban Institute",
        x = "Weight (Tons)",
-       y = "Miles Per Gallon")
+       y = "Miles per gallon")
 ```
 
 Text too often overlaps with other text or geoms when using `geom_text()`. `library(ggrepel)` is a `library(ggplot2)` add-on that automatically positions text so it doesn't overlap with geoms or other text. To add this functionality, install and load `library(ggrepel)` and then use `geom_text_repel()` with the same syntax as `geom_text()`. 
@@ -960,9 +936,8 @@ mtcars %>%
 		                mapping = aes(label = model), 
 		                nudge_x = 0.38) +
 	  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       caption = "Urban Institute",
-       x = "Weight (Tons)",
-       y = "Miles Per Gallon")
+	       x = "Weight (Tons)",
+	       y = "Miles per gallon")
 ```
 
 ### annotate()
