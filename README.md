@@ -9,11 +9,9 @@ urbnthemes
 
 ### Installation
 
-The only way to install the package is to download this entire directory, open the RStudio project, and click "Install and Restart". Then use `library(urbnthemes)` to load the package.
+The only way to install the package is to download this entire directory, open the RStudio project, and run `devtools::install()`. Then use `library(urbnthemes)` to load the package.
 
-![](man/figures/install-and-restart.png)
-
-When this reposiotry is made public, the following will work:
+When this repository is made public, the following will work:
 
     # Or the development version from GitHub
     # install.packages("devtools")
@@ -26,7 +24,7 @@ library(ggplot2)
 library(urbnthemes)
 ```
 
-    #> Setting Mac/Linux options...
+    #> Setting Windows options...
 
 ``` r
 set_urban_defaults()
