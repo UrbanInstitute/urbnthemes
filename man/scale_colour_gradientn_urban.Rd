@@ -10,6 +10,25 @@ scale_colour_gradientn_urban(..., colours = c("#CFE8F3", "#A2D4EC", "#73BFE2",
   "#0A4C6A", "#062635"), values = NULL, space = "Lab",
   na.value = "grey50", guide = "colourbar")
 }
+\arguments{
+\item{...}{additional arguments passed to ggplot2::continuous_scale}
+
+\item{colours}{vector of colours}
+
+\item{colors}{vector of colors}
+
+\item{values}{if colours should not be evenly positioned along the gradient
+this vector gives the position (between 0 and 1) for each colour in the
+\code{colours} vector. See \code{\link{rescale}} for a convience function
+to map an arbitrary range to between 0 and 1.}
+
+\item{space}{colour space in which to calculate gradient. Must be "Lab" -
+other values are deprecated.}
+
+\item{na.value}{missing values will be replaced with this value}
+
+\item{guide}{name of guide object, or object itself}
+}
 \description{
 Continuous scale fill that aligns with the Urban Institute style
 }
