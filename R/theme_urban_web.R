@@ -41,6 +41,12 @@ theme_urban_web <- function(base_size = 12L, base_family = "Lato",
 
     # Plot Attributes
 
+    plot.tag = element_text(size = base_size * 1.5,
+                            hjust = 0L,
+                            vjust = 0L,
+                            face = "bold",
+                            margin = margin(b = 10L)),
+    plot.tag.position = "topleft",
     plot.title = element_text(size = base_size * 1.5,
                               hjust = 0L,
                               vjust = 0L,

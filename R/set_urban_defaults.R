@@ -20,6 +20,14 @@ set_urban_defaults <- function(style = "print") {
     ggplot2::theme_set(theme_urban_map())
   }
 
+
+  # set default color scales ------------------------------------------------
+
+  options(
+    ggplot2.continuous.colour = "gradient",
+    ggplot2.continuous.fill = "gradient"
+  )
+
   # add Lato font to text and label geoms ---------------------------
 
   ggplot2::update_geom_defaults("text", list(family = "Lato"))
