@@ -14,7 +14,7 @@ set_urban_defaults <- function(style = "print") {
 
   if (style == "print") {
     ggplot2::theme_set(theme_urban_print())
-  } else if (style == "print") {
+  } else if (style == "web") {
     ggplot2::theme_set(theme_urban_web())
   } else if (style == "map") {
     ggplot2::theme_set(theme_urban_map())
