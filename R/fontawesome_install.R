@@ -12,8 +12,8 @@ fontawesome_install <- function() {
   if (sum(grepl("FontAwesome", extrafont::fonts())) > 0) {
     "FontAwesome is already imported and registered."
   } else {
-    font_import()
-    loadfonts()
+    extrafont::font_import()
+    extrafont::loadfonts()
     fontawesome_test()
   }
 }

@@ -12,8 +12,8 @@ lato_install <- function() {
   if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
     "Lato is already imported and registered."
   } else {
-    font_import()
-    loadfonts()
+    extrafont::font_import()
+    extrafont::loadfonts()
     lato_test()
   }
 }
