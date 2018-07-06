@@ -6,7 +6,7 @@
 #' @import gridExtra
 #' @md
 #' @export
-urban_logo_text <- function() {
+urbn_logo_text <- function() {
   grobTree(
   gp = gpar(fontsize = 7, hjust = 1),
   textGrob(label = " I N S T I T U T E",

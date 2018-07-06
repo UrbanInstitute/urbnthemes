@@ -1,6 +1,6 @@
 #' The Urban Institute [ggplot2] theme
 #'
-#' \code{theme_urban_web} provides a [ggplot2] theme formatted according to the
+#' \code{theme_urbn_web} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
 #'
 #' @import extrafont
@@ -10,9 +10,9 @@
 #' @param base_line_size,base_rect_size base line and rectangle sizes
 #' @export
 
-theme_urban_web <- function(base_size = 12L, base_family = "Lato",
-                      base_line_size = base_size / 24L,
-                      base_rect_size = base_size / 24L) {
+theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
+                           base_line_size = base_size / 24L,
+                           base_rect_size = base_size / 24L) {
 
   half_line <- base_size / 2L
 

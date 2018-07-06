@@ -4,8 +4,8 @@
 #'
 #' @export
 #' @param palette Palette name.
-urban_color_pal <- function(palette = "categorical") {
-  palette_list <- palette_urban
+urbn_color_pal <- function(palette = "categorical") {
+  palette_list <- palette_urbn
 
   types <- palette_list[[palette]]
 
@@ -20,7 +20,7 @@ urban_color_pal <- function(palette = "categorical") {
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
 #' @export
 scale_color_discrete <- function(...) {
-  scale_color_urban(...)
+  scale_color_urbn(...)
 }
 
 #' Discrete scale color that aligns with the Urban Institute style
@@ -29,7 +29,7 @@ scale_color_discrete <- function(...) {
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
 #' @export
 scale_colour_discrete <- function(...) {
-  scale_color_urban(...)
+  scale_color_urbn(...)
 }
 
 #' Discrete scale fill that aligns with the Urban Institute style
@@ -38,7 +38,7 @@ scale_colour_discrete <- function(...) {
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
 #' @export
 scale_fill_discrete <- function(palette = "categorical", ...) {
-  scale_fill_urban(...)
+  scale_fill_urbn(...)
 }
 
 #' Continuous scale fill that aligns with the Urban Institute style
@@ -46,7 +46,7 @@ scale_fill_discrete <- function(palette = "categorical", ...) {
 #' @md
 #' @export
 scale_color_gradientn <- function(...) {
-  scale_color_gradientn_urban(...)
+  scale_color_gradientn_urbn(...)
 }
 
 #' Continuous scale fill that aligns with the Urban Institute style
@@ -54,7 +54,7 @@ scale_color_gradientn <- function(...) {
 #' @md
 #' @export
 scale_colour_gradientn <- function(...) {
-  scale_color_gradientn_urban(...)
+  scale_color_gradientn_urbn(...)
 }
 
 #' Continuous scale fill that aligns with the Urban Institute style
@@ -62,7 +62,7 @@ scale_colour_gradientn <- function(...) {
 #' @md
 #' @export
 scale_fill_gradientn <- function(...) {
-  scale_colour_gradientn_urban(...)
+  scale_colour_gradientn_urbn(...)
 }
 
 

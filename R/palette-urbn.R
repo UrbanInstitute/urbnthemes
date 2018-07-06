@@ -6,7 +6,7 @@
 #'
 #' @format A \code{list}.
 
-palette_urban <- {
+palette_urbn <- {
 
   palette <- list(
     categorical = list(

@@ -10,13 +10,13 @@
 #' @param base_line_size,base_rect_size base line and rectangle sizes
 #' @export
 
-theme_urban_print <- function(base_size = 8.5, base_family = "Lato",
-                              base_line_size = 0.5,
-                              base_rect_size = 0.5) {
+theme_urbn_print <- function(base_size = 8.5, base_family = "Lato",
+                             base_line_size = 0.5,
+                             base_rect_size = 0.5) {
 
-  theme_urban_web(base_size = 8.5, base_family = "Lato",
-                  base_line_size = 0.5,
-                  base_rect_size = 0.5) +
+  theme_urbn_web(base_size = 8.5, base_family = "Lato",
+                 base_line_size = 0.5,
+                 base_rect_size = 0.5) +
     ggplot2::theme(
 
     # main attributes

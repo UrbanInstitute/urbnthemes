@@ -1,6 +1,6 @@
 #' The Urban Institute [ggplot2] theme
 #'
-#' \code{set_urban_defaults} provides a [ggplot2] theme formatted according to the
+#' \code{set_urbn_defaults} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
 #'
 #' @param style The default theme style for the R session. "web", "print", or "map".
@@ -8,16 +8,16 @@
 #' @import ggrepel
 #' @md
 #' @export
-set_urban_defaults <- function(style = "print") {
+set_urbn_defaults <- function(style = "print") {
 
-  # set default theme to theme_urban_web() ----------------------------------
+  # set default theme to theme_urbn_web() ----------------------------------
 
   if (style == "print") {
-    ggplot2::theme_set(theme_urban_print())
+    ggplot2::theme_set(theme_urbn_print())
   } else if (style == "web") {
-    ggplot2::theme_set(theme_urban_web())
+    ggplot2::theme_set(theme_urbn_web())
   } else if (style == "map") {
-    ggplot2::theme_set(theme_urban_map())
+    ggplot2::theme_set(theme_urbn_map())
   }
 
 
@@ -56,14 +56,14 @@ set_urban_defaults <- function(style = "print") {
 
   # redefine default discrete colours, up to 9 colours.
 
-  assign("scale_color_discrete", function(...) scale_color_urban(...), envir = globalenv())
-  assign("scale_colour_discrete", function(...)  scale_color_urban(...), envir = globalenv())
-  assign("scale_fill_discrete", function(...)  scale_fill_urban(...), envir = globalenv())
+  assign("scale_color_discrete", function(...) scale_color_urbn(...), envir = globalenv())
+  assign("scale_colour_discrete", function(...)  scale_color_urbn(...), envir = globalenv())
+  assign("scale_fill_discrete", function(...)  scale_fill_urbn(...), envir = globalenv())
 
   # set default colors for continuous color scales --------------------------
 
-  assign("scale_fill_gradientn", function(...)  scale_fill_gradientn_urban(...), envir = globalenv())
-  assign("scale_color_gradientn", function(...)  scale_color_gradientn_urban(...), envir = globalenv())
-  assign("scale_colour_gradientn", function(...) scale_colour_gradientn_urban(...), envir = globalenv())
+  assign("scale_fill_gradientn", function(...)  scale_fill_gradientn_urbn(...), envir = globalenv())
+  assign("scale_color_gradientn", function(...)  scale_color_gradientn_urbn(...), envir = globalenv())
+  assign("scale_colour_gradientn", function(...) scale_colour_gradientn_urbn(...), envir = globalenv())
 
 }

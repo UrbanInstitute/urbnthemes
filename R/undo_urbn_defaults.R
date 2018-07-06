@@ -8,9 +8,9 @@
 #' @md
 #' @export
 
-undo_urban_defaults <- function() {
+undo_urbn_defaults <- function() {
 
-  # set default theme to theme_urban_web() ----------------------------------
+  # set default theme to theme_urbn_web() ----------------------------------
 
   ggplot2::theme_set(ggplot2::theme_grey())
 
