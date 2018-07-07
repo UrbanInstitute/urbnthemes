@@ -6,6 +6,7 @@
 #' @param style The default theme style for the R session. "web", "print", or "map".
 #' @import extrafont
 #' @import ggrepel
+#' @import conflicted
 #' @md
 #' @export
 set_urbn_defaults <- function(style = "print") {
@@ -54,16 +55,22 @@ set_urbn_defaults <- function(style = "print") {
 
   # set default colors for discrete color scales ----------------------------
 
-  # redefine default discrete colours, up to 9 colours.
+  scale_color_discrete <- urbnthemes::scale_color_discrete
+  scale_colour_discrete <- urbnthemes::scale_colour_discrete
+  scale_fill_discrete <- urbnthemes::scale_fill_discrete
+  scale_color_gradientn <- urbnthemes::scale_color_gradientn
+  scale_colour_gradientn <- urbnthemes::scale_colour_gradientn
+  scale_fill_gradientn <- urbnthemes::scale_fill_gradientn
+  scale_fill_ordinal <- urbnthemes::scale_color_discrete
+  scale_colour_ordinal <- urbnthemes::scale_color_discrete
 
-  assign("scale_color_discrete", function(...) scale_color_urbn(...), envir = globalenv())
-  assign("scale_colour_discrete", function(...)  scale_color_urbn(...), envir = globalenv())
-  assign("scale_fill_discrete", function(...)  scale_fill_urbn(...), envir = globalenv())
+  scale_color_viridis_d <- urbnthemes::scale_color_discrete
+  scale_colour_viridis_d <- urbnthemes::scale_colour_discrete
+  scale_fill_viridis_d <- urbnthemes::scale_fill_discrete
 
-  # set default colors for continuous color scales --------------------------
-
-  assign("scale_fill_gradientn", function(...)  scale_fill_gradientn_urbn(...), envir = globalenv())
-  assign("scale_color_gradientn", function(...)  scale_color_gradientn_urbn(...), envir = globalenv())
-  assign("scale_colour_gradientn", function(...) scale_colour_gradientn_urbn(...), envir = globalenv())
-
+  # the next three are unnecessary because of ggplot2.continuous.fill and
+  # ggplot2.continuous.colour, but are here for completeness
+  scale_color_viridis_c <- urbnthemes::scale_color_discrete
+  scale_colour_viridis_c <- urbnthemes::scale_colour_discrete
+  scale_fill_viridis_c <- urbnthemes::scale_fill_discrete
 }
