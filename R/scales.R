@@ -14,7 +14,7 @@ urbn_color_pal <- function(palette = "categorical") {
   }
 }
 
-#' Discrete scale color that aligns with the Urban Institute style
+#' Discrete color scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
@@ -23,7 +23,7 @@ scale_color_discrete <- function(...) {
   ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
 }
 
-#' Discrete scale color that aligns with the Urban Institute style
+#' Discrete color scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
@@ -32,7 +32,7 @@ scale_colour_discrete <- function(...) {
   ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
 }
 
-#' Discrete scale fill that aligns with the Urban Institute style
+#' Discrete fill scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
@@ -41,7 +41,7 @@ scale_fill_discrete <- function(...) {
   ggplot2::discrete_scale("fill", "urbn", urbn_color_pal("categorical"), ...)
 }
 
-#' Continuous scale fill that aligns with the Urban Institute style
+#' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @export
@@ -59,13 +59,13 @@ scale_color_gradientn <- function(...,
                    scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
 }
 
-#' Continuous scale fill that aligns with the Urban Institute style
+#' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @export
 scale_colour_gradientn <- scale_color_gradientn
 
-#' Continuous scale fill that aligns with the Urban Institute style
+#' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
 #' @export
@@ -83,13 +83,13 @@ scale_fill_gradientn <- function(...,
                    scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
 }
 
-#' Discrete scale fill for ordinal factors that aligns with the Urban Institute style
+#' Discrete fill scale for ordinal factors that aligns with the Urban Institute style
 #'
 #' @md
 #' @export
 scale_fill_ordinal <- scale_color_discrete
 
-#' Discrete scale color for ordinal factors that aligns with the Urban Institute style
+#' Discrete color scale for ordinal factors that aligns with the Urban Institute style
 #'
 #' @md
 #' @export

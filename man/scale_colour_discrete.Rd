@@ -2,7 +2,7 @@
 % Please edit documentation in R/scales.R
 \name{scale_colour_discrete}
 \alias{scale_colour_discrete}
-\title{Discrete scale color that aligns with the Urban Institute style}
+\title{Discrete color scale that aligns with the Urban Institute style}
 \usage{
 scale_colour_discrete(...)
 }
@@ -10,5 +10,5 @@ scale_colour_discrete(...)
 \item{palette}{Urban Institute palette to use. One of \code{categorical} or \code{sequential}}
 }
 \description{
-Discrete scale color that aligns with the Urban Institute style
+Discrete color scale that aligns with the Urban Institute style
 }

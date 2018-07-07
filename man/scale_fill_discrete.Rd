@@ -2,13 +2,13 @@
 % Please edit documentation in R/scales.R
 \name{scale_fill_discrete}
 \alias{scale_fill_discrete}
-\title{Discrete scale fill that aligns with the Urban Institute style}
+\title{Discrete fill scale that aligns with the Urban Institute style}
 \usage{
-scale_fill_discrete(palette = "categorical", ...)
+scale_fill_discrete(...)
 }
 \arguments{
 \item{palette}{Urban Institute palette to use. One of \code{categorical} or \code{sequential}}
 }
 \description{
-Discrete scale fill that aligns with the Urban Institute style
+Discrete fill scale that aligns with the Urban Institute style
 }

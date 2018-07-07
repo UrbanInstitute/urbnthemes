@@ -2,10 +2,14 @@
 % Please edit documentation in R/scales.R
 \name{scale_colour_gradientn}
 \alias{scale_colour_gradientn}
-\title{Continuous scale fill that aligns with the Urban Institute style}
+\title{Continuous fill scale that aligns with the Urban Institute style}
 \usage{
-scale_colour_gradientn(...)
+scale_colour_gradientn(..., colours = c("#CFE8F3", "#A2D4EC", "#73BFE2",
+  "#46ABDB", "#1696D2", "#12719E", "#0A4C6A", "#062635"),
+  colors = c("#CFE8F3", "#A2D4EC", "#73BFE2", "#46ABDB", "#1696D2", "#12719E",
+  "#0A4C6A", "#062635"), values = NULL, space = "Lab",
+  na.value = "grey50", guide = "colourbar")
 }
 \description{
-Continuous scale fill that aligns with the Urban Institute style
+Continuous fill scale that aligns with the Urban Institute style
 }
