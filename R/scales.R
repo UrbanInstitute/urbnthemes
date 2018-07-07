@@ -83,4 +83,14 @@ scale_fill_gradientn <- function(...,
                    scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
 }
 
+#' Discrete scale fill for ordinal factors that aligns with the Urban Institute style
+#'
+#' @md
+#' @export
+scale_fill_ordinal <- scale_color_discrete
 
+#' Discrete scale color for ordinal factors that aligns with the Urban Institute style
+#'
+#' @md
+#' @export
+scale_colour_ordinal <- scale_color_discrete
