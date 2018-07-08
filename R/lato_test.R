@@ -10,6 +10,6 @@ lato_test <- function() {
   if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
     "Lato is imported and registered."
   } else {
-    "Lato isn't imported and registered. Install from Google Fonts and important and register using lato_install()."
+    "Lato isn't imported and registered. Install from Google Fonts and import and register using lato_install()."
   }
 }
