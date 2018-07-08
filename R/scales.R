@@ -87,7 +87,7 @@ scale_fill_gradientn <- function(...,
 #'
 #' @md
 #' @export
-scale_fill_ordinal <- scale_color_discrete
+scale_fill_ordinal <- scale_fill_discrete
 
 #' Discrete color scale for ordinal factors that aligns with the Urban Institute style
 #'

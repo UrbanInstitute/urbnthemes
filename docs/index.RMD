@@ -6,6 +6,8 @@ output:
     code_folding: hide
     toc: TRUE
     toc_float: TRUE
+editor_options: 
+  chunk_output_type: console
 ---
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" />
@@ -31,8 +33,8 @@ options(scipen = 999)
 #source("../urban_theme_windows.R")
 #source("../urban_theme_mac.R")
 
-library(uithemes)
-set_urban_defaults()
+library(urbnthemes)
+set_urbn_defaults("print")
 ```
 
 
