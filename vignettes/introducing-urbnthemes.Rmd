@@ -1,0 +1,32 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Overview
+
+Make ggplot2 graphics that align closely with the Urban Institute style guide.
+
+## Examples
+
+```{r theme}
+library(ggplot2)
+library(urbnthemes)
+
+ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
+  geom_point() +
+  labs(title = "Title", 
+       subtitle = "Subtitle", 
+       caption = "Caption",
+       x = "X Variable", 
+       y = "Y Variable") +
+  theme_urbn_web()
+
+```
+

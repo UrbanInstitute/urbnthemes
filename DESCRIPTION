@@ -1,7 +1,7 @@
 Package: urbnthemes
 Type: Package
 Title: Additional theme and utilities for "ggplot2" in the Urban Institute style
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Kyle", "Ueyama", email = "kueyama@urban.org", role = c("aut", "cre")),
     person("Aaron", "Williams", email = "awilliams@urban.org", role = "aut"),
@@ -11,11 +11,12 @@ Description: Align "ggplot2" output more closely with the Urban Institute
     Data Visualization style guide <http://urbaninstitute.github.io/graphics-styleguide/>.
 Depends: R (>= 3.1.0)
 Imports:
-    ggplot2 (>= 2.2.1),
+    ggplot2 (>= 3.0.0),
     extrafont,
     ggrepel,
     gridExtra,
-    scales
+    scales,
+    conflicted
 License: GPL-3
 URL: https://github.com/UI-Research/urbnthemes
 BugReports: https://github.com/UI-Research/urbnthemes/issues
