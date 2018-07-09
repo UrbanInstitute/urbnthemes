@@ -14,7 +14,8 @@ Imports:
     ggplot2 (>= 2.2.1),
     extrafont,
     ggrepel,
-    gridExtra
+    gridExtra,
+    scales
 License: GPL-3
 URL: https://github.com/UI-Research/urbnthemes
 BugReports: https://github.com/UI-Research/urbnthemes/issues

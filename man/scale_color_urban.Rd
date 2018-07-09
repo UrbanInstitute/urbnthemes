@@ -8,6 +8,8 @@ scale_color_urban(palette = "categorical", ...)
 }
 \arguments{
 \item{palette}{Urban Institute palette to use. One of \code{categorical} or \code{sequential}}
+
+\item{...}{Additional arguments passed to ggplot2::discrete_scale}
 }
 \description{
 Discrete scale color that aligns with the Urban Institute style

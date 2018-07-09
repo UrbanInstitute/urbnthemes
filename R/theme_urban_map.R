@@ -24,19 +24,19 @@ theme_urban_map <- function(scale = "continuous",
   gg <- gg +  ggplot2::theme(
 
       # make changes for mapping styles
-      axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      axis.title = element_blank(),
-      panel.grid = element_blank(),
-      axis.line = element_blank(),
-      legend.margin = margin(t = 6L, r = 6L, b = 6L, l = 6L, "pt")
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      panel.grid = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      legend.margin = ggplot2::margin(t = 6L, r = 6L, b = 6L, l = 6L, "pt")
     )
 
   if (scale == "continuous") {
-    gg <- gg + theme(
+    gg <- gg + ggplot2::theme(
       legend.position = "right",
       legend.direction = "vertical",
-      legend.title = element_text(size = base_size)
+      legend.title = ggplot2::element_text(size = base_size)
     )
   }
   # return gg
