@@ -21,24 +21,24 @@ theme_urbn_print <- function(base_size = 8.5, base_family = "Lato",
 
     # main attributes
 
-    text = element_text(size = base_size),
+    text = ggplot2::element_text(size = base_size),
 
     # Plot Attributes
 
-    plot.title = element_text(size = base_size * 12 / 8.5),
-    plot.subtitle = element_text(size = base_size * 9.5 / 8.5),
-    plot.caption = element_text(size = base_size * 7 / 8.5),
+    plot.title = ggplot2::element_text(size = base_size * 12 / 8.5),
+    plot.subtitle = ggplot2::element_text(size = base_size * 9.5 / 8.5),
+    plot.caption = ggplot2::element_text(size = base_size * 7 / 8.5),
 
     # axis attributes
 
-    axis.text = element_text(size = base_size),
+    axis.text = ggplot2::element_text(size = base_size),
 
-    axis.title = element_text(face = "italic",
+    axis.title = ggplot2::element_text(face = "italic",
                               size = base_size),
 
     # strip attributes (Faceting)
 
-    strip.text = element_text(size = base_size * 9.5 / 8.5),
+    strip.text = ggplot2::element_text(size = base_size * 9.5 / 8.5),
 
     # don't create a complete format
     complete = FALSE

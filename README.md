@@ -3,6 +3,8 @@
 urbnthemes
 ----------
 
+[![Travis-CI Build Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
+
 ### Overview
 
 `urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with web, print, and map themes as well as tools that make plotting easier at the Urban Institute. `urbnthemes` replaces the [urban\_R\_theme](https://github.com/UrbanInstitute/urban_R_theme).
