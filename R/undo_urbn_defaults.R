@@ -5,6 +5,7 @@
 #'
 #' @import extrafont
 #' @import ggrepel
+#' @import conflicted
 #' @md
 #' @export
 
@@ -38,25 +39,15 @@ undo_urbn_defaults <- function() {
   ggplot2::update_stat_defaults("density", list(fill = "#595959"))
   ggplot2::update_stat_defaults("ydensity", list(fill = "#595959"))
 
-  # set default colors for discrete color scales ----------------------------
+  # overwrite urbnthemes scale functions so default ggplot2 functions take precedence
 
-  rm(scale_color_discrete, envir = globalenv())
-  rm(scale_colour_discrete, envir = globalenv())
-  rm(scale_fill_discrete, envir = globalenv())
-  rm(scale_fill_gradientn, envir = globalenv())
-  rm(scale_color_gradientn, envir = globalenv())
-  rm(scale_colour_gradientn, envir = globalenv())
-
-  # redefine default discrete colours, up to 9 colours.
-
-  assign("scale_color_discrete", function(...) saved_scale_color_discrete, envir = globalenv())
-  assign("scale_colour_discrete", function(...)  saved_scale_colour_discrete, envir = globalenv())
-  assign("scale_fill_discrete", function(...)  saved_scale_fill_discrete, envir = globalenv())
-
-  # set default colors for continuous color scales --------------------------
-
-  assign("scale_fill_gradientn", function(...)  saved_scale_fill_gradientn, envir = globalenv())
-  assign("scale_color_gradientn", function(...)  saved_scale_color_gradientn, envir = globalenv())
-  assign("scale_colour_gradientn", function(...) saved_scale_colour_gradientn, envir = globalenv())
+  scale_color_discrete <- ggplot2::scale_color_discrete
+  scale_colour_discrete <- ggplot2::scale_colour_discrete
+  scale_fill_discrete <- ggplot2::scale_fill_discrete
+  scale_color_gradientn <- ggplot2::scale_color_gradientn
+  scale_colour_gradientn <- ggplot2::scale_colour_gradientn
+  scale_fill_gradientn <- ggplot2::scale_fill_gradientn
+  scale_fill_ordinal <- ggplot2::scale_fill_ordinal
+  scale_colour_ordinal <- ggplot2::scale_colour_ordinal
 
 }
