@@ -11,11 +11,12 @@ Description: Align "ggplot2" output more closely with the Urban Institute
     Data Visualization style guide <http://urbaninstitute.github.io/graphics-styleguide/>.
 Depends: R (>= 3.1.0)
 Imports:
-    ggplot2 (>= 2.2.1),
+    ggplot2 (>= 3.0.0),
     extrafont,
     ggrepel,
     gridExtra,
-    scales
+    scales,
+    conflicted
 License: GPL-3
 URL: https://github.com/UI-Research/urbnthemes
 BugReports: https://github.com/UI-Research/urbnthemes/issues

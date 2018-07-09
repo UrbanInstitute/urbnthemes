@@ -5,7 +5,7 @@
 #' Data used by the palettes in the uithemes package.
 #'
 #' @format A \code{list}.
-
+#' @export
 palette_urbn <- {
 
   palette <- list(

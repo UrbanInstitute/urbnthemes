@@ -10,6 +10,9 @@ scale_colour_gradientn(..., colours = c("#CFE8F3", "#A2D4EC", "#73BFE2",
   "#0A4C6A", "#062635"), values = NULL, space = "Lab",
   na.value = "grey50", guide = "colourbar")
 }
+\arguments{
+\item{...}{other arguments passed to \code{discrete_scale()}}
+}
 \description{
 Continuous fill scale that aligns with the Urban Institute style
 }

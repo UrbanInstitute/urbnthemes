@@ -7,7 +7,7 @@
 scale_fill_discrete(...)
 }
 \arguments{
-\item{palette}{Urban Institute palette to use. One of \code{categorical} or \code{sequential}}
+\item{...}{other arguments passed to \code{discrete_scale()}}
 }
 \description{
 Discrete fill scale that aligns with the Urban Institute style

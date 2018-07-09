@@ -45,7 +45,7 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
                             hjust = 0L,
                             vjust = 0L,
                             face = "bold",
-                            margin = margin(b = 10L)),
+                            margin = ggplot2::margin(b = 10L)),
     plot.tag.position = "topleft",
     plot.title = ggplot2::element_text(size = base_size * 1.5,
 

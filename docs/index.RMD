@@ -1014,7 +1014,7 @@ mpg %>%
 
 `ggsave()` exports ggplot2 plots. The function can be used in two ways. If `plot =` isn't specified in the function call, then `ggsave()` automatically saves the plot that was last displayed in the Viewer window. Second, if `plot =` is specified, then `ggsave()` saves the specified plot. `ggsave()` guesses the type of graphics device to use in export (.png, .pdf, .svg, etc.) from the file extension in the filename. 
 
-```{r ggsave, eval = FALSE}
+```{r ggsave, eval=FALSE}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point()

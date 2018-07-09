@@ -7,7 +7,7 @@
 scale_color_discrete(...)
 }
 \arguments{
-\item{palette}{Urban Institute palette to use. One of \code{categorical} or \code{sequential}}
+\item{...}{other arguments passed to \code{discrete_scale()}}
 }
 \description{
 Discrete color scale that aligns with the Urban Institute style

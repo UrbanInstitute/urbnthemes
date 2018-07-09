@@ -17,7 +17,7 @@ urbn_color_pal <- function(palette = "categorical") {
 #' Discrete color scale that aligns with the Urban Institute style
 #'
 #' @md
-#' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_color_discrete <- function(...) {
   ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
@@ -26,7 +26,7 @@ scale_color_discrete <- function(...) {
 #' Discrete color scale that aligns with the Urban Institute style
 #'
 #' @md
-#' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_colour_discrete <- function(...) {
   ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
@@ -35,7 +35,7 @@ scale_colour_discrete <- function(...) {
 #' Discrete fill scale that aligns with the Urban Institute style
 #'
 #' @md
-#' @param palette Urban Institute palette to use. One of \code{categorical} or \code{sequential}
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_fill_discrete <- function(...) {
   ggplot2::discrete_scale("fill", "urbn", urbn_color_pal("categorical"), ...)
@@ -44,6 +44,7 @@ scale_fill_discrete <- function(...) {
 #' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_color_gradientn <- function(...,
                                   colours = c("#CFE8F3","#A2D4EC","#73BFE2","#46ABDB", "#1696D2","#12719E","#0A4C6A","#062635"),
@@ -55,19 +56,21 @@ scale_color_gradientn <- function(...,
 
   colours <- if (missing(colours)) colors else colours
 
-  continuous_scale("colour", "gradientn",
+  ggplot2::continuous_scale("colour", "gradientn",
                    scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
 }
 
 #' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_colour_gradientn <- scale_color_gradientn
 
 #' Continuous fill scale that aligns with the Urban Institute style
 #'
 #' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_fill_gradientn <- function(...,
                                  colours = c("#CFE8F3","#A2D4EC","#73BFE2","#46ABDB", "#1696D2","#12719E","#0A4C6A","#062635"),
@@ -79,18 +82,20 @@ scale_fill_gradientn <- function(...,
 
   colours <- if (missing(colours)) colors else colours
 
-  continuous_scale("fill", "gradientn",
+  ggplot2::continuous_scale("fill", "gradientn",
                    scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
 }
 
 #' Discrete fill scale for ordinal factors that aligns with the Urban Institute style
 #'
 #' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_fill_ordinal <- scale_fill_discrete
 
 #' Discrete color scale for ordinal factors that aligns with the Urban Institute style
 #'
 #' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_colour_ordinal <- scale_color_discrete

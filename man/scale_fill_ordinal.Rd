@@ -6,6 +6,9 @@
 \usage{
 scale_fill_ordinal(...)
 }
+\arguments{
+\item{...}{other arguments passed to \code{discrete_scale()}}
+}
 \description{
 Discrete fill scale for ordinal factors that aligns with the Urban Institute style
 }
