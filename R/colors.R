@@ -6,7 +6,6 @@
 #' @source Urban Institute Data Visualization Style Guide
 #'  \url{http://urbaninstitute.github.io/graphics-styleguide/}
 #'
-#' @format
 #'
 #' @family urbn palettes
 #' @rdname urbn_palettes

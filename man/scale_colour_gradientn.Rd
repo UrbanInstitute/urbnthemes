@@ -12,6 +12,18 @@ scale_colour_gradientn(..., colours = c("#CFE8F3", "#A2D4EC", "#73BFE2",
 }
 \arguments{
 \item{...}{other arguments passed to \code{discrete_scale()}}
+
+\item{colours}{vector of colours}
+
+\item{colors}{vector of colours}
+
+\item{values}{if colours should not be evenly positioned along the gradient this vector gives the position (between 0 and 1) for each colour in the colours vector. See rescale for a convience function to map an arbitrary range to between 0 and 1}
+
+\item{space}{colour space in which to calculate gradient. Must be "Lab" - other values are deprecated.}
+
+\item{na.value}{default color for NA values}
+
+\item{guide}{legend representation of scale}
 }
 \description{
 Continuous fill scale that aligns with the Urban Institute style

@@ -11,7 +11,7 @@
 \alias{palette_urbn_spacegray}
 \alias{palette_urbn_red}
 \title{Urban Institute palettes}
-\format{}
+\format{An object of class \code{character} of length 8.}
 \source{
 Urban Institute Data Visualization Style Guide
  \url{http://urbaninstitute.github.io/graphics-styleguide/}
