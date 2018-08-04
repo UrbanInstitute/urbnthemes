@@ -22,85 +22,111 @@ palette_urbn_main <- c(
 
 #' @rdname urbn_palettes
 #' @export
+palette_urbn_diverging <- c(
+  "#ca5800",
+  "#fdbf11",
+  "#fdd870",
+  "#fff2cf",
+  "#cfe8f3",
+  "#73bfe2",
+  "#1696d2",
+  "#0a4c6a")
+
+#' @rdname urbn_palettes
+#' @export
+palette_urbn_quintile <- c(
+  "#cfe8f3",
+  "#73bfe2",
+  "#1696d2",
+  "#0a4c6a",
+  "#000000")
+
+#' @rdname urbn_palettes
+#' @export
+palette_urbn_politics <- c(
+  "#1696d2",
+  "#db2b27")
+
+#' @rdname urbn_palettes
+#' @export
 palette_urbn_cyan <- c(
-  "#CFE8F3",
-  "#A2D4EC",
-  "#73BFE2",
-  "#46ABDB",
-  "#1696D2",
-  "#12719E",
-  "#0A4C6A",
+  "#cfe8f3",
+  "#a2d4ec",
+  "#73bfe2",
+  "#46abdb",
+  "#1696d2",
+  "#12719e",
+  "#0a4c6a",
   "#062635")
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_gray <- c(
-  "#F5F5F5",
-  "#ECECEC",
-  "#E3E3E3",
-  "#DCDBDB",
-  "#D2D2D2",
-  "#9D9D9D",
+  "#f5f5f5",
+  "#ececec",
+  "#e3e3e3",
+  "#dcdbdb",
+  "#d2d2d2",
+  "#9d9d9d",
   "#696969",
   "#353535")
-
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_yellow <- c(
-  "#FFF2CF",
-  "#FCE39E",
-  "#FDD870",
-  "#FCCB41",
-  "#FABE15",
-  "#BB8E2D",
-  "#7F6127",
-  "#3E3215")
+  "#fff2cf",
+  "#fce39e",
+  "#fdd870",
+  "#fccb41",
+  "#fabe15",
+  "#bb8e2d",
+  "#7f6127",
+  "#3e3215")
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_magenta <- c(
-  "#F5CBDF",
-  "#EB99C2",
-  "#E46AA7",
-  "#E54096",
-  "#E90989",
-  "#AF1F6B",
+  "#f5cbdf",
+  "#eb99c2",
+  "#e46aa7",
+  "#e54096",
+  "#e90989",
+  "#af1f6b",
   "#761548",
   "#351123")
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_green <- c(
-  "#DCEDD9",
-  "#BCDEB4",
-  "#98CF90",
-  "#78C26D",
-  "#55B748",
+  "#dcedd9",
+  "#bcdeb4",
+  "#98cf90",
+  "#78c26d",
+  "#55b748",
   "#408941",
-  "#2C5C2D",
-  "#1A2E19")
+  "#2c5c2d",
+  "#1a2e19")
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_spacegray <- c(
-  "#D5D5D4",
-  "#ADABAC",
+  "#d5d5d4",
+  "#adabac",
   "#848081",
-  "#5C5859",
-  "#332D2F",
+  "#5c5859",
+  "#332d2f",
   "#262223",
-  "#1A1717",
-  "#0E0C0D")
+  "#1a1717",
+  "#0e0c0d")
 
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_red <- c(
-  "#F8D5D4",
-  "#F1AAA9",
-  "#E9807D",
-  "#E25552",
-  "#DB2B27",
-  "#A4201D",
-  "#6E1614",
-  "#370B0A")
+  "#f8d5d4",
+  "#f1aaa9",
+  "#e9807d",
+  "#e25552",
+  "#db2b27",
+  "#a4201d",
+  "#6e1614",
+  "#370b0a")
