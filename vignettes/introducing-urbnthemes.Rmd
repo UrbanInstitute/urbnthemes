@@ -30,3 +30,35 @@ ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
 
 ```
 
+## Quick palettes
+
+`urbnthemes` contains many quick-access color palettes from the [Urban Institute Data Visualization Style Guide](http://urbaninstitute.github.io/graphics-styleguide/). These palettes can be used to quickly overwrite default color palettes from `urbnthemes`.
+
+* `palette_urbn_main` is the eight color discrete palette of the Urban Institute with cyan, yellow, black, gray, magenta, green, space gray, and red. 
+* `palette_urbn_diverging` is an eight color diverging palette. 
+* `palette_urbn_quintile` is a five color blue palette that is good for quintiles. 
+* `palette_urbn_politics` is a two color palette with blue for Democrats and red for Republicans. 
+
+There are seven palettes that are continuous palettes of the seven unique colors in the discrete Urban Institute color palette:
+
+* `palette_urbn_cyan`
+* `palette_urbn_gray`
+* `palette_urbn_yellow`
+* `palette_urbn_magenta`
+* `palette_urbn_green`
+* `palette_urbn_spacegray`
+* `palette_urbn_red`
+
+All color palettes are listed in the documentation for any color palette. Simply submit `?<palette name>` to see a list of all palettes. Furthermore, all palettes begin with `palette_urbn_*` so autocomplete can be used to quickly explore the entire list of palettes. 
+
+![](images/autocomplete.png)
+
+The vectors can be subset using base R syntax. 
+
+```{r palette-subset1}
+palette_urbn_main[1:4]
+```
+
+```{r palette-subset2}
+palette_urbn_spacegray[1:5]
+```

@@ -372,6 +372,7 @@ gapminder %>%
 	filter(country %in% c("Australia", "Canada", "New Zealand", "Japan")) %>%
 	ggplot(aes(year, gdpPercap, color = country)) +
 	geom_line() +
+  scale_x_continuous(expand = c(0, 0), breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2010), limits = c(1945, 2011)) +
 	scale_y_continuous(expand = c(0, 0), labels = scales::dollar, limits = c(0, 40000)) +
 	labs(title = "Per Capita GDP in Selected Countries",
 			 subtitle = "From the gapminder data set",
@@ -391,6 +392,7 @@ as_tibble(EuStockMarkets) %>%
 	gather(key = "key", value = "value", -date) %>%
 	ggplot(aes(date, value, color = key)) +
 	geom_line() +
+  scale_x_continuous(expand = c(0, 0), limits = c(1991, 1999.5), breaks = c(1991, 1993, 1995, 1997, 1999)) +
   scale_y_continuous(expand = c(0, 0), 
   									 labels = scales::dollar,
   									 limits = c(0, 10000)) +
@@ -462,7 +464,7 @@ msleep %>%
 
 Because strip charts show all values, they are useful for showing where selected points lie in the distribution of a variable. The clearest way to do this is by adding `geom_point()` twice with `filter()` in the data argument. This way, the highlighted values show up on top of unhighlighted values. 
 
-```{r stripchart with highlighting, fig.height=2}
+```{r stripchart-with-highlighting, fig.height=2}
 ggplot() +
   geom_point(data = filter(msleep, name != "Red fox"), 
                     aes(x = sleep_total, 
@@ -490,7 +492,7 @@ ggplot() +
 
 Add a y variable to see the distributions of the continuous variable in subsets of a categorical variable. 
 
-```{r subsetted stripchart, fig.height=3}
+```{r subsetted-stripchart, fig.height=3}
 library(forcats)
 
 msleep %>%
@@ -539,7 +541,7 @@ ggplot(InsectSprays, aes(x = spray, y = count)) +
 
 Continuous variables with smooth distributions are sometimes better represented with smoothed kernel density estimates than histograms or boxplots. `geom_density()` computes and plots a kernel density estimate. Notice the lumps around integers and halves in the following distribution because of rounding. 
 
-```{r kernel density plot}
+```{r kernel-density-plot}
 diamonds %>%
   ggplot(aes(carat)) +
   geom_density() +
@@ -549,7 +551,7 @@ diamonds %>%
        y = "Density")
 ```
 
-```{r kernel density plot filled}
+```{r kernel-density-plot-filled}
 diamonds %>%
   mutate(cost = ifelse(price > 5500, "More than $5,500 +", "$0 to $5,500")) %>%
   ggplot(aes(carat, fill = cost)) +
@@ -579,7 +581,7 @@ ggplot(diamonds, mapping = aes(x = price, y = cut)) +
 
 Violin plots are symmetrical displays of smooth kernel density plots. 
 
-```{r violin plot}
+```{r violin-plot}
 ggplot(InsectSprays, aes(x = spray, y = count, fill = spray)) +
   geom_violin() +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
@@ -628,7 +630,7 @@ msleep %>%
 ------
 
 ### Stacked Area
-```{r area plot stack}
+```{r area-plot-stack}
 txhousing %>%
   filter(city %in% c("Austin","Houston","Dallas","San Antonio","Fort Worth")) %>%
   group_by(city, year) %>%
@@ -642,7 +644,7 @@ txhousing %>%
 ```
 
 ### Filled Area
-```{r area plot fill}
+```{r area-plot-fill}
 txhousing %>%
   filter(city %in% c("Austin", "Houston", "Dallas", "San Antonio", "Fort Worth")) %>%
   group_by(city, year) %>%
@@ -666,7 +668,7 @@ Waffle charts will require a little extra tinkering since they are called from `
 
 ### Single Waffle Chart
 
-```{r single waffle}
+```{r single-waffle}
 library(waffle)
 
 parts <- c(`Virginia\nClinics` = (1000 - 208 - 105), `Maryland\nClinics` = 208, `D.C.\nClinics` = 105)
@@ -683,7 +685,7 @@ Waffle charts can be enhanced by replacing squares qith glyphs. Two important ar
 Using glyphs requires downloading fontawesome. That can be done [here](https://github.com/hrbrmstr/waffle/tree/master/inst/fonts). Then run `library(extrafont)`, 
 `port(<font-location>)`, and `loadfonts()` once. After that, building waffle charts with glpyhs should be as easy as one function call. 
 
-```{r waffle with glyphs}
+```{r waffle-with-glyphs}
 #library(extrafont)
 #font_import("H:/IT/urban_R_theme/docs")
 #loadfonts()
@@ -700,7 +702,7 @@ waffle(parts, rows = 5, glyph_size = 12, colors = c("#1696d2", "#fdbf11", "#0000
 
 `library(waffle)` allows multiple waffle charts to be ironed together using `iron()`. Ironing multiple charts together requires some trial-and-error to get the sizes and resolution to look good, but the results can be worth the work. Don't forget `theme(text = element_text(family = "Lato"))`!
 
-```{r ironed waffle}
+```{r ironed-waffle}
 library(waffle)
 
 white <- c(`With Degree` = 169300, `Without Degree` = 800)
@@ -721,29 +723,31 @@ iron(
 
 ------
 
-```{r heat map, fig.height=10}
+```{r heat-map}
 library(fivethirtyeight)
 
 bad_drivers %>%
-  mutate(`Number of Drivers` = scale(num_drivers),
-         `Percent Speeding` = scale(perc_speeding),
-         `Percent Alcohol` = scale(perc_alcohol),
-         `Percent Not Distracted` = scale(perc_not_distracted),
-         `Percent No Previous` = scale(perc_no_previous),
+  filter(state %in% c("Maine", "New Hampshire", "Vermont", "Massachusetts", "Connecticut", "New York")) %>%
+  mutate(`Number of\nDrivers` = scale(num_drivers),
+         `Percent\nSpeeding` = scale(perc_speeding),
+         `Percent\nAlcohol` = scale(perc_alcohol),
+         `Percent Not\nDistracted` = scale(perc_not_distracted),
+         `Percent No\nPrevious` = scale(perc_no_previous),
          state = factor(state, levels = rev(state))
          ) %>%
   select(-insurance_premiums, -losses, -(num_drivers:losses)) %>%
-  gather(`Number of Drivers`:`Percent No Previous`, key = "variable", value = "SD's from Mean") %>%
+  gather(`Number of\nDrivers`:`Percent No\nPrevious`, key = "variable", value = "SD's from Mean") %>%
   ggplot(aes(variable, state)) +
     geom_tile(aes(fill = `SD's from Mean`)) +
-    labs(title = "Drivers Involved in Fatal Collisions By Behavior",
+    labs(title = "Northeast Drivers Involved in Fatal Collisions By Behavior",
       subtitle = "As a share of scaled fatal collisions per billion miles, 2009",
       x = NULL,
       y = NULL) + 
     scale_fill_gradientn() +
     theme(legend.position = "right",
-      legend.direction = "vertical",
-      axis.text.x = element_text(angle = 45)) +
+          legend.direction = "vertical",
+          axis.line.x = element_blank(),
+          panel.grid.major.y = element_blank()) +
   remove_ticks()
 #https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/
 ```
@@ -758,35 +762,32 @@ R's faceting system is a powerful way to make "small multiples".
 
 Some edits to the theme may be necessary depending upon how many rows and columns are in the plot. 
 
-```{r small multiples, message = FALSE, warning = FALSE, fig.height = 9}
-txhousing %>%
-  filter(!city %in% c("Brazoria County", "Brownsville", "San Angelo", "Denton County")) %>%
-  ggplot(aes(x = median)) +
-  geom_histogram() +
-  facet_wrap(~city) +
-  scale_x_continuous(labels = scales::dollar) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
-  labs(title = "Median Monthly Home Prices in Selected Texas Cities",
-       x = "Median Monthly Home Value",
-       y = "Count") + 
-  theme(axis.text.x = element_text(angle = 90),
-        strip.text = element_text(face = "plain", 
-                              size = rel(0.5)))
+```{r small-multiples, fig.height=2}
+diamonds %>%
+  ggplot(mapping = aes(x = carat, y = price)) +
+  geom_point(alpha = 0.05) +
+  facet_wrap(~cut, ncol = 5) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)),
+                     limits = c(0, NA), 
+                     labels = scales::dollar) +
+  labs(x = "Carat",
+       y = "Price")
 ```
 
 ### facet_grid()
 
-``` {r faceting}
-mtcars %>%
-	mutate(vs = factor(vs, levels = 0:1, labels = c("Normal Transmission", "V/S Transmission")),
-				 am = factor(am, levels = 0:1, labels = c("Automatic Transmission", "Manual Transmission"))) %>%
-	ggplot(aes(wt, mpg)) +
-		geom_point(alpha = 0.5) +
-		scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
-  	labs(title = "Determinants of Fuel Efficiency", 
-  			 subtitle = "1974 Motor Trends US magazine data") +
-  	facet_grid(vs ~ am, margins = TRUE) +
-		theme(panel.border = element_rect(colour = "black", fill = NA, size = 0.3))
+``` {r faceting, fig.height=7}
+diamonds %>%
+  filter(color %in% c("D", "E", "F", "G")) %>%
+  ggplot(mapping = aes(x = carat, y = price)) +
+  geom_point(alpha = 0.05) +
+  facet_grid(color ~ cut) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)),
+                     limits = c(0, NA), 
+                     labels = scales::dollar) +
+  labs(x = "Carat",
+       y = "Price") +
+  theme(panel.spacing = unit(20L, "pt"))
 ```
 
 ## Smoothers
@@ -816,7 +817,7 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
 
 `geom_smooth` can be subset by categorical and factor variables. This requires subgroups to have a decent number of observations and and a fair amount of variability across the x-axis. Confidence intervals often widen at the ends so special care is needed for the chart to be meaningful and readable. 
 
-```{r subset geom_smooth}
+```{r subset-geom_smooth}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
 	geom_point(alpha = 0.2) +
 	geom_smooth() +
@@ -915,7 +916,7 @@ mtcars %>%
 
 `annotate()` doesn't use data frames. Instead, it takes values for `x =` and `y =`. It can add text, rectangles, segments, and pointrange. 
 
-```{r annotate point}
+```{r annotate-point}
 msleep %>%
   filter(bodywt < 1000) %>%
   ggplot(aes(bodywt, sleep_total)) +
@@ -927,7 +928,7 @@ msleep %>%
        y = "Sleep time (hours)")
 ```
 
-```{r annotate rect}
+```{r annotate-rect}
 library(AmesHousing)
 
 ames <- make_ames()
@@ -960,7 +961,7 @@ It is often useful to add points to line plots with a small number of values acr
 ### Design{.tabset}
 
 #### Before
-```{r layering geoms design}
+```{r layering-geoms-design}
 table1 %>%
 	ggplot(aes(x = year, y = cases)) +
 		geom_line(aes(color = country)) +
@@ -971,7 +972,7 @@ table1 %>%
 ```
 
 #### After
-```{r layering geoms design grey}
+```{r layering-geoms-design-gray}
 table1 %>%
 	ggplot(aes(year, cases)) +
 		geom_line(aes(group = country), color = "grey50") +

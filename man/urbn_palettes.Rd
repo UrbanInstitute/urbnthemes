@@ -3,6 +3,9 @@
 \docType{data}
 \name{palette_urbn_main}
 \alias{palette_urbn_main}
+\alias{palette_urbn_diverging}
+\alias{palette_urbn_quintile}
+\alias{palette_urbn_politics}
 \alias{palette_urbn_cyan}
 \alias{palette_urbn_gray}
 \alias{palette_urbn_yellow}
@@ -18,6 +21,12 @@ Urban Institute Data Visualization Style Guide
 }
 \usage{
 palette_urbn_main
+
+palette_urbn_diverging
+
+palette_urbn_quintile
+
+palette_urbn_politics
 
 palette_urbn_cyan
 
