@@ -34,19 +34,6 @@ ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
 
 `urbnthemes` contains many quick-access color palettes from the [Urban Institute Data Visualization Style Guide](http://urbaninstitute.github.io/graphics-styleguide/). These palettes can be used to quickly overwrite default color palettes from `urbnthemes`.
 
-```{r diverging}
-library(tidyverse)
-library(urbnthemes)
-
-set_urbn_defaults(style = "print")
-
-mtcars %>%
-  mutate(ntile_hp = ntile(hp, 8)) %>%
-  ggplot(aes(wt, mpg, color = factor(ntile_hp))) +
-  geom_point() +
-  scale_color_manual(values = palette_urbn_diverging)
-```
-
 * `palette_urbn_main` is the eight color discrete palette of the Urban Institute with cyan, yellow, black, gray, magenta, green, space gray, and red. 
 * `palette_urbn_diverging` is an eight color diverging palette. 
 * `palette_urbn_quintile` is a five color blue palette that is good for quintiles. 
