@@ -6,3 +6,6 @@ inst/doc
 
 /* Windows system files */
 *.db
+
+/* example content */
+examples/
