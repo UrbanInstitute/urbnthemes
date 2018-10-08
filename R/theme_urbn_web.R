@@ -48,7 +48,6 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
                             margin = ggplot2::margin(b = 10L)),
     plot.tag.position = "topleft",
     plot.title = ggplot2::element_text(size = base_size * 1.5,
-
                               hjust = 0L,
                               vjust = 0L,
                               face = "bold",
@@ -63,7 +62,10 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
                                 margin = ggplot2::margin(t = half_line * 0.9)),
     plot.background = NULL,
 
-    plot.margin = ggplot2::margin(half_line, half_line, half_line, half_line),
+    plot.margin = ggplot2::margin(t = half_line,
+                                  r = base_line_size * 24,
+                                  b = half_line,
+                                  l = half_line),
 
     # axis attributes
 
