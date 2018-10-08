@@ -84,7 +84,7 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
     axis.title.y.right = NULL,
 
     axis.ticks = ggplot2::element_line(),
-    axis.ticks.length = unit(4L, "pt"),
+    axis.ticks.length = ggplot2::unit(4L, "pt"),
     axis.ticks.x = ggplot2::element_line(colour = NULL,
                                 size = NULL,
                                 linetype = NULL,
@@ -102,16 +102,17 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
 
     legend.background = ggplot2::element_blank(),
 
-    legend.spacing = unit(20L, "pt"),
-    legend.spacing.x = NULL,
+    legend.spacing = ggplot2::unit(20L, "pt"),
+    legend.spacing.x = ggplot2::unit(4L, "pt"),
     legend.spacing.y = NULL,
 
     legend.key = ggplot2::element_blank(),
-    legend.key.size = unit(10L, "pt"),
+    legend.key.size = ggplot2::unit(10L, "pt"),
     legend.key.height = NULL,
     legend.key.width = NULL,
 
-    legend.text = NULL,
+    legend.text = ggplot2::element_text(size = base_size * 9.5 / 8.5,
+                               vjust = 1),
     legend.text.align = NULL,
     legend.title = ggplot2::element_blank(),
     legend.title.align = NULL,
@@ -132,7 +133,7 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
     panel.border = ggplot2::element_blank(),
     panel.ontop = FALSE,
 
-    panel.spacing = unit(6L, "pt"),
+    panel.spacing = ggplot2::unit(6L, "pt"),
     panel.spacing.x = NULL,
     panel.spacing.y = NULL,
 
@@ -161,8 +162,8 @@ theme_urbn_web <- function(base_size = 12L, base_family = "Lato",
     strip.placement.x =  NULL,
     strip.placement.y =  NULL,
 
-    strip.switch.pad.grid = unit(0.1, "cm"),
-    strip.switch.pad.wrap = unit(0.1, "cm"),
+    strip.switch.pad.grid = ggplot2::unit(0.1, "cm"),
+    strip.switch.pad.wrap = ggplot2::unit(0.1, "cm"),
 
     # create a complete format
     complete = TRUE
