@@ -10,6 +10,6 @@ fontawesome_test <- function() {
   if (sum(grepl("FontAwesome", extrafont::fonts())) > 0) {
     "FontAwesome is imported and registered."
   } else {
-    "FontAwesome isn't imported and registered. Install from GitHub and important and register using fontawesome_install()."
+    "FontAwesome isn't imported and registered. Install from GitHub and import and register using fontawesome_install()."
   }
 }

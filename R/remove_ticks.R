@@ -5,7 +5,7 @@
 #' @md
 #' @export
 remove_ticks <- function() {
-  ggplot2::theme(axis.ticks = element_blank(),
-                 axis.ticks.x = element_blank(),
-                 axis.ticks.y = element_blank())
+  ggplot2::theme(axis.ticks = ggplot2::element_blank(),
+                 axis.ticks.x = ggplot2::element_blank(),
+                 axis.ticks.y = ggplot2::element_blank())
 }
