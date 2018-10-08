@@ -1,0 +1,173 @@
+---
+output:
+  html_document:
+    css: styles.css
+    self_contained: TRUE
+    code_folding: hide
+    toc: TRUE
+    toc_float: TRUE
+editor_options: 
+  chunk_output_type: console
+params:
+  theme_version: "print"
+---
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" />
+
+<div id="header">
+![](www/images/urban-institute-logo.png)
+</div>
+
+## Urban Institute R Graphics Guide
+
+------
+
+```{r setup, include=FALSE}
+library(knitr)
+library(datasets)
+library(tidyverse)
+
+opts_chunk$set(echo = TRUE)
+opts_chunk$set(warning = FALSE)
+opts_chunk$set(message = FALSE)
+opts_chunk$set(fig.width = 6.6)
+options(scipen = 999)
+
+# Source ggplot2 theme
+
+library(urbnthemes)
+set_urbn_defaults(style = params$theme_version)
+```
+
+### Bar plots
+
+```{r bar-plot-1}
+mtcars %>%
+  count(cyl) %>%
+  ggplot(aes(factor(cyl), n)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = n), vjust = -1) +    
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  remove_ticks() +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_blank())
+```
+
+
+```{r bar-plot-2}
+mtcars %>%
+  count(cyl) %>%
+  ggplot(aes(x = factor(cyl), y = n)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = n), hjust = -1) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  theme(panel.grid.major.y = element_blank()) +
+  coord_flip()
+```
+
+### Stacked bar plots
+
+```{r stack-bar-1}
+mtcars %>%
+  group_by(am) %>%
+  count(cyl) %>%
+  ggplot(aes(factor(cyl), n, fill = factor(am))) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = n), position = position_stack(vjust = 1)) +    
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  remove_ticks() +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_blank())
+```
+
+```{r stack-bar-2}
+mtcars %>%
+  group_by(am) %>%
+  count(cyl) %>%
+  ggplot(aes(factor(cyl), n, fill = factor(am))) +
+  geom_col(width = 0.7, position = "dodge") +
+  geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  remove_ticks() +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_blank())
+```
+
+
+### Scatter plots
+
+```{r scatter-plot-1}
+mtcars %>%
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point(size = 3) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     limits = c(0, 40),
+                     breaks = 0:8 * 5) +
+  labs(x = "Weight (thousands of pounds)",
+       y = "City MPG") +
+  theme(panel.grid.major.x = element_line(colour = "#dedddd"))
+```
+
+```{r scatter-plot-2}
+mtcars %>%
+  ggplot(aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     limits = c(0, 40),
+                     breaks = 0:8 * 5) +
+  labs(x = "Weight (thousands of pounds",
+       y = "City MPG") +
+  theme(panel.grid.major.x = element_line(colour = "#dedddd"))
+```
+
+### Line plots
+
+```{r line-plot}
+library(gapminder)
+
+gapminder %>%
+  filter(country %in% c("Australia", "Canada", "New Zealand")) %>%
+  ggplot(aes(year, gdpPercap, color = country)) +
+  geom_line(size = 1) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     breaks = c(1952 + 0:12 * 5), 
+                     limits = c(1952, 2007)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     breaks = 0:8 * 5000,
+                     labels = scales::dollar, 
+                     limits = c(0, 40000)) +
+  labs(x = NULL,
+       y = "Per capita GDP")
+```
+
+### Area plots
+
+```{r area-plots-1}
+
+base_size <- 8.5
+
+txhousing %>%
+  filter(city %in% c("Austin","Houston","Dallas","San Antonio","Fort Worth")) %>%
+  group_by(city, year) %>%
+  summarize(sales = sum(sales)) %>%
+  ggplot(aes(x = year, y = sales, fill = city)) +
+  geom_area(position = "stack") +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(2000, 2015),
+                     breaks = 2000 + 0:15) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), 
+                     labels = scales::comma) +
+  labs(x = "Year",
+       y = "Home sales")
+
+```
+
+
+
+
