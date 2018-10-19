@@ -78,14 +78,13 @@ Utility functions:
 -   `lato_install()`
 -   `fontawesome_test()`
 -   `fontawesome_install()`
+-   `view_palette()`
 
 In development:
 
--   `urban_logo_image()`
 -   `undo_urban_defaults()`
 -   `save_urban_print()`
 -   `save_urban_web()`
--   `urban_rmarkdown_header()`
 
 ### Getting help
 
