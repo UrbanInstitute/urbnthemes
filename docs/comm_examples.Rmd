@@ -50,8 +50,7 @@ mtcars %>%
   geom_text(aes(label = n), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
-  theme(panel.grid.major.y = element_blank(),
-        axis.text.y = element_blank())
+  remove_axis() 
 ```
 
 
@@ -62,8 +61,7 @@ mtcars %>%
   geom_col() +
   geom_text(aes(label = n), hjust = -1) +  
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  theme(panel.grid.major.y = element_blank()) +
-  coord_flip()
+  remove_axis("both")
 ```
 
 ### Stacked bar plots
@@ -77,8 +75,7 @@ mtcars %>%
   geom_text(aes(label = n), position = position_stack(vjust = 0.9)) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
-  theme(panel.grid.major.y = element_blank(),
-        axis.text.y = element_blank())
+  remove_axis()
 ```
 
 ```{r stack-bar-2}
@@ -90,8 +87,7 @@ mtcars %>%
   geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
-  theme(panel.grid.major.y = element_blank(),
-        axis.text.y = element_blank())
+  remove_axis()
 ```
 
 
@@ -109,7 +105,7 @@ mtcars %>%
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds)",
        y = "City MPG") +
-  theme(panel.grid.major.x = element_line(colour = "#dedddd"))
+  scatter_grid()
 ```
 
 ```{r scatter-plot-2}
@@ -124,7 +120,7 @@ mtcars %>%
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds",
        y = "City MPG") +
-  theme(panel.grid.major.x = element_line(colour = "#dedddd"))
+  scatter_grid()
 ```
 
 ### Line plots

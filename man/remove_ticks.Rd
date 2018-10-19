@@ -4,7 +4,10 @@
 \alias{remove_ticks}
 \title{The Urban Institute \link{ggplot2} theme}
 \usage{
-remove_ticks()
+remove_ticks(axis = "both")
+}
+\arguments{
+\item{axis}{Axis to drop. "x", "y", or "both"}
 }
 \description{
 Removes tick marks from all axes

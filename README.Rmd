@@ -82,6 +82,8 @@ Formatting functions:
 
 * `urbn_logo_text()`
 * `remove_ticks()`
+* `remove_axis()`
+* `scatter_grid()`
 
 Utility functions:
 
