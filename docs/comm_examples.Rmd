@@ -45,7 +45,7 @@ set_urbn_defaults(style = params$theme_version)
 mtcars %>%
   count(cyl) %>%
   ggplot(aes(factor(cyl), n)) +
-  geom_col(width = 0.7) +
+  geom_col() +
   geom_text(aes(label = n), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
@@ -58,7 +58,7 @@ mtcars %>%
 mtcars %>%
   count(cyl) %>%
   ggplot(aes(x = factor(cyl), y = n)) +
-  geom_col(width = 0.7) +
+  geom_col() +
   geom_text(aes(label = n), hjust = -1) +  
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   theme(panel.grid.major.y = element_blank()) +
@@ -72,7 +72,7 @@ mtcars %>%
   group_by(am) %>%
   count(cyl) %>%
   ggplot(aes(factor(cyl), n, fill = factor(am))) +
-  geom_col(width = 0.7) +
+  geom_col() +
   geom_text(aes(label = n), position = position_stack(vjust = 0.9)) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
@@ -85,7 +85,7 @@ mtcars %>%
   group_by(am) %>%
   count(cyl) %>%
   ggplot(aes(factor(cyl), n, fill = factor(am))) +
-  geom_col(width = 0.7, position = "dodge") +
+  geom_col(position = "dodge") +
   geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   remove_ticks() +
@@ -99,7 +99,7 @@ mtcars %>%
 ```{r scatter-plot-1}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
-  geom_point(size = 3) +
+  geom_point() +
   scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
@@ -114,7 +114,7 @@ mtcars %>%
 ```{r scatter-plot-2}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg, color = factor(cyl))) +
-  geom_point(size = 3) +
+  geom_point() +
   scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
@@ -134,7 +134,7 @@ library(gapminder)
 gapminder %>%
   filter(country %in% c("Australia", "Canada", "New Zealand")) %>%
   ggplot(aes(year, gdpPercap, color = country)) +
-  geom_line(size = 1) +
+  geom_line() +
   scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
                      breaks = c(1952 + 0:12 * 5), 
                      limits = c(1952, 2007)) +

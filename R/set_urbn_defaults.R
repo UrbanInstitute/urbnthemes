@@ -63,4 +63,11 @@ set_urbn_defaults <- function(style = "print") {
   scale_fill_gradientn <- urbnthemes::scale_fill_gradientn
   scale_fill_ordinal <- urbnthemes::scale_fill_ordinal
   scale_colour_ordinal <- urbnthemes::scale_colour_ordinal
+
+  # update geom defaults ----------------------------------------------------
+  geom_bar <- urbnthemes::geom_bar
+  geom_col <- urbnthemes::geom_col
+  geom_line <- urbnthemes::geom_line
+  geom_point <- urbnthemes::geom_point
+
 }

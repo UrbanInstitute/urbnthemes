@@ -2,6 +2,10 @@
 
 export(fontawesome_install)
 export(fontawesome_test)
+export(geom_bar)
+export(geom_col)
+export(geom_line)
+export(geom_point)
 export(lato_install)
 export(lato_test)
 export(palette_urbn)
