@@ -30,7 +30,8 @@ library(tidyverse)
 opts_chunk$set(echo = TRUE)
 opts_chunk$set(warning = FALSE)
 opts_chunk$set(message = FALSE)
-opts_chunk$set(fig.width = 6.6)
+opts_chunk$set(fig.width = 6.5)
+opts_chunk$set(fig.height = 4)
 options(scipen = 999)
 
 # Source ggplot2 theme
