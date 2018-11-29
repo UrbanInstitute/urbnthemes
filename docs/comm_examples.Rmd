@@ -49,6 +49,8 @@ mtcars %>%
   geom_col() +
   geom_text(aes(label = n), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = "Cylinders",
+       y = NULL) +
   remove_ticks() +
   remove_axis() 
 ```
@@ -61,7 +63,10 @@ mtcars %>%
   geom_col() +
   geom_text(aes(label = n), hjust = -1) +  
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  remove_axis("both")
+  labs(x = "Cylinders",
+       y = NULL) +  
+  coord_flip() +
+  remove_axis(axis = "x", flip = TRUE)
 ```
 
 ### Stacked bar plots
@@ -74,6 +79,8 @@ mtcars %>%
   geom_col() +
   geom_text(aes(label = n), position = position_stack(vjust = 0.9)) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = NULL,
+       y = NULL) +  
   remove_ticks() +
   remove_axis()
 ```
@@ -86,6 +93,8 @@ mtcars %>%
   geom_col(position = "dodge") +
   geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = NULL,
+       y = NULL) +  
   remove_ticks() +
   remove_axis()
 ```
@@ -118,7 +127,7 @@ mtcars %>%
   scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
                      limits = c(0, 40),
                      breaks = 0:8 * 5) +
-  labs(x = "Weight (thousands of pounds",
+  labs(x = "Weight (thousands of pounds)",
        y = "City MPG") +
   scatter_grid()
 ```

@@ -2,15 +2,16 @@
 % Please edit documentation in R/add_axis.R, R/remove_axis.R
 \name{remove_axis}
 \alias{remove_axis}
-\alias{remove_axis}
 \title{The Urban Institute \link{ggplot2} theme}
 \usage{
-remove_axis(axis = "y")
+remove_axis(axis = "y", flip = FALSE)
 
-remove_axis(axis = "y")
+remove_axis(axis = "y", flip = FALSE)
 }
 \arguments{
 \item{axis}{Axis to drop. "x", "y", or "both"}
+
+\item{flip}{TRUE/FALSE is \code{coord_flip()} is used}
 
 \item{axis}{Axis to drop. "x", "y", or "both"}
 }
