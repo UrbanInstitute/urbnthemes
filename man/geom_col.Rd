@@ -4,9 +4,11 @@
 \alias{geom_col}
 \title{geom_col in the Urban Institute style}
 \usage{
-geom_col(...)
+geom_col(mapping = NULL, width = 0.7, ...)
 }
 \arguments{
+\item{mapping}{mapping from ggplot2}
+
 \item{...}{other arguments passed to \code{geom_col()}}
 }
 \description{

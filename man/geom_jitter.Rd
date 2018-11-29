@@ -4,9 +4,11 @@
 \alias{geom_jitter}
 \title{geom_jitter in the Urban Institute style}
 \usage{
-geom_jitter(...)
+geom_jitter(mapping = NULL, size = 3, ...)
 }
 \arguments{
+\item{mapping}{mapping from ggplot2}
+
 \item{...}{other arguments passed to \code{geom_jitter()}}
 }
 \description{

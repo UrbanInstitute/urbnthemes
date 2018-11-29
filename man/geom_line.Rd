@@ -4,9 +4,11 @@
 \alias{geom_line}
 \title{geom_line in the Urban Institute style}
 \usage{
-geom_line(...)
+geom_line(mapping = NULL, size = 1, ...)
 }
 \arguments{
+\item{mapping}{mapping from ggplot2}
+
 \item{...}{other arguments passed to \code{geom_line()}}
 }
 \description{

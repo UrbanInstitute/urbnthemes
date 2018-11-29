@@ -73,13 +73,18 @@ mtcars %>%
 
 ```{r stack-bar-1}
 mtcars %>%
+  mutate(am = factor(am, labels = c("Automatic", "Manual"))) %>%  
   group_by(am) %>%
   count(cyl) %>%
-  ggplot(aes(factor(cyl), n, fill = factor(am))) +
-  geom_col() +
-  geom_text(aes(label = n), position = position_stack(vjust = 0.9)) +    
+  group_by(cyl) %>%
+  arrange(cyl) %>%
+  mutate(label_height = cumsum(n)) %>%
+  ggplot() +
+  geom_col(aes(factor(cyl), n, fill = factor(am)), 
+           position = position_stack(reverse = TRUE)) +
+  geom_text(aes(x = factor(cyl), y = label_height - 0.5, label = n)) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  labs(x = NULL,
+  labs(x = "Cylinders",
        y = NULL) +  
   remove_ticks() +
   remove_axis()
@@ -87,13 +92,14 @@ mtcars %>%
 
 ```{r stack-bar-2}
 mtcars %>%
+  mutate(am = factor(am, labels = c("Automatic", "Manual"))) %>%
   group_by(am) %>%
   count(cyl) %>%
   ggplot(aes(factor(cyl), n, fill = factor(am))) +
   geom_col(position = "dodge") +
   geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  labs(x = NULL,
+  labs(x = "Cylinders",
        y = NULL) +  
   remove_ticks() +
   remove_axis()
@@ -149,14 +155,12 @@ gapminder %>%
                      labels = scales::dollar, 
                      limits = c(0, 40000)) +
   labs(x = NULL,
-       y = "Per capita GDP")
+       y = "Per capita GDP (US dollars)")
 ```
 
 ### Area plots
 
 ```{r area-plots-1}
-
-base_size <- 8.5
 
 txhousing %>%
   filter(city %in% c("Austin","Houston","Dallas","San Antonio","Fort Worth")) %>%

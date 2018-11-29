@@ -4,9 +4,11 @@
 \alias{geom_bar}
 \title{geom_bar in the Urban Institute style}
 \usage{
-geom_bar(...)
+geom_bar(mapping = NULL, width = 0.7, ...)
 }
 \arguments{
+\item{mapping}{mapping from ggplot2}
+
 \item{...}{other arguments passed to \code{geom_bar()}}
 }
 \description{
