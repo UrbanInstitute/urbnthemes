@@ -32,6 +32,9 @@ opts_chunk$set(fig.path = "www/images/")
 opts_chunk$set(echo = TRUE)
 opts_chunk$set(warning = FALSE)
 opts_chunk$set(message = FALSE)
+opts_chunk$set(fig.width = 6.5)
+opts_chunk$set(fig.height = 4)
+opts_chunk$set(fig.retina = 3)
 options(scipen = 999)
 ```
 

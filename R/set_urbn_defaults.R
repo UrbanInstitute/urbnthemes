@@ -1,9 +1,9 @@
 #' The Urban Institute [ggplot2] theme
 #'
 #' \code{set_urbn_defaults} provides a [ggplot2] theme formatted according to the
-#' Urban Institute style guide for web, with sensible defaults.
+#' Urban Institute style guide, with sensible defaults.
 #'
-#' @param style The default theme style for the R session. "web", "print", or "map".
+#' @param style The default theme style for the R session. "print" or "map".
 #' @import extrafont
 #' @import ggrepel
 #' @import conflicted
@@ -17,8 +17,11 @@ set_urbn_defaults <- function(style = "print") {
     ggplot2::theme_set(theme_urbn_print())
   } else if (style == "web") {
     ggplot2::theme_set(theme_urbn_web())
-  } else if (style == "map") {
-    ggplot2::theme_set(theme_urbn_map())
+  } else {
+    stop('Invalid "style" argument. Valid styles are: ',
+         '"print" and "map".',
+         call. = FALSE
+    )
   }
 
   # add Lato font to text and label geoms ---------------------------
@@ -69,5 +72,7 @@ set_urbn_defaults <- function(style = "print") {
   geom_col <- urbnthemes::geom_col
   geom_line <- urbnthemes::geom_line
   geom_point <- urbnthemes::geom_point
+  geom_step <- urbnthemes::geom_step
+  geom_path <- urbnthemes::geom_path
 
 }
