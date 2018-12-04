@@ -46,6 +46,30 @@ geom_line <- function(mapping = NULL, size = 1, ...) {
   ggplot2::geom_line(mapping = mapping, size = size, ...)
 }
 
+#' geom_step in the Urban Institute style
+#'
+#' Submit `?ggplot2::geom_step` to see the full documentation for `geom_step()`
+#'
+#' @md
+#' @param mapping mapping from ggplot2
+#' @param ... other arguments passed to \code{geom_step()}
+#' @export
+geom_step <- function(mapping = NULL, size = 1, ...) {
+  ggplot2::geom_step(mapping = mapping, size = size, ...)
+}
+
+#' geom_path in the Urban Institute style
+#'
+#' Submit `?ggplot2::geom_path` to see the full documentation for `geom_path()`
+#'
+#' @md
+#' @param mapping mapping from ggplot2
+#' @param ... other arguments passed to \code{geom_path()}
+#' @export
+geom_path <- function(mapping = NULL, size = 1, ...) {
+  ggplot2::geom_path(mapping = mapping, size = size, ...)
+}
+
 #' geom_point in the Urban Institute style
 #'
 #' Submit `?ggplot2::geom_point` to see the full documentation for `geom_point()`
