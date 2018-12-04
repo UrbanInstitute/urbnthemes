@@ -32,6 +32,7 @@ opts_chunk$set(warning = FALSE)
 opts_chunk$set(message = FALSE)
 opts_chunk$set(fig.width = 6.5)
 opts_chunk$set(fig.height = 4)
+opts_chunk$set(fig.retina = 5)
 options(scipen = 999)
 
 # Source ggplot2 theme
@@ -73,21 +74,23 @@ mtcars %>%
 
 ```{r stack-bar-1}
 mtcars %>%
-  mutate(am = factor(am, labels = c("Automatic", "Manual"))) %>%  
+  mutate(am = factor(am, labels = c("Automatic", "Manual")),
+         cyl = factor(cyl)) %>%  
   group_by(am) %>%
   count(cyl) %>%
   group_by(cyl) %>%
-  arrange(cyl) %>%
+  arrange(desc(am)) %>%
   mutate(label_height = cumsum(n)) %>%
   ggplot() +
-  geom_col(aes(factor(cyl), n, fill = factor(am)), 
-           position = position_stack(reverse = TRUE)) +
-  geom_text(aes(x = factor(cyl), y = label_height - 0.5, label = n)) +    
+  geom_col(aes(cyl, n, fill = am)) +
+  geom_text(aes(x = cyl, y = label_height - 0.5, label = n, color = am)) +
+  scale_color_manual(values = c("white", "black")) +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   labs(x = "Cylinders",
        y = NULL) +  
   remove_ticks() +
-  remove_axis()
+  remove_axis() +
+  guides(color = FALSE)
 ```
 
 ```{r stack-bar-2}
@@ -112,10 +115,10 @@ mtcars %>%
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
-  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
                      limits = c(0, 40),
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds)",
@@ -125,12 +128,13 @@ mtcars %>%
 
 ```{r scatter-plot-2}
 mtcars %>%
-  ggplot(aes(x = wt, y = mpg, color = factor(cyl))) +
+  mutate(cyl = paste(cyl, "cylinders")) %>%
+  ggplot(aes(x = wt, y = mpg, color = cyl)) +
   geom_point() +
-  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
                      limits = c(0, 40),
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds)",
@@ -145,16 +149,17 @@ library(gapminder)
 
 gapminder %>%
   filter(country %in% c("Australia", "Canada", "New Zealand")) %>%
+  mutate(country = factor(country, levels = c("Canada", "Australia", "New Zealand"))) %>%
   ggplot(aes(year, gdpPercap, color = country)) +
   geom_line() +
-  scale_x_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
                      breaks = c(1952 + 0:12 * 5), 
                      limits = c(1952, 2007)) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
                      breaks = 0:8 * 5000,
                      labels = scales::dollar, 
                      limits = c(0, 40000)) +
-  labs(x = NULL,
+  labs(x = "Year",
        y = "Per capita GDP (US dollars)")
 ```
 
@@ -175,9 +180,4 @@ txhousing %>%
                      labels = scales::comma) +
   labs(x = "Year",
        y = "Home sales")
-
 ```
-
-
-
-
