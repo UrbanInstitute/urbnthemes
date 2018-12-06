@@ -15,8 +15,8 @@ set_urbn_defaults <- function(style = "print") {
 
   if (style == "print") {
     ggplot2::theme_set(theme_urbn_print())
-  } else if (style == "web") {
-    ggplot2::theme_set(theme_urbn_web())
+  } else if (style == "map") {
+    ggplot2::theme_set(theme_urbn_map())
   } else {
     stop('Invalid "style" argument. Valid styles are: ',
          '"print" and "map".',
