@@ -6,6 +6,9 @@ output:
     code_folding: hide
     toc: TRUE
     toc_float: TRUE
+    pandoc_args: [ 
+      "--tab-stop=2" 
+    ] 
 editor_options: 
   chunk_output_type: console
 ---
@@ -26,7 +29,7 @@ library(datasets)
 library(tidyverse)
 library(urbnthemes)
 
-set_urbn_defaults("print")
+set_urbn_defaults(style = "print")
 
 opts_chunk$set(fig.path = "www/images/")
 opts_chunk$set(echo = TRUE)
@@ -116,72 +119,113 @@ More information: [ggplot2: Elegant Graphics for Data Analysis](https://www.amaz
 ### One Color
 
 ```{r barplots}
-ggplot(data = mtcars, mapping = aes(factor(cyl))) +
-  geom_bar() + 
+mtcars %>%
+  count(cyl) %>%
+  ggplot(mapping = aes(x = factor(cyl), y = n)) +
+  geom_col() +
+  geom_text(mapping = aes(label = n), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  labs(title = "Number of Cars By Number of Cylinders",
-       x = "Number of Cylinders",
-       y = "Count") +
-  remove_ticks()
+  labs(x = "Cylinders",
+       y = NULL) +
+  remove_ticks() +
+  remove_axis() 
+```
+
+### One Color (Rotated)
+
+This example introduces `coord_flip()` and `remove_axis(axis = "x", flip = TRUE)`. `remove_axis()` is from `library(urbnthemes)` and creates a custom theme for rotated bar plots. 
+
+```{r barplot-rotated}
+mtcars %>%
+  count(cyl) %>%
+  ggplot(mapping = aes(x = factor(cyl), y = n)) +
+  geom_col() +
+  geom_text(mapping = aes(label = n), hjust = -1) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = "Cylinders",
+       y = NULL) +  
+  coord_flip() +
+  remove_axis(axis = "x", flip = TRUE)
 ```
 
 ### Three Colors 
 
-This is identical to the previous plot except colors and a legend are added with `fill = factor(cyl)`. Turning `x` into a factor with `factor(cyl)` skips 5 and 7 on the `x-axis`. Adding `fill = cyl` without `factor()` would have created a continuous color scheme and legend.   
+This is identical to the previous plot except colors and a legend are added with `fill = cyl`. Turning `x` into a factor with `factor(cyl)` skips 5 and 7 on the `x-axis`. Adding `fill = cyl` without `factor()` would have created a continuous color scheme and legend.   
 
 ``` {r 3-color-barplot}
-ggplot(data = mtcars, mapping = aes(x = factor(cyl), fill = factor(cyl))) +
-  geom_bar() +
+mtcars %>%
+  mutate(cyl = factor(cyl)) %>%
+  count(cyl) %>%
+  ggplot(mapping = aes(x = cyl, y = n, fill = cyl)) +
+  geom_col() +
+  geom_text(mapping = aes(label = n), vjust = -1) +    
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  labs(title = "Number of Cars By Number of Cylinders",
-       x = "Number of Cylinders",
-       y = "Count") +
-  remove_ticks()
+  labs(x = "Cylinders",
+       y = NULL) +
+  remove_ticks() +
+  remove_axis()
 ```
 
 ### Stacked Bar Plot
 
-An additional aesthetic can easily be added to bar plots by adding `fill = categorical variable` to the mapping. Here, diamond quality subsets each bar showing the count of diamonds with each level of clarity. 
+An additional aesthetic can easily be added to bar plots by adding `fill = categorical variable` to the mapping. Here, transmission type subsets each bar showing the count of cars with different numbers of cylinders. 
 
 ```{r stacked-bar-plot}
-ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
-  geom_bar() +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::comma) +
-  labs(title = "Diamond Clarity",
-       subtitle = "Something Informative About Diamonds",
-       x = "Clarity",
-       y = "Count") +
-  remove_ticks()
+mtcars %>%
+  mutate(am = factor(am, labels = c("Automatic", "Manual")),
+         cyl = factor(cyl)) %>%  
+  group_by(am) %>%
+  count(cyl) %>%
+  group_by(cyl) %>%
+  arrange(desc(am)) %>%
+  mutate(label_height = cumsum(n)) %>%
+  ggplot() +
+  geom_col(mapping = aes(x = cyl, y = n, fill = am)) +
+  geom_text(aes(x = cyl, y = label_height - 0.5, label = n, color = am)) +
+  scale_color_manual(values = c("white", "black")) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = "Cylinders",
+       y = NULL) +  
+  remove_ticks() +
+  remove_axis() +
+  guides(color = FALSE)
 ```
 
 ### Stacked Bar Plot With Position = Fill
 
-`position = "fill"` in `geom_bar()` changes the y-axis from count to the proportion of each bar. 
+The previous examples used `geom_col()`, which takes a y value for bar height. This example uses `geom_bar()` which sums the values and generates a value for bar heights. In this example, `position = "fill"` in `geom_bar()` changes the y-axis from count to the proportion of each bar. 
 
 ```{r stacked-bar-plot-fill}
-ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
-  geom_bar(position = "fill") +
+mtcars %>%
+  mutate(am = factor(am, labels = c("Automatic", "Manual")),
+         cyl = factor(cyl)) %>%  
+  ggplot() +
+  geom_bar(mapping = aes(x = cyl, fill = am), position = "fill") +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::percent) +
-  labs(title = "Better Cut Diamonds have Better Clarity",
-      subtitle = "Share of Diamonds with Different Qualities by Clarity of Cut",
-      x = "Clarity",
-      y = "Count") +
-  remove_ticks()
+  labs(x = "Cylinders",
+       y = NULL) +  
+  remove_ticks() +
+  guides(color = FALSE)
 ```
 
 ### Dodged Bar Plot
 
-Subsetted bar charts in ggplot2 are stacked by default. `position = "dodge"` in `geom_bar()` expands the bar chart so the bars appear next to each other.
+Subsetted bar charts in ggplot2 are stacked by default. `position = "dodge"` in `geom_col()` expands the bar chart so the bars appear next to each other.
 
 ```{r dodged-bar-plot}
-ggplot(data = diamonds, mapping = aes(clarity, fill = cut)) + 
-  geom_bar(position = "dodge") +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::comma) +
-  labs(title = "Diamond Clarity",
-       subtitle = "Something Informative About Diamonds",
-       x = "Clarity",
-       y = "Count") +
-  remove_ticks()
+mtcars %>%
+  mutate(am = factor(am, labels = c("Automatic", "Manual")),
+         cyl = factor(cyl)) %>%
+  group_by(am) %>%
+  count(cyl) %>%
+  ggplot(mapping = aes(cyl, y = n, fill = factor(am))) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = n), position = position_dodge(width = 0.7), vjust = -1) +    
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = "Cylinders",
+       y = NULL) +  
+  remove_ticks() +
+  remove_axis()
 ```
 
 ### Lollipop plot/Cleveland dot plot{.tabset}
@@ -190,7 +234,7 @@ Lollipop plots and Cleveland dot plots are minimalist alternatives to bar plots.
 
 #### Lollipop plot
 
-```{r lollipop-plot}
+```{r lollipop-plot, fig.height = 5}
 mtcars %>%
 	rownames_to_column("model") %>%
 	arrange(mpg) %>%
@@ -198,29 +242,23 @@ mtcars %>%
 	ggplot(aes(mpg, model)) +
 		geom_segment(aes(x = 0, xend = mpg, y = model, yend = model)) +	
 		geom_point() +
-		scale_x_continuous(expand = c(0, 0), limits = c(0, max(mtcars$mpg) * 1.1)) +
-		labs(title = "Miles Per Gallon of Popular Cars",
-				 subtitle = "1974 Motor Trend US magazine",
-				 x = NULL, 
-				 y = "Miles Per Gallon") +
-	theme(axis.text.y = element_text(size = 8))
+		scale_x_continuous(expand = expand_scale(mult = c(0, 0)), limits = c(0, 40)) +
+		labs(x = NULL, 
+				 y = "Miles Per Gallon")
 ```
 
 #### Cleveland dot plot
 
-```{r cleveland-dot-plot}
+```{r cleveland-dot-plot, fig.height = 5}
 mtcars %>%
 	rownames_to_column("model") %>%
 	arrange(mpg) %>%
 	mutate(model = factor(model, levels = .$model)) %>%
 	ggplot(aes(mpg, model)) +
 		geom_point() +
-		scale_x_continuous(expand = c(0, 0), limits = c(0, max(mtcars$mpg) * 1.1)) +
-		labs(title = "Miles Per Gallon of Popular Cars",
-				 subtitle = "1974 Motor Trend US magazine",
-				 x = NULL, 
-				 y = "Miles Per Gallon") +
-	theme(axis.text.y = element_text(size = 8))
+		scale_x_continuous(expand = expand_scale(mult = c(0, 0)), limits = c(0, 40)) +
+		labs(x = NULL, 
+				 y = "Miles Per Gallon")
 ```
 
 ### Dumbell plot
@@ -233,16 +271,21 @@ mtcars %>%
 
 ### One Color Scatter Plot
 
-Scatter plots are useful for showing relationships between two or more variables. 
+Scatter plots are useful for showing relationships between two or more variables. Use `scatter_grid()` from `library(urbnthemes)` to easily add vertical grid lines for scatter plots. 
 
 ```{r one-color-scatter-plot}
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
-  geom_point() + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::dollar) +
-  labs(title = "Diamond Prices Increase With Size",
-       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
-       x = "Carat",
-       y = "Price")
+mtcars %>%
+  ggplot(mapping = aes(x = wt, y = mpg)) +
+  geom_point() +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 40),
+                     breaks = 0:8 * 5) +
+  labs(x = "Weight (thousands of pounds)",
+       y = "City MPG") +
+  scatter_grid()
 ```
 
 ### High-Density Scatter Plot with Transparency
@@ -250,13 +293,19 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
 Large numbers of observations can sometimes make scatter plots tough to interpret because points overlap. Adding `alpha = ` with a number between 0 and 1 adds transparency to points and clarity to plots. Now it's easy to see that jewelry stores are probably rounding up but not rounding down carats!
 
 ```{r alpha-scatter-plot}
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
-  geom_point(alpha = 0.05) + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::dollar) +
-  labs(title = "Diamond Prices Increase With Size",
-       subtitle = "Diamond Prices in Dollars and Sizes in Carats",
-       x = "Carat",
-       y = "Price")
+diamonds %>%
+  ggplot(mapping = aes(x = carat, y = price)) +
+  geom_point(alpha = 0.05) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 20000),
+                     breaks = 0:4 * 5000,
+                     labels = scales::dollar) +
+  labs(x = "Carat",
+       y = "Price") +
+  scatter_grid()
 ```
 
 ### Hex Scatter Plot
@@ -264,14 +313,20 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
 Sometimes transparency isn't enough to bring clarity to a scatter plot with many observations. As n increases into the hundreds of thousands and even millions, `geom_hex` can be one of the best ways to display relationships between two variables. 
 
 ``` {r scatter-plot-hex}
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) + 
-  geom_hex(mapping = aes(fill = ..count..)) + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::dollar) +
-	scale_fill_gradientn(labels = scales::comma) +
-  labs(title = "Title",
-       subtitle = "geom_hex adds clarity to overlapping points",
-       x = "Carat",
+diamonds %>%
+  ggplot(mapping = aes(x = carat, y = price)) +
+  geom_hex(mapping = aes(fill = ..count..)) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 20000),
+                     breaks = 0:4 * 5000,
+                     labels = scales::dollar) +
+	scale_fill_gradientn(labels = scales::comma) +  
+  labs(x = "Carat",
        y = "Price") +
+  scatter_grid() +
   theme(legend.position = "right",
         legend.direction = "vertical")
 ```
@@ -283,39 +338,59 @@ Sometimes scatter plots have many overlapping points but a reasonable number of 
 
 #### Before
 ```{r before-scatter-plot}
-ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
-  geom_point() + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-  labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       x = "Displacement",
-       y = "City MPG")
+mpg %>%
+  ggplot(mapping = aes(x = displ, y = cty)) +
+  geom_point() +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 7),
+                     breaks = 0:7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 40),
+                     breaks = 0:4 * 10) +
+  labs(x = "Displacement",
+       y = "City MPG") +
+  scatter_grid()
 ```
 
 #### After
 ```{r jitter-plot}
 set.seed(2017)
-ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
-  geom_jitter(width = 0.2, height = 0.2) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-  labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       x = "Displacement",
-       y = "City MPG")
+mpg %>%
+  ggplot(mapping = aes(x = displ, y = cty)) +
+  geom_jitter() +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 7),
+                     breaks = 0:7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 40),
+                     breaks = 0:4 * 10) +
+  labs(x = "Displacement",
+       y = "City MPG") +
+  scatter_grid()
 ```
 
-### Scatter Plot with Counts
+### Scatter Plots with Varying Point Size
 
-Another option is to use `geom_count()` to add a size dimension to overlapping points.
+Weights and populations can be mapped in scatter plots to the size of the points. Here, the number of households in each state is mapped to the size of each point using `aes(size = hhpop)`. Note: `ggplot2::geom_point()` is used instead of `geom_point()`.
 
-```{r geom_count}
-ggplot(data = mpg, mapping = aes(x = displ, y = cty)) + 
-  geom_count() + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-  labs(title = "Displacement and City MPG",
-       subtitle = "Cars With Less Displacement Generally Get Better City MPG",
-       x = "Displacement",
-       y = "City MPG")
+
+```{r geom_point-size, fig.height = 5}
+urbnmapr::statedata %>%
+  ggplot(mapping = aes(x = medhhincome, y = horate)) +
+  ggplot2::geom_point(mapping = aes(size = hhpop), alpha = 0.3) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(30000, 80000),
+                     breaks = 3:8 * 10000,
+                     labels = scales::dollar) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 0.8),
+                     breaks = 0:4 * 0.2) +
+  scale_radius(range = c(3, 15),
+               breaks = c(2500000, 7500000, 12500000), 
+               labels = scales::comma) +
+  labs(x = "Household income",
+       y = "Homeownership rate") +
+  scatter_grid()
 ```
 
 ### Scatter Plots with Fill
@@ -324,30 +399,18 @@ A third aesthetic can be added to scatter plots. Here, color signifies the numbe
 
 ``` {r filled-scatter-plot}
 mtcars %>%
-  mutate(Cylinders = factor(cyl)) %>%
-  ggplot(mapping = aes(x = wt, y = mpg, colour = Cylinders)) + 
-  geom_point(size = 3) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       x = "Weight (Tons)",
-       y = "Miles Per Gallon") +
-  theme(legend.title = element_text(hjust = 0))
-```
-
-### Bubble Scatter Plot
-
-`size =` can be used as a mapping to plot a fourth dimension. 
-
-```{r bubble-chart}
-mtcars %>%
-  mutate(Cylinders = factor(cyl), `Automatic Transmission` = factor(am)) %>%
-  ggplot(mapping = aes(x = wt, y = mpg, color = `Automatic Transmission`, size = Cylinders)) + 
-  geom_point() + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +  
-  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       x = "Weight (Tons)",
-       y = "Miles Per Gallon") +
-  theme(legend.title = element_text(hjust = 0))
+  mutate(cyl = paste(cyl, "cylinders")) %>%
+  ggplot(aes(x = wt, y = mpg, color = cyl)) +
+  geom_point() +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 6),
+                     breaks = 0:6) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 40),
+                     breaks = 0:8 * 5) +
+  labs(x = "Weight (thousands of pounds)",
+       y = "City MPG") +
+  scatter_grid()
 ```
 
 ## Line Plots
@@ -355,32 +418,40 @@ mtcars %>%
 ------
 
 ```{r line-plots}
-ggplot(data = economics, mapping = aes(x = date, y = unemploy)) +
+economics %>%
+  ggplot(mapping = aes(x = date, y = unemploy)) +
   geom_line() +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 16000), labels = scales::comma) +
-  labs(title = "Unemployment in the United States",
-       subtitle = "Number of Unemployed Americans in the U.S.",
-       x = "Year", 
+  scale_x_date(expand = expand_scale(mult = c(0.002, 0)), 
+               breaks = "10 years",
+               limits = c(as.Date("1961-01-01"), as.Date("2020-01-01")),
+               date_labels = "%Y") +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     breaks = 0:4 * 4000,
+                     limits = c(0, 16000),
+                     labels = scales::comma) +
+  labs(x = "Year", 
        y = "Number Unemployed (1,000s)")
 ```
 
 ### Lines Plots With Multiple Lines
 
-
 ```{r multiple-line-charts1}
-library(tidyverse)
 library(gapminder)
 
 gapminder %>%
-	filter(country %in% c("Australia", "Canada", "New Zealand", "Japan")) %>%
-	ggplot(aes(year, gdpPercap, color = country)) +
-	geom_line() +
-  scale_x_continuous(expand = c(0, 0), breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2010), limits = c(1945, 2011)) +
-	scale_y_continuous(expand = c(0, 0), labels = scales::dollar, limits = c(0, 40000)) +
-	labs(title = "Per Capita GDP in Selected Countries",
-			 subtitle = "From the gapminder data set",
-			 x = "Year",
-			 y = "Per capita GDP")
+  filter(country %in% c("Australia", "Canada", "New Zealand")) %>%
+  mutate(country = factor(country, levels = c("Canada", "Australia", "New Zealand"))) %>%
+  ggplot(aes(year, gdpPercap, color = country)) +
+  geom_line() +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     breaks = c(1952 + 0:12 * 5), 
+                     limits = c(1952, 2007)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     breaks = 0:8 * 5000,
+                     labels = scales::dollar, 
+                     limits = c(0, 40000)) +
+  labs(x = "Year",
+       y = "Per capita GDP (US dollars)")
 ```
 
 Plotting more than one variable can be useful for seeing the relationship of variables over time, but it takes a small amount of data munging. 
@@ -388,34 +459,153 @@ Plotting more than one variable can be useful for seeing the relationship of var
 This is because `ggplot2` wants data in a "long" format instead of a "wide" format for line plots with multiple lines. `gather()` and `spread()` from the `tidyr` package make switching back-and-forth between "long" and "wide" painless. Essentially, variable titles go into "key" and variable values go into "value". Then ggplot2, turns the different levels of the key variable (population, unemployment) into colors. 
 
 ```{r multiple-line-charts2}
-library(tidyverse)
-
 as_tibble(EuStockMarkets) %>%
 	mutate(date = time(EuStockMarkets)) %>%
 	gather(key = "key", value = "value", -date) %>%
-	ggplot(aes(date, value, color = key)) +
+	ggplot(mapping = aes(x = date, y = value, color = key)) +
 	geom_line() +
-  scale_x_continuous(expand = c(0, 0), limits = c(1991, 1999.5), breaks = c(1991, 1993, 1995, 1997, 1999)) +
-  scale_y_continuous(expand = c(0, 0), 
-  									 labels = scales::dollar,
-  									 limits = c(0, 10000)) +
-	labs(title = "Major European Stock Indices",
-			 subtitle = "Based on daily closing prices",
-			 x = "Date",
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(1991, 1999), 
+                     breaks = c(1991, 1993, 1995, 1997, 1999)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     breaks = 0:4 * 2500,
+                     labels = scales::dollar, 
+                     limits = c(0, 10000)) +  
+	labs(x = "Date",
 			 y = "Value")
+```
+
+### Step plot
+
+`geom_line()` connects coordinates with the shortest possible straight line. Sometimes step plots are necessary because y values don't change between coordinates. For example, the upper-bound of the Federal Funds Rate is set at regular intervals and remains constant until it is changed. 
+
+```{r step-plot}
+# downloaded from FRED on 2018-12-06
+
+# https://fred.stlouisfed.org/series/DFEDTARU
+
+fed_fund_rate <- read_csv(
+  "date, fed_funds_rate
+   2014-01-01,0.0025
+   2015-12-16,0.0050
+   2016-12-14,0.0075
+   2017-03-16,0.0100
+   2017-06-15,0.0125
+   2017-12-14,0.0150
+   2018-03-22,0.0175
+   2018-06-14,0.0200
+   2018-09-27,0.0225
+   2018-12-06,0.0225")
+
+fed_fund_rate %>%
+  ggplot(mapping = aes(x = date, y = fed_funds_rate)) + 
+  geom_step() +
+  scale_x_date(expand = expand_scale(mult = c(0.002, 0)), 
+               breaks = "1 year",
+               limits = c(as.Date("2014-01-01"), as.Date("2019-01-01")),
+               date_labels = "%Y") +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     breaks = c(0, 0.01, 0.02, 0.03),
+                     limits = c(0, 0.03),
+                     labels = scales::percent) +  
+	labs(x = "Date",
+			 y = "Upper-bound of the Federal Funds Rate")
+```
+
+### Path plot
+
+The Beveridge curve is a macroeconomic plot that displays a relationship between the unemployment rate and the vacancy rate. Movements along the curve indicate changes in the business cyle and horizontal shifts of the curve suggest structural changes in the labor market.
+
+Lines in Beveridge curves do not monotonically move from left to right. Therefore, it is necessary to use `geom_path()`. 
+
+```{r, path-plot}
+# seasonally-adjusted, quarterly vacancy rate - JOLTS # seasonally-adjusted, quarterly unemployment rate - CPS
+
+# pulled from FRED on April 11, 2018. 
+
+library(ggrepel)
+
+beveridge <- read_csv(
+	"quarter, vacanacy_rate, unempoyment_rate
+	2006-01-01,0.0310,0.0473
+	2006-04-01,0.0316,0.0463
+	2006-07-01,0.0313,0.0463
+	2006-10-01,0.0310,0.0443
+	2007-01-01,0.0323,0.0450
+	2007-04-01,0.0326,0.0450
+	2007-07-01,0.0316,0.0466
+	2007-10-01,0.0293,0.0480
+	2008-01-01,0.0286,0.0500
+	2008-04-01,0.0280,0.0533
+	2008-07-01,0.0253,0.0600
+	2008-10-01,0.0220,0.0686
+	2009-01-01,0.0196,0.0826
+	2009-04-01,0.0180,0.0930
+	2009-07-01,0.0176,0.0963
+	2009-10-01,0.0180,0.0993
+	2010-01-01,0.0196,0.0983
+	2010-04-01,0.0220,0.0963
+	2010-07-01,0.0216,0.0946
+	2010-10-01,0.0220,0.0950
+	2011-01-01,0.0226,0.0903
+	2011-04-01,0.0236,0.0906
+	2011-07-01,0.0250,0.0900
+	2011-10-01,0.0243,0.0863
+	2012-01-01,0.0270,0.0826
+	2012-04-01,0.0270,0.0820
+	2012-07-01,0.0266,0.0803
+	2012-10-01,0.0260,0.0780
+	2013-01-01,0.0276,0.0773
+	2013-04-01,0.0280,0.0753
+	2013-07-01,0.0280,0.0723
+	2013-10-01,0.0276,0.0693
+	2014-01-01,0.0290,0.0666
+	2014-04-01,0.0323,0.0623
+	2014-07-01,0.0326,0.0610
+	2014-10-01,0.0330,0.0570
+	2015-01-01,0.0350,0.0556
+	2015-04-01,0.0366,0.0540
+	2015-07-01,0.0373,0.0510
+	2015-10-01,0.0360,0.0500
+	2016-01-01,0.0386,0.0493
+	2016-04-01,0.0383,0.0486
+	2016-07-01,0.0383,0.0493
+	2016-10-01,0.0363,0.0473
+	2017-01-01,0.0366,0.0466
+	2017-04-01,0.0390,0.0433
+	2017-07-01,0.0406,0.0430
+	2017-10-01,0.0386,0.0410")
+
+labels <- beveridge %>%
+  filter(lubridate::month(quarter) == 1)
+
+beveridge %>%
+	ggplot() +
+	geom_path(mapping = aes(x = unempoyment_rate, y = vacanacy_rate), alpha = 0.5) +
+  geom_point(data = labels, mapping = aes(x = unempoyment_rate, y = vacanacy_rate)) +
+  geom_text_repel(data = labels, mapping = aes(x = unempoyment_rate, y = vacanacy_rate, label = lubridate::year(quarter))) +  
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0.04, 0.1),
+                     labels = scales::percent) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     breaks = c(0, 0.01, 0.02, 0.03, 0.04, 0.05),
+                     limits = c(0, 0.05),
+                     labels = scales::percent) +  
+	labs(x = "Seasonally-adjusted unemployment rate",
+			 y = "Seasonally-adjusted vacancy rate") +  
+  scatter_grid()
 ```
 
 ### Slope plots
 
-```{r slope-plot}
+```{r slope-plot, fig.height = 5}
 # https://www.bls.gov/lau/
-
 library(ggrepel)
 
 unemployment <- tibble(
 	time = c("October 2009", "October 2009", "October 2009", "August 2017", "August 2017", "August 2017"),
 	rate = c(7.4, 7.1, 10.0, 3.9, 3.8, 6.4),
-	state = c("Maryland", "Virginia", "Washington D.C.", "Maryland", "Virginia", "Washington D.C.")
+	state = c("Maryland", "Virginia", "Washington, D.C.", "Maryland", "Virginia", "Washington, D.C.")
 )
 
 label <- tibble(label = c("October 2009", "August 2017"))
@@ -423,22 +613,23 @@ october <- filter(unemployment, time == "October 2009")
 august <- filter(unemployment, time == "August 2017")
 
 unemployment %>%
-	mutate(time = factor(time, levels = c("October 2009", "August 2017"))) %>%
+	mutate(time = factor(time, levels = c("October 2009", "August 2017")),
+	       state = factor(state, levels = c("Washington, D.C.", "Maryland", "Virginia"))) %>%
 	ggplot() + 
-		geom_line(aes(time, rate, group = state, color = state)) +
-		geom_point(aes(x = time, y = rate, color = state)) +
-		labs(subtitle = "Unemployment Rate") +
-		theme(axis.ticks.x = element_blank(),
-					axis.title.x = element_blank(),
-					axis.ticks.y = element_blank(),
-  	      axis.title.y = element_blank(), 
-  	      axis.text.y = element_blank(),
-					panel.grid.major.y = element_blank(),
-  	      panel.grid.minor.y = element_blank(),
-  	      panel.grid.major.x = element_blank(),
-					axis.line = element_blank()) +
-		geom_text_repel(data = october, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = -0.06) + 
-		geom_text_repel(data = august, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = 0.06)
+	geom_line(aes(time, rate, group = state, color = state), show.legend = FALSE) +
+	geom_point(aes(x = time, y = rate, color = state)) +
+	labs(subtitle = "Unemployment Rate") +
+	theme(axis.ticks.x = element_blank(),
+				axis.title.x = element_blank(),
+				axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.y = element_blank(),
+				panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.x = element_blank(),
+				axis.line = element_blank()) +
+	geom_text_repel(data = october, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = -0.06) + 
+	geom_text_repel(data = august, mapping = aes(x = time, y = rate, label = as.character(rate)), nudge_x = 0.06)
 ```
 
 ## Univariate
@@ -456,6 +647,9 @@ msleep %>%
   ggplot(aes(x = sleep_total, y = factor(1))) +
   geom_point(alpha = 0.2, size = 5) +
   labs(y = NULL) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 25), 
+                     breaks = 0:5 * 5) +
   scale_y_discrete(labels = NULL) +
   labs(title = "Total Sleep Time of Different Mammals",
        x = "Total sleep time (hours)",
@@ -481,7 +675,9 @@ ggplot() +
                  color = name),
              alpha = 0.8,
              size = 5) +
-  labs(y = NULL) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 25), 
+                     breaks = 0:5 * 5) +  
   scale_y_discrete(labels = NULL) +
   labs(title = "Total Sleep Time of Different Mammals",
        x = "Total sleep time (hours)",
@@ -508,6 +704,9 @@ msleep %>%
                             )) %>%
   ggplot(aes(x = sleep_total, y = vore)) +
   geom_point(alpha = 0.2, size = 5) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 25), 
+                     breaks = 0:5 * 5) +  
   labs(title = "Total Sleep Time of Different Mammals by Diet",
        x = "Total sleep time (hours)",
        y = NULL) +
@@ -521,9 +720,10 @@ Histograms divide the distribution of a variable into n equal-sized bins and the
 ```{r histogram}
 ggplot(data = diamonds, mapping = aes(x = depth)) + 
   geom_histogram(bins = 100) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, 100)) +  
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), labels = scales::comma) +
-  labs(title = "Distribution of Diamond Depths",
-       x = "Depth",
+  labs(x = "Depth",
        y = "Count")
 ```
 
@@ -532,12 +732,13 @@ ggplot(data = diamonds, mapping = aes(x = depth)) +
 Boxplots were invented in the 1970s by John Tukey[^1]. Instead of showing the underlying data or binned counts of the underlying data, they focus on important values like the 25th percentile, median, and 75th percentile. 
 
 ```{r box-plot}
-ggplot(InsectSprays, aes(x = spray, y = count)) +
+InsectSprays %>%
+  ggplot(mapping =  aes(x = spray, y = count)) +
   geom_boxplot() +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
-  labs(title = "Number of Insects Killed by Insect Sprays",
-       x = "Type of Insect Spray",
-       y = "Number of Dead Insects")
+  labs(x = "Type of insect spray",
+       y = "Number of dead insects") +
+  remove_ticks()
 ```
 
 ### Smoothed Kernel Density Plots
@@ -546,22 +747,24 @@ Continuous variables with smooth distributions are sometimes better represented 
 
 ```{r kernel-density-plot}
 diamonds %>%
-  ggplot(aes(carat)) +
-  geom_density() +
+  ggplot(mapping = aes(carat)) +
+  geom_density(color = NA) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, NA)) +
 	scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
-  labs(title = "Distribution of Carats",
-       x = "Carat",
+  labs(x = "Carat",
        y = "Density")
 ```
 
 ```{r kernel-density-plot-filled}
 diamonds %>%
   mutate(cost = ifelse(price > 5500, "More than $5,500 +", "$0 to $5,500")) %>%
-  ggplot(aes(carat, fill = cost)) +
-  geom_density(alpha = 0.25) +
-	scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  labs(title = "Distribution of Carats",
-       x = "Carat",
+  ggplot(mapping = aes(carat, fill = cost)) +
+  geom_density(alpha = 0.25, color = NA) +
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+                     limits = c(0, NA)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  labs(x = "Carat",
        y = "Density")
 ```
 
@@ -574,9 +777,7 @@ library(ggridges)
 
 ggplot(diamonds, mapping = aes(x = price, y = cut)) +
 	geom_density_ridges(fill = "#1696d2") +
-	scale_x_continuous(labels = scales::dollar) +
-  labs(title = "Distribution of Diamond Prices by Diamond Cut",
-       x = "Price",
+  labs(x = "Price",
        y = "Cut")
 ```
 
@@ -585,12 +786,12 @@ ggplot(diamonds, mapping = aes(x = price, y = cut)) +
 Violin plots are symmetrical displays of smooth kernel density plots. 
 
 ```{r violin-plot}
-ggplot(InsectSprays, aes(x = spray, y = count, fill = spray)) +
-  geom_violin() +
+InsectSprays %>%
+  ggplot(mapping = aes(x = spray, y = count, fill = spray)) +
+  geom_violin(color = NA) +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +
-  labs(title = "Number of Insects Killed by Insect Sprays",
-       x = "Type of Insect Spray",
-       y = "Number of Dead Insects") +
+  labs(x = "Type of insect spray",
+       y = "Number of dead insects") +
   remove_ticks()
 ```
 
@@ -608,12 +809,12 @@ msleep %>%
                             "Carnivore" = "carni"
                             )) %>%
   ggplot(aes(x = vore, y = sleep_total, fill = vore)) +
-  stat_summary(fun.y= "mean",
-              colour = "black", 
-              size = 30,
-              shape = 95,
-              geom = "point") +
-  geom_violin() +
+  stat_summary(fun.y = "mean",
+               colour = "black", 
+               size = 30,
+               shape = 95,
+               geom = "point") +
+  geom_violin(color = NA) +
   geom_jitter(width = 0,
               height = 0.05,
               alpha = 0.4,
@@ -621,9 +822,8 @@ msleep %>%
               size = 10,
   						color = "grey50") +
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.2))) +  
-    labs(title = "Total Sleep Time of Different Mammals by Diet",
-       x = NULL,
-       y = "Total sleep time (hours)") +
+    labs(x = NULL,
+         y = "Total sleep time (hours)") +
   theme(legend.position = "none") +
   remove_ticks()
 ```
@@ -639,26 +839,32 @@ txhousing %>%
   group_by(city, year) %>%
   summarize(sales = sum(sales)) %>%
   ggplot(aes(x = year, y = sales, fill = city)) +
-    geom_area(position = "stack") +
-    scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), labels = scales::comma) +
-    labs(title = "Home Sales in Texas Cities",
-         x = "Year",
-         y = "Home Sales")
+  geom_area(position = "stack") +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(2000, 2015),
+                     breaks = 2000 + 0:15) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), 
+                     labels = scales::comma) +
+  labs(x = "Year",
+       y = "Home sales")
 ```
 
 ### Filled Area
 ```{r area-plot-fill}
 txhousing %>%
-  filter(city %in% c("Austin", "Houston", "Dallas", "San Antonio", "Fort Worth")) %>%
+  filter(city %in% c("Austin","Houston","Dallas","San Antonio","Fort Worth")) %>%
   group_by(city, year) %>%
-  summarize(listings = sum(listings)) %>%
-  mutate(listings = ifelse(is.na(listings), lag(listings), listings)) %>%
-  ggplot(aes(x = year, y = listings, fill = city)) +
-    geom_area(position = "fill") +
-    scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = scales::comma) +
-    labs(title = "Home Listings in Texas Cities",
-         x = "Year",
-         y = "Proportion of Home Listings")
+  summarize(sales = sum(sales)) %>%
+  ggplot(aes(x = year, y = sales, fill = city)) +
+  geom_area(position = "fill") +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(2000, 2015),
+                     breaks = 2000 + 0:15) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.02)),
+                     breaks = c(0, 0.25, 0.5, 0.75, 1),
+                     labels = scales::percent) +
+  labs(x = "Year",
+       y = "Home sales")
 ```
 
 ## Waffle Chart / Square Pie Chart
@@ -742,10 +948,8 @@ bad_drivers %>%
   gather(`Number of\nDrivers`:`Percent No\nPrevious`, key = "variable", value = "SD's from Mean") %>%
   ggplot(aes(variable, state)) +
     geom_tile(aes(fill = `SD's from Mean`)) +
-    labs(title = "Northeast Drivers Involved in Fatal Collisions By Behavior",
-      subtitle = "As a share of scaled fatal collisions per billion miles, 2009",
-      x = NULL,
-      y = NULL) + 
+    labs(x = NULL,
+         y = NULL) + 
     scale_fill_gradientn() +
     theme(legend.position = "right",
           legend.direction = "vertical",
@@ -770,11 +974,14 @@ diamonds %>%
   ggplot(mapping = aes(x = carat, y = price)) +
   geom_point(alpha = 0.05) +
   facet_wrap(~cut, ncol = 5) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)),
-                     limits = c(0, NA), 
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(0, 6)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(0, 20000), 
                      labels = scales::dollar) +
   labs(x = "Carat",
-       y = "Price")
+       y = "Price") +
+  scatter_grid()
 ```
 
 ### facet_grid()
@@ -785,12 +992,15 @@ diamonds %>%
   ggplot(mapping = aes(x = carat, y = price)) +
   geom_point(alpha = 0.05) +
   facet_grid(color ~ cut) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)),
-                     limits = c(0, NA), 
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(0, 4)) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)),
+                     limits = c(0, 20000), 
                      labels = scales::dollar) +
   labs(x = "Carat",
        y = "Price") +
-  theme(panel.spacing = unit(20L, "pt"))
+  theme(panel.spacing = unit(20L, "pt")) +
+  scatter_grid()
 ```
 
 ## Smoothers
@@ -799,43 +1009,60 @@ diamonds %>%
 
 `geom_smooth()` fits and plots models to data with two or more dimensions. 
 
-```{r geom_smooth}
-ggplot(data = mpg) +
-	geom_smooth(mapping = aes(x = displ, y = hwy))
-```
-
-Understanding and manipulating defaults is more important for `geom_smooth()` than other geoms because it contains a number of assumptions. `geom_smooth()` automatically uses loess for datasets with fewer than 1,000 observations and 
-a generalized additive model with `formula = y ~ s(x, bs = "cs")` for datasets with greater than 1,000 observations. Both default to a 95% confidence interval with the confidence interval displayed. 
+Understanding and manipulating defaults is more important for `geom_smooth()` than other geoms because it contains a number of assumptions. `geom_smooth()` automatically uses loess for datasets with fewer than 1,000 observations and a generalized additive model with `formula = y ~ s(x, bs = "cs")` for datasets with greater than 1,000 observations. Both default to a 95% confidence interval with the confidence interval displayed. 
 
 Models are chosen with `method = ` and can be set to lm(), glm(), gam(), loess(), rlm(), and more. Formulas can be specified with `formula = ` and `y ~ x` syntax. Plotting the standard error is toggled with `se = TRUE` and `se = FALSE`, and level is specificed with `level = `. As always, more information can be seen in RStudio with `?geom_smooth()`.
 
 `geom_point()` adds a scatterplot to `geom_smooth()`. The order of the function calls is important. The function called second will be layed on top of the function called first. 
 
-```{r geom_smooth2}
-ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
-	geom_point(alpha = 0.1) +
+```{r geom_smooth}
+diamonds %>%
+  ggplot(mapping = aes(x = carat, y = price)) +
+	geom_point(alpha = 0.05) +
 	geom_smooth(color =  "#ec008b") +
-	scale_y_continuous(expand = c(0, 0), labels = scales::dollar)
+	scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+	                   limits = c(0, 5),
+	                   breaks = 0:5) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     limits = c(0, 20000), 
+                     labels = scales::dollar) +  
+  labs(x = "Carat",
+       y = "Price") +
+  scatter_grid()
 ```
 
 `geom_smooth` can be subset by categorical and factor variables. This requires subgroups to have a decent number of observations and and a fair amount of variability across the x-axis. Confidence intervals often widen at the ends so special care is needed for the chart to be meaningful and readable. 
+
+This example uses Loess with MPG = displacement.
 
 ```{r subset-geom_smooth}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
 	geom_point(alpha = 0.2) +
 	geom_smooth() +
-	labs(title = "Engine Displacement and City MPG by Number of Cylinders",
-			 subtitle = "Loess: MPG = Displacement",
-			 x = "Engine Displacement",
-			 y = "Highway MPG")
+	scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+	                   limits = c(0, 7),
+	                   breaks = 0:7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     limits = c(0, 60)) +  
+	labs(x = "Engine displacement",
+			 y = "Highway MPG") +
+  scatter_grid()
+```
 
-ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
-	geom_smooth(method = "lm") +
+This example uses linear models with MPG = displacement. 
+
+```{r subset-geom-smooth-lm}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
 	geom_point(alpha = 0.2) +
-	labs(title = "Engine Displacement and City MPG by Drive",
-			 subtitle = "Linear Model: MPG = Displacement",
-			 x = "Engine Displacement",
-			 y = "Highway MPG")
+	geom_smooth(method = "lm") +
+	scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+	                   limits = c(0, 7),
+	                   breaks = 0:7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     limits = c(0, 60)) +  
+	labs(x = "Engine displacement",
+			 y = "Highway MPG") +
+  scatter_grid()
 ```
 
 
@@ -884,12 +1111,16 @@ labels <- mtcars %>%
 	filter(model %in% c("Toyota Corolla", "Merc 240D", "Datsun 710"))
 
 mtcars %>%
-	ggplot(mapping = aes(x = wt, y = mpg)) +
-		geom_point() +
-		geom_text(data = labels, mapping = aes(x = wt, y = mpg, label = model), nudge_x = 0.38) +
-	  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       x = "Weight (Tons)",
-       y = "Miles Per Gallon")
+	ggplot() +
+	geom_point(mapping = aes(x = wt, y = mpg)) +
+	geom_text(data = labels, mapping = aes(x = wt, y = mpg, label = model), nudge_x = 0.38) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 6)) + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 40)) +  
+  labs(x = "Weight (Tons)",
+       y = "Miles per gallon (MPG)") +
+  scatter_grid()
 ```
 
 Text too often overlaps with other text or geoms when using `geom_text()`. `library(ggrepel)` is a `library(ggplot2)` add-on that automatically positions text so it doesn't overlap with geoms or other text. To add this functionality, install and load `library(ggrepel)` and then use `geom_text_repel()` with the same syntax as `geom_text()`. 
@@ -905,14 +1136,17 @@ labels <- mtcars %>%
 
 mtcars %>%
 	ggplot(mapping = aes(x = wt, y = mpg)) +
-		geom_point() +
-		geom_text_repel(data = labels, 
-		                mapping = aes(label = model), 
-		                nudge_x = 0.38) +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-	  labs(title = "Fuel Efficiency Declines as Weight Increases",
-       x = "Weight (Tons)",
-       y = "Miles Per Gallon")
+	geom_point() +
+	geom_text_repel(data = labels, 
+	                mapping = aes(label = model), 
+	                nudge_x = 0.38) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 6)) + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 40)) +  
+  labs(x = "Weight (Tons)",
+       y = "Miles per gallon (MPG)") +
+  scatter_grid()
 ```
 
 ### annotate()
@@ -921,14 +1155,18 @@ mtcars %>%
 
 ```{r annotate-point}
 msleep %>%
-  filter(bodywt < 1000) %>%
+  filter(bodywt <= 1000) %>%
   ggplot(aes(bodywt, sleep_total)) +
   geom_point() +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 25)) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(-10, 1000),
+  									 labels = scales::comma) + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 25)) +  
   annotate("text", x = 500, y = 12, label = "These data suggest that heavy \n animals sleep less than light animals") +
-  labs(title = "The relationship between mammal weight and sleep",
-       x = "Body weight (pounds)",
-       y = "Sleep time (hours)")
+  labs(x = "Body weight (pounds)",
+       y = "Sleep time (hours)") +
+  scatter_grid()  
 ```
 
 ```{r annotate-rect}
@@ -941,16 +1179,17 @@ ames %>%
   mutate(Sale_Price = Sale_Price / 1000) %>%  
   ggplot(aes(square_footage, Sale_Price)) +
   geom_point(alpha = 0.2) +
-  scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, 800), 
-                     labels = scales::dollar) +
-  scale_x_continuous(labels = scales::comma,
-                     breaks = c(0, 5000, 10000)) +  
-  labs(title = "Home Sales Prices in Ames, Iowa", 
-       x = "Square footage", 
-       y = "Sale price (thousands)") +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(-10, 12000),
+  									 labels = scales::comma) + 
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+  									 limits = c(0, 800),
+  									 labels = scales::dollar) +  
   annotate("rect", xmin = 6800, xmax = 11500, ymin = 145, ymax = 210, alpha = 0.1) +
-  annotate("text", x = 8750, y = 230, label = "Unfinished homes")
+  annotate("text", x = 8750, y = 230, label = "Unfinished homes") +
+  labs(x = "Square footage", 
+       y = "Sale price (thousands)") +
+  scatter_grid()   
 ```
 
 ## Layered Geoms
@@ -969,7 +1208,8 @@ table1 %>%
 	ggplot(aes(x = year, y = cases)) +
 		geom_line(aes(color = country)) +
 		geom_point(aes(color = country)) +
-		scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), labels = scales::comma) +
+		scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), 
+		                   labels = scales::comma) +
 		scale_x_continuous(breaks = c(1999, 2000)) +
 		labs(title = "Changes in Tuberculosis Cases in Three Countries")
 ```
@@ -980,7 +1220,8 @@ table1 %>%
 	ggplot(aes(year, cases)) +
 		geom_line(aes(group = country), color = "grey50") +
 		geom_point(aes(color = country)) +
-		scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), labels = scales::comma) +
+		scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), 
+		                   labels = scales::comma) +
 		scale_x_continuous(breaks = c(1999, 2000)) +
 		labs(title = "Changes in Tuberculosis Cases in Three Countries")
 ```
@@ -1002,14 +1243,16 @@ mpg_summary <- mpg %>%
 
 mpg %>%
 	ggplot() +
-		geom_point(aes(x = displ, y = cty, color = factor(cyl)), alpha = 0.5) +
-		geom_point(data = mpg_summary, aes(x = displ, y = cty), size = 5, color = "#ec008b") +
-		geom_text(data = mpg_summary, aes(x = displ, y = cty, label = cyl)) +
-    scale_y_continuous(expand = c(0, 0), limits = c(0, 40)) +
-		labs(title = "City MPG, Engine Displacement, and Number of Cylinders", 
-				 subtitle = "Subgroup Means in Red", 
-				 x = "Displacement",
-				 y = "City MPG")
+	geom_point(aes(x = displ, y = cty, color = factor(cyl)), alpha = 0.5) +
+	geom_point(data = mpg_summary, aes(x = displ, y = cty), size = 5, color = "#ec008b") +
+	geom_text(data = mpg_summary, aes(x = displ, y = cty, label = cyl)) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+                     limits = c(0, 8)) +  
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0)), 
+                     limits = c(0, 40)) +
+	labs(x = "Displacement",
+	     y = "City MPG") +
+  scatter_grid()
 ```
 
 ## Saving Plots

@@ -7,7 +7,7 @@ urbnthemes
 
 ### Overview
 
-`urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with web, print, and map themes as well as tools that make plotting easier at the Urban Institute. `urbnthemes` replaces the [urban\_R\_theme](https://github.com/UrbanInstitute/urban_R_theme).
+`urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with print and map themes as well as tools that make plotting easier at the Urban Institute. `urbnthemes` replaces the [urban\_R\_theme](https://github.com/UrbanInstitute/urban_R_theme).
 
 ### Installation
 
@@ -63,7 +63,6 @@ grid.arrange(plot, urbn_logo_text(), ncol = 1, heights = c(30, 1))
 Core themes:
 
 -   `set_urbn_defaults()`
--   `theme_urbn_web()`
 -   `theme_urbn_print()`
 -   `theme_urbn_map()`
 
@@ -71,6 +70,8 @@ Formatting functions:
 
 -   `urbn_logo_text()`
 -   `remove_ticks()`
+-   `remove_axis()`
+-   `scatter_grid()`
 
 Utility functions:
 
@@ -82,9 +83,8 @@ Utility functions:
 
 In development:
 
--   `undo_urban_defaults()`
--   `save_urban_print()`
--   `save_urban_web()`
+-   `undo_urbn_defaults()`
+-   `save_urbn_print()`
 
 ### Getting help
 
