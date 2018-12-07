@@ -26,7 +26,7 @@ ggplot(mpg, aes(hwy, cty, color = as.factor(cyl))) +
        caption = "Caption",
        x = "X Variable", 
        y = "Y Variable") +
-  theme_urbn_web()
+  theme_urbn_print()
 
 ```
 

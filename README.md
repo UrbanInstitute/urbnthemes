@@ -72,6 +72,8 @@ Formatting functions:
 -   `remove_ticks()`
 -   `remove_axis()`
 -   `scatter_grid()`
+-   `add_axis()`
+-   `urbn_geofacet`
 
 Utility functions:
 
