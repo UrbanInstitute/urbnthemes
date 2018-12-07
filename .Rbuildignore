@@ -4,3 +4,7 @@
 ^README-.*\.png$
 ^docs/*
 ^\.travis\.yml$
+^docs$
+^CODE_OF_CONDUCT.md
+^hexsticker.R
+^/figures/hexsticker.png
