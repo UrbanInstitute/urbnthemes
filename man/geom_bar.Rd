@@ -9,6 +9,8 @@ geom_bar(mapping = NULL, width = 0.7, ...)
 \arguments{
 \item{mapping}{mapping from ggplot2}
 
+\item{width}{bar width}
+
 \item{...}{other arguments passed to \code{geom_bar()}}
 }
 \description{

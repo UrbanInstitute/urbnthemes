@@ -9,6 +9,8 @@ geom_jitter(mapping = NULL, size = 3, ...)
 \arguments{
 \item{mapping}{mapping from ggplot2}
 
+\item{size}{point size}
+
 \item{...}{other arguments passed to \code{geom_jitter()}}
 }
 \description{

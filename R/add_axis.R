@@ -6,7 +6,7 @@
 #'
 #' @md
 #' @export
-remove_axis <- function(axis = "y") {
+add_axis <- function(axis = "y") {
 
   if (axis == "x") {
 

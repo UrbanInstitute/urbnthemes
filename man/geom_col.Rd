@@ -9,6 +9,8 @@ geom_col(mapping = NULL, width = 0.7, ...)
 \arguments{
 \item{mapping}{mapping from ggplot2}
 
+\item{width}{column width}
+
 \item{...}{other arguments passed to \code{geom_col()}}
 }
 \description{

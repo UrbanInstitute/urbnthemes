@@ -9,6 +9,8 @@ geom_text(mapping = NULL, size = 1/0.352777778, ...)
 \arguments{
 \item{mapping}{mapping from ggplot2}
 
+\item{size}{text size}
+
 \item{...}{other arguments passed to \code{geom_point()}}
 }
 \description{

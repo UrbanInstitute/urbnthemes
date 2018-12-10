@@ -16,7 +16,8 @@ Imports:
     ggrepel,
     gridExtra,
     scales,
-    conflicted
+    conflicted,
+    tibble
 License: GPL-3
 URL: https://github.com/UI-Research/urbnthemes
 BugReports: https://github.com/UI-Research/urbnthemes/issues

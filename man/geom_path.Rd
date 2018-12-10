@@ -9,6 +9,8 @@ geom_path(mapping = NULL, size = 1, ...)
 \arguments{
 \item{mapping}{mapping from ggplot2}
 
+\item{size}{line size}
+
 \item{...}{other arguments passed to \code{geom_path()}}
 }
 \description{
