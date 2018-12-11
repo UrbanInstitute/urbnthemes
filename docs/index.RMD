@@ -1070,9 +1070,82 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = factor(cyl))) +
 
 ------
 
-points
-polygons
-lines
+[`library(gghighlight)`](https://yutannihilation.github.io/gghighlight/) enables the intuitive highlighting of ggplot2 plots. `gghighlight` modifies existing ggplot2 objects, so no other code should change. All of the highlighting is handled by the function `gghighlight()`, which can handle all types of geoms. 
+
+*Warning:* R will throw an error if too many colors are highlighted because of the design of `urbnthemes`. Simply decrease the number of highlighted geoms to solve this issue. 
+
+There are two main ways to highlight. 
+
+### Threshold
+
+The first way to highlight is with a threshold. Add a logical test to `gghighlight()` to describe which lines should be highlighted. Here, lines with maximum change in per-capita Gross Domestic Product greater than $35,000 are highlighted by `gghighlight(max(pcgpd_change) > 35000, use_direct_label = FALSE)`. 
+
+```{r gghighlight-threshold}
+library(gghighlight)
+library(gapminder)
+
+data <- gapminder %>%
+  filter(continent %in% c("Europe")) %>%
+  group_by(country) %>%
+  mutate(pcgpd_change = ifelse(year == 1952, 0, gdpPercap - lag(gdpPercap))) %>%
+  mutate(pcgpd_change = cumsum(pcgpd_change))
+  
+data %>%
+  ggplot(aes(year, pcgpd_change, group = country, color = country)) +
+  geom_line() +
+  gghighlight(max(pcgpd_change) > 35000, use_direct_label = FALSE) +  
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)),
+                     breaks = c(seq(1950, 2010, 10)),
+                     limits = c(1950, 2010)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     breaks = 0:8 * 5000,
+                     labels = scales::dollar,
+                     limits = c(0, 40000)) +
+  labs(x = "Year",
+       y = "Change in per-capita GDP (US dollars)")
+```
+
+### Rank
+
+The second way to highlight is by rank. Here, the countries with the first highest values for change in per-capita Gross Domestic Product are highlighted with `gghighlight(max(pcgpd_change), max_highlight = 5, use_direct_label = FALSE)`.
+
+```{r gghighlight-rank}
+data %>%
+  ggplot(aes(year, pcgpd_change, group = country, color = country)) +
+  geom_line() +
+  gghighlight(max(pcgpd_change), max_highlight = 5, use_direct_label = FALSE) +  
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)),
+                     breaks = c(seq(1950, 2010, 10)),
+                     limits = c(1950, 2010)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     breaks = 0:8 * 5000,
+                     labels = scales::dollar,
+                     limits = c(0, 40000)) +
+  labs(x = "Year",
+       y = "Change in per-capita GDP (US dollars)")
+```
+
+### Faceting
+
+`gghighlight()` works well with ggplot2's faceting system. 
+
+```{r gghighlight-faceting}
+data %>%
+  ggplot(aes(year, pcgpd_change, group = country)) +
+  geom_line() +
+  gghighlight(max(pcgpd_change), max_highlight = 4, use_direct_label = FALSE) +  
+  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)),
+                     breaks = c(seq(1950, 2010, 10)),
+                     limits = c(1950, 2010)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)),
+                     breaks = 0:8 * 5000,
+                     labels = scales::dollar,
+                     limits = c(0, 40000)) +
+  labs(x = "Year",
+       y = "Change in per-capita GDP (US dollars)") +
+  facet_wrap(~ country) +
+  theme(panel.spacing = unit(20L, "pt"))
+```
 
 ## Text and Annotation
 
