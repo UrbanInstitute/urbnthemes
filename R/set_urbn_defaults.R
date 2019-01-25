@@ -6,7 +6,6 @@
 #' @param style The default theme style for the R session. "print" or "map".
 #' @import extrafont
 #' @import ggrepel
-#' @import conflicted
 #' @md
 #' @export
 set_urbn_defaults <- function(style = "print") {
@@ -60,24 +59,23 @@ set_urbn_defaults <- function(style = "print") {
   # overwrite default scale functions so Urban Institute colors are part of the
   # default ggplot2 functionality
 
-  conflicted::conflict_prefer("scale_color_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_color_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_ordinal", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_ordinal", "urbnthemes")
+  scale_color_discrete <- urbnthemes::scale_color_discrete
+  scale_colour_discrete <- urbnthemes::scale_colour_discrete
+  scale_fill_discrete <- urbnthemes::scale_fill_discrete
+  scale_color_gradientn <- urbnthemes::scale_color_gradientn
+  scale_colour_gradientn <- urbnthemes::scale_colour_gradientn
+  scale_fill_gradientn <- urbnthemes::scale_fill_gradientn
+  scale_fill_ordinal <- urbnthemes::scale_fill_ordinal
+  scale_colour_ordinal <- urbnthemes::scale_colour_ordinal
 
   # update geom defaults ----------------------------------------------------
 
-  conflicted::conflict_prefer("geom_bar", "urbnthemes")
-  conflicted::conflict_prefer("geom_col", "urbnthemes")
-  conflicted::conflict_prefer("geom_jitter", "urbnthemes")
-  conflicted::conflict_prefer("geom_line", "urbnthemes")
-  conflicted::conflict_prefer("geom_point", "urbnthemes")
-  conflicted::conflict_prefer("geom_step", "urbnthemes")
-  conflicted::conflict_prefer("geom_path", "urbnthemes")
-  conflicted::conflict_prefer("geom_text", "urbnthemes")
-
+  geom_bar <- urbnthemes::geom_bar
+  geom_col <- urbnthemes::geom_col
+  geom_jitter <- urbnthemes::geom_jitter
+  geom_line <- urbnthemes::geom_line
+  geom_point <- urbnthemes::geom_point
+  geom_step <- urbnthemes::geom_step
+  geom_path <- urbnthemes::geom_path
+  geom_text <- urbnthemes::geom_text
 }

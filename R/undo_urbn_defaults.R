@@ -5,7 +5,6 @@
 #'
 #' @import extrafont
 #' @import ggrepel
-#' @import conflicted
 #' @md
 #' @export
 
