@@ -6,7 +6,6 @@
 #' @param style The default theme style for the R session. "print" or "map".
 #' @import extrafont
 #' @import ggrepel
-#' @import conflicted
 #' @md
 #' @export
 set_urbn_defaults <- function(style = "print") {
@@ -56,28 +55,5 @@ set_urbn_defaults <- function(style = "print") {
   ggplot2::update_stat_defaults("boxplot", list(fill = "#1696d2"))
   ggplot2::update_stat_defaults("density", list(fill = "#1696d2"))
   ggplot2::update_stat_defaults("ydensity", list(fill = "#1696d2"))
-
-  # overwrite default scale functions so Urban Institute colors are part of the
-  # default ggplot2 functionality
-
-  conflicted::conflict_prefer("scale_color_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_discrete", "urbnthemes")
-  conflicted::conflict_prefer("scale_color_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_gradientn", "urbnthemes")
-  conflicted::conflict_prefer("scale_fill_ordinal", "urbnthemes")
-  conflicted::conflict_prefer("scale_colour_ordinal", "urbnthemes")
-
-  # update geom defaults ----------------------------------------------------
-
-  conflicted::conflict_prefer("geom_bar", "urbnthemes")
-  conflicted::conflict_prefer("geom_col", "urbnthemes")
-  conflicted::conflict_prefer("geom_jitter", "urbnthemes")
-  conflicted::conflict_prefer("geom_line", "urbnthemes")
-  conflicted::conflict_prefer("geom_point", "urbnthemes")
-  conflicted::conflict_prefer("geom_step", "urbnthemes")
-  conflicted::conflict_prefer("geom_path", "urbnthemes")
-  conflicted::conflict_prefer("geom_text", "urbnthemes")
 
 }

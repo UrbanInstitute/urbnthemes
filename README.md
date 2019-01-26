@@ -24,6 +24,8 @@ Waffle charts with glyphs require fontawesome. `fontawesome_test()` and `fontawe
 
 ### Usage
 
+Always load `library(urbnthemes)` after `library(ggplot2)` or `library(tidyverse)`.
+
 ``` r
 library(ggplot2)
 library(urbnthemes)
