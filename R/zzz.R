@@ -6,7 +6,7 @@
     grDevices::windows.options(width = 8.33333333333333,
                                height = 5.55555555555556)
     grDevices::windowsFonts(Lato = grDevices::windowsFont("Lato"))
-    grDevices::windowsFonts(Lato = grDevices::windowsFont("FontAwesome"))
+    grDevices::windowsFonts(FontAwesome = grDevices::windowsFont("FontAwesome"))
   } else {
     packageStartupMessage("Setting Mac/Linux options...")
     grDevices::quartz.options(width = 8.33333333333333,
