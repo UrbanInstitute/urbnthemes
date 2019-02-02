@@ -46,4 +46,5 @@ palette_urbn_red
 Vectors with hex-color codes that correspond to the color palettes outlined in the Urban Institute Data Visualization Style Guide.
 \url{http://urbaninstitute.github.io/graphics-styleguide/}
 }
+\concept{urbn palettes}
 \keyword{datasets}

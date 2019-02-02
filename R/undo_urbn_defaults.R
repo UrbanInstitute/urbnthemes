@@ -5,7 +5,6 @@
 #'
 #' @import extrafont
 #' @import ggrepel
-#' @import conflicted
 #' @md
 #' @export
 
@@ -38,16 +37,5 @@ undo_urbn_defaults <- function() {
   ggplot2::update_stat_defaults("boxplot", list(fill = "#595959"))
   ggplot2::update_stat_defaults("density", list(fill = "#595959"))
   ggplot2::update_stat_defaults("ydensity", list(fill = "#595959"))
-
-  # overwrite urbnthemes scale functions so default ggplot2 functions take precedence
-
-  scale_color_discrete <- ggplot2::scale_color_discrete
-  scale_colour_discrete <- ggplot2::scale_colour_discrete
-  scale_fill_discrete <- ggplot2::scale_fill_discrete
-  scale_color_gradientn <- ggplot2::scale_color_gradientn
-  scale_colour_gradientn <- ggplot2::scale_colour_gradientn
-  scale_fill_gradientn <- ggplot2::scale_fill_gradientn
-  scale_fill_ordinal <- ggplot2::scale_fill_ordinal
-  scale_colour_ordinal <- ggplot2::scale_colour_ordinal
 
 }

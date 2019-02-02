@@ -7,7 +7,6 @@
 
 ## New functionality
 
-* `set_urbn_defaults()` used to overwrite `scale_*_*()` functions in the global environment. Now, `urbnthemes` intentionally creates package conflicts for `scale_*_*()` functions and resolves them in favor of `urbnthemes` in `set_urbn_defaults()` with the package [conflicted](https://www.tidyverse.org/articles/2018/06/conflicted/). This should be more stable and will limit clutter in the global environemnt. 
 * All syntax that included "urban" has been switched to "urbn". This will be the default for any R packages made at the Urban Institute. 
 * `colors.R` contains eleven `palette_urbn_*` vectors. More information is available in the [Urban Institute Data Visualization Style Guide](http://urbaninstitute.github.io/graphics-styleguide/). 
     * `palette_urbn_main` is the eight color discrete palette of the Urban Institute with cyan, yellow, black, gray, magenta, green, space gray, and red. 

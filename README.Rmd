@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 ### Overview
 
-`urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with web, print, and map themes as well as tools that make plotting easier at the Urban Institute. `urbnthemes` replaces the [urban_R_theme](https://github.com/UrbanInstitute/urban_R_theme).
+`urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with print and map themes as well as tools that make plotting easier at the Urban Institute. `urbnthemes` replaces the [urban_R_theme](https://github.com/UrbanInstitute/urban_R_theme).
 
 ### Installation
 
@@ -37,6 +37,8 @@ If Lato isn't imported and registered, install [Lato](https://fonts.google.com/s
 Waffle charts with glyphs require fontawesome. `fontawesome_test()` and `fontawesome_install()` are the fontawesome versions of the above functions. Be sure to install fontawesome from [here](https://github.com/hrbrmstr/waffle/tree/master/inst/fonts).
 
 ### Usage
+
+Always load `library(urbnthemes)` after `library(ggplot2)` or `library(tidyverse)`.
 
 ```{r example, message=FALSE}
 library(ggplot2)
@@ -74,7 +76,6 @@ grid.arrange(plot, urbn_logo_text(), ncol = 1, heights = c(30, 1))
 Core themes:
 
 * `set_urbn_defaults()`
-* `theme_urbn_web()`
 * `theme_urbn_print()`
 * `theme_urbn_map()`
 
@@ -82,6 +83,10 @@ Formatting functions:
 
 * `urbn_logo_text()`
 * `remove_ticks()`
+* `remove_axis()`
+* `scatter_grid()`
+* `add_axis()`
+* `urbn_geofacet`
 
 Utility functions:
 
@@ -89,14 +94,12 @@ Utility functions:
 * `lato_install()`
 * `fontawesome_test()`
 * `fontawesome_install()`
+* `view_palette()`
 
 In development:
 
-* `urban_logo_image()`
-* `undo_urban_defaults()`
-* `save_urban_print()`
-* `save_urban_web()`
-* `urban_rmarkdown_header()`
+* `undo_urbn_defaults()`
+* `save_urbn_print()`
 
 ### Getting help
 

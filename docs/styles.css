@@ -1,3 +1,31 @@
+.container-fluid {
+  font-family: Lato;
+}
+
+/* make titles blue */
+h1 {
+  color: #1696d2;
+}
+
+.navbar {
+  background-color: #1696d2;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #1696d2;
+    background-color: #FFFFFF;
+}
+
 /* Global Formats */
 .main-container {
   font-family: Lato;
@@ -25,31 +53,10 @@
 }
 
 .tocify {
-	border-radius: 0px;
-}
-
-/* In-line code formatting */
-code {
-    white-space: pre;
-    font-family: "Monaco", Helvetica, Arial, sans-serif;
-}
-
-/* Code box format */
-.pre {
-	font-family: "Monaco", Helvetica, Arial, sans-serif;	
+	border-radius: 0;
 }
 
 /* Button Formatting */
 .btn {
-	border-radius: 0;	
-}
-
-/* Kable Formatting
-caption {
-	font-size: 18px;
-	color: #000000;
-} */
-
-.table.header {
-	text-align: center;
+	border-radius: 0;
 }

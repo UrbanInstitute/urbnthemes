@@ -7,9 +7,9 @@
 set_urbn_defaults(style = "print")
 }
 \arguments{
-\item{style}{The default theme style for the R session. "web", "print", or "map".}
+\item{style}{The default theme style for the R session. "print" or "map".}
 }
 \description{
 \code{set_urbn_defaults} provides a \link{ggplot2} theme formatted according to the
-Urban Institute style guide for web, with sensible defaults.
+Urban Institute style guide, with sensible defaults.
 }
