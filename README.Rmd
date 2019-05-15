@@ -6,14 +6,14 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# urbnthemes <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
+
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-"
 )
 ```
-
-## urbnthemes
 
 [![Travis-CI Build Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
 
@@ -27,7 +27,7 @@ A comprehensive set of examples is available at the [Urban Institute R Users Gro
 
 ```
 install.packages("devtools")
-devtools::install_github("UI-Research/urbnthemes")
+devtools::install_github("UI-Research/urbnthemes", build_vignettes = TRUE)
 ```
 
 ### Fonts
@@ -121,12 +121,6 @@ txhousing %>%
   labs(x = "Year",
        y = "Home sales")
 ```
-
-
-
-
-
-
 
 ### Branding
 

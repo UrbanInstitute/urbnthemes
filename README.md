@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## urbnthemes
+# urbnthemes <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
 
 [![Travis-CI Build
 Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
@@ -21,7 +21,7 @@ website](https://ui-research.github.io/r-at-urban/graphics-guide.html).
 ### Installation
 
     install.packages("devtools")
-    devtools::install_github("UI-Research/urbnthemes")
+    devtools::install_github("UI-Research/urbnthemes", build_vignettes = TRUE)
 
 ### Fonts
 
