@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vignette Title • urbnthemes</title>
+<title>Introducing urbnthemes • urbnthemes</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Vignette Title">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introducing urbnthemes">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -53,7 +53,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/introducing-urbnthemes.html">Vignette Title</a>
+      <a href="../articles/introducing-urbnthemes.html">Introducing urbnthemes</a>
     </li>
   </ul>
 </li>
@@ -80,10 +80,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Vignette Title</h1>
-                        <h4 class="author">Vignette Author</h4>
+      <h1>Introducing urbnthemes</h1>
+                        <h4 class="author">Aaron R. Williams</h4>
             
-            <h4 class="date">2019-05-15</h4>
+            <h4 class="date">2019-05-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/UI-Research/urbnthemes/blob/master/vignettes/introducing-urbnthemes.Rmd"><code>vignettes/introducing-urbnthemes.Rmd</code></a></small>
       <div class="hidden name"><code>introducing-urbnthemes.Rmd</code></div>
@@ -95,37 +95,100 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>Make ggplot2 graphics that align closely with the Urban Institute style guide.</p>
+<p><code>urbnthemes</code> is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends <code>ggplot2</code> with print and map themes as well as tools that make plotting easier at the Urban Institute. <code>urbnthemes</code> replaces the <a href="https://github.com/UrbanInstitute/urban_R_theme">urban_R_theme</a>.</p>
+<p>A comprehensive set of examples is available at the <a href="https://ui-research.github.io/r-at-urban/graphics-guide.html">Urban Institute R Users Group website</a>.</p>
 </div>
-<div id="examples" class="section level2">
+<div id="fonts" class="section level2">
 <h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a></code></pre></div>
-<pre><code>## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)</a></code></pre></div>
-<pre><code>## Setting Windows options...</code></pre>
-<pre><code>## 
-## Attaching package: 'urbnthemes'</code></pre>
-<pre><code>## The following objects are masked from 'package:ggplot2':
-## 
-##     geom_bar, geom_col, geom_jitter, geom_line, geom_path,
-##     geom_point, geom_step, geom_text, scale_color_discrete,
-##     scale_color_gradientn, scale_colour_discrete,
-##     scale_colour_gradientn, scale_colour_ordinal,
-##     scale_fill_discrete, scale_fill_gradientn, scale_fill_ordinal</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hwy, cty, <span class="dt">color =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(cyl))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Title"</span>, </a>
-<a class="sourceLine" id="cb7-4" title="4">       <span class="dt">subtitle =</span> <span class="st">"Subtitle"</span>, </a>
-<a class="sourceLine" id="cb7-5" title="5">       <span class="dt">caption =</span> <span class="st">"Caption"</span>,</a>
-<a class="sourceLine" id="cb7-6" title="6">       <span class="dt">x =</span> <span class="st">"X Variable"</span>, </a>
-<a class="sourceLine" id="cb7-7" title="7">       <span class="dt">y =</span> <span class="st">"Y Variable"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="kw"><a href="../reference/theme_urbn_print.html">theme_urbn_print</a></span>()</a></code></pre></div>
-<p><img src="introducing-urbnthemes_files/figure-html/theme-1.png" width="700"></p>
+<a href="#fonts" class="anchor"></a>Fonts</h2>
+<p>The Urban Institute uses <a href="https://fonts.google.com/specimen/Lato">Lato</a> font for publications. After installing <code>urbnthemes</code>, submit <code><a href="../reference/lato_test.html">urbnthemes::lato_test()</a></code> to see if Lato is imported and registered.</p>
+<p>If Lato isn’t imported and registered, install <a href="https://fonts.google.com/specimen/Lato">Lato</a> and then submit <code><a href="../reference/lato_install.html">urbnthemes::lato_install()</a></code>. If you are on a Windows, you may need to install <a href="https://www.ghostscript.com/download.html">ghostscript</a> and then submit <code><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv(R_GSCMD = "link to the ghostscript .exe")</a></code> before running <code><a href="../reference/lato_install.html">urbnthemes::lato_install()</a></code>.</p>
+<p>Waffle charts with glyphs require fontawesome. <code><a href="../reference/fontawesome_test.html">fontawesome_test()</a></code> and <code><a href="../reference/fontawesome_install.html">fontawesome_install()</a></code> are the fontawesome versions of the above functions. Be sure to install fontawesome from <a href="https://github.com/hrbrmstr/waffle/tree/master/inst/fonts">here</a>.</p>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>Always load <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(urbnthemes)</a></code> after <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(ggplot2)</a></code> or <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(tidyverse)</a></code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="../reference/set_urbn_defaults.html">set_urbn_defaults</a></span>(<span class="dt">style =</span> <span class="st">"print"</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="st">  </span><span class="kw"><a href="../reference/geom_bar.html">geom_bar</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Number of Cylinders"</span>,</a>
+<a class="sourceLine" id="cb1-10" title="10">       <span class="dt">y =</span> <span class="st">"Count"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="st">  </span><span class="kw"><a href="../reference/remove_ticks.html">remove_ticks</a></span>()</a></code></pre></div>
+<p><img src="introducing-urbnthemes_files/figure-html/example-1.png" width="700"></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> wt, <span class="dt">y =</span> mpg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.002</span>, <span class="dv">0</span>)), </a>
+<a class="sourceLine" id="cb2-4" title="4">                     <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">6</span>),</a>
+<a class="sourceLine" id="cb2-5" title="5">                     <span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">6</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.002</span>)), </a>
+<a class="sourceLine" id="cb2-7" title="7">                     <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb2-8" title="8">                     <span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span><span class="dv">5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Weight (thousands of pounds)"</span>,</a>
+<a class="sourceLine" id="cb2-10" title="10">       <span class="dt">y =</span> <span class="st">"City MPG"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">  </span><span class="kw"><a href="../reference/scatter_grid.html">scatter_grid</a></span>()</a></code></pre></div>
+<p><img src="introducing-urbnthemes_files/figure-html/scatter-plot-1-1.png" width="700"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars, <span class="kw">aes</span>(<span class="dt">x =</span> wt, <span class="dt">y =</span> mpg, <span class="dt">color =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.002</span>, <span class="dv">0</span>)), </a>
+<a class="sourceLine" id="cb3-4" title="4">                     <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">6</span>),</a>
+<a class="sourceLine" id="cb3-5" title="5">                     <span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">6</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.002</span>)), </a>
+<a class="sourceLine" id="cb3-7" title="7">                     <span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb3-8" title="8">                     <span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">8</span> <span class="op">*</span><span class="st"> </span><span class="dv">5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Weight (thousands of pounds)"</span>,</a>
+<a class="sourceLine" id="cb3-10" title="10">       <span class="dt">y =</span> <span class="st">"City MPG"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="st">  </span><span class="kw"><a href="../reference/scatter_grid.html">scatter_grid</a></span>()</a></code></pre></div>
+<p><img src="introducing-urbnthemes_files/figure-html/scatter-plot-2-1.png" width="700"> ## Branding</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grid)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gridExtra)</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw"><a href="../reference/set_urbn_defaults.html">set_urbn_defaults</a></span>()</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8">plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> mtcars, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">  </span><span class="kw"><a href="../reference/geom_bar.html">geom_bar</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"Number of Cylinders"</span>,</a>
+<a class="sourceLine" id="cb4-12" title="12">       <span class="dt">y =</span> <span class="st">"Count"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="st">  </span><span class="kw"><a href="../reference/remove_ticks.html">remove_ticks</a></span>()</a>
+<a class="sourceLine" id="cb4-14" title="14"></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="kw">grid.arrange</span>(plot, <span class="kw"><a href="../reference/urbn_logo_text.html">urbn_logo_text</a></span>(), <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">heights =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">30</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="introducing-urbnthemes_files/figure-html/example2-1.png" width="700"></p>
+<p>Core themes:</p>
+<ul>
+<li><code><a href="../reference/set_urbn_defaults.html">set_urbn_defaults()</a></code></li>
+<li><code><a href="../reference/theme_urbn_print.html">theme_urbn_print()</a></code></li>
+<li><code><a href="../reference/theme_urbn_map.html">theme_urbn_map()</a></code></li>
+</ul>
+<p>Formatting functions:</p>
+<ul>
+<li><code><a href="../reference/urbn_logo_text.html">urbn_logo_text()</a></code></li>
+<li><code><a href="../reference/remove_ticks.html">remove_ticks()</a></code></li>
+<li><code><a href="../reference/remove_axis.html">remove_axis()</a></code></li>
+<li><code><a href="../reference/scatter_grid.html">scatter_grid()</a></code></li>
+<li><code><a href="../reference/add_axis.html">add_axis()</a></code></li>
+<li><code>urbn_geofacet</code></li>
+</ul>
+<p>Utility functions:</p>
+<ul>
+<li><code><a href="../reference/lato_test.html">lato_test()</a></code></li>
+<li><code><a href="../reference/lato_install.html">lato_install()</a></code></li>
+<li><code><a href="../reference/fontawesome_test.html">fontawesome_test()</a></code></li>
+<li><code><a href="../reference/fontawesome_install.html">fontawesome_install()</a></code></li>
+<li><code><a href="../reference/view_palette.html">view_palette()</a></code></li>
+</ul>
+<p>In development:</p>
+<ul>
+<li><code><a href="../reference/undo_urbn_defaults.html">undo_urbn_defaults()</a></code></li>
+<li><code>save_urbn_print()</code></li>
+</ul>
 </div>
 <div id="quick-palettes" class="section level2">
 <h2 class="hasAnchor">
@@ -154,10 +217,10 @@
 <p>All color palettes are listed in the documentation for any color palette. Simply submit <code>?&lt;palette name&gt;</code> to see a list of all palettes. Furthermore, all palettes begin with <code>palette_urbn_*</code> so autocomplete can be used to quickly explore the entire list of palettes.</p>
 <p><img src="images/autocomplete.png"></p>
 <p>The vectors can be subset using base R syntax.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">palette_urbn_main[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">palette_urbn_main[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <pre><code>##      cyan    yellow     black      gray 
 ## "#1696d2" "#fdbf11" "#000000" "#d2d2d2"</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">palette_urbn_spacegray[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">palette_urbn_spacegray[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>## [1] "#d5d5d4" "#adabac" "#848081" "#5c5859" "#332d2f"</code></pre>
 </div>
   </div>
@@ -168,7 +231,8 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#fonts">Fonts</a></li>
+      <li><a href="#usage">Usage</a></li>
       <li><a href="#quick-palettes">Quick palettes</a></li>
       </ul>
 </div>

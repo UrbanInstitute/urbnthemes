@@ -1,29 +1,35 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# urbnthemes <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
+# urbnthemes <a href="https://ui-research.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
 [![Travis-CI Build
 Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
 
-### Overview
+## Overview
 
 `urbnthemes` is a set of tools for creating Urban Institute-themed plots
 and maps in R. The package extends `ggplot2` with print and map themes
 as well as tools that make plotting easier at the Urban Institute.
-`urbnthemes` replaces the
-[urban\_R\_theme](https://github.com/UrbanInstitute/urban_R_theme).
 
 A comprehensive set of examples is available at the [Urban Institute R
 Users Group
 website](https://ui-research.github.io/r-at-urban/graphics-guide.html).
 
-### Installation
+## Stay up-to-date
+
+Sign up
+[here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343bf)
+to stay up-to-date with R package releases and R resources from the
+Urban Institute. We will not share your information and we will not
+email more than once per month.
+
+## Installation
 
     install.packages("devtools")
     devtools::install_github("UI-Research/urbnthemes", build_vignettes = TRUE)
 
-### Fonts
+## Fonts
 
 The Urban Institute uses [Lato](https://fonts.google.com/specimen/Lato)
 font for publications. After installing `urbnthemes`, submit
@@ -41,7 +47,7 @@ Waffle charts with glyphs require fontawesome. `fontawesome_test()` and
 functions. Be sure to install fontawesome from
 [here](https://github.com/hrbrmstr/waffle/tree/master/inst/fonts).
 
-### Usage
+## Usage
 
 Always load `library(urbnthemes)` after `library(ggplot2)` or
 `library(tidyverse)`.
@@ -135,7 +141,7 @@ txhousing %>%
 
 ![](man/figures/README-area-plot-1.png)<!-- -->
 
-### Branding
+## Branding
 
 ``` r
 library(ggplot2)
@@ -194,7 +200,7 @@ In development:
   - `undo_urbn_defaults()`
   - `save_urbn_print()`
 
-### Getting help
+## Getting help
 
 Contact [Aaron Williams](awilliams@urban.org) or [Kyle
 Ueyama](kueyama@urban.org) with feedback or questions.
