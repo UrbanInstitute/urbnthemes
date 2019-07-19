@@ -6,7 +6,7 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# urbnthemes <a href="https://ui-research.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
+# urbnthemes <a href="https://UrbanInstitute.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -15,13 +15,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
+[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
 
 ## Overview
 
 `urbnthemes` is a set of tools for creating Urban Institute-themed plots and maps in R. The package extends `ggplot2` with print and map themes as well as tools that make plotting easier at the Urban Institute. 
 
-A comprehensive set of examples is available at the [Urban Institute R Users Group website](https://ui-research.github.io/r-at-urban/graphics-guide.html). 
+A comprehensive set of examples is available at the [Urban Institute R Users Group website](https://UrbanInstitute.github.io/r-at-urban/graphics-guide.html). 
 
 ## Stay up-to-date
 
@@ -31,7 +31,7 @@ Sign up [here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343b
 
 ```
 install.packages("devtools")
-devtools::install_github("UI-Research/urbnthemes", build_vignettes = TRUE)
+devtools::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
 ```
 
 ## Fonts

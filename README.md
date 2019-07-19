@@ -1,10 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# urbnthemes <a href="https://ui-research.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
+# urbnthemes <a href="https://UrbanInstitute.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
 [![Travis-CI Build
-Status](https://travis-ci.org/UI-Research/urbnthemes.svg?branch=master)](https://travis-ci.org/UI-Research/urbnthemes)
+Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
 
 ## Overview
 
@@ -14,7 +14,7 @@ as well as tools that make plotting easier at the Urban Institute.
 
 A comprehensive set of examples is available at the [Urban Institute R
 Users Group
-website](https://ui-research.github.io/r-at-urban/graphics-guide.html).
+website](https://UrbanInstitute.github.io/r-at-urban/graphics-guide.html).
 
 ## Stay up-to-date
 
@@ -27,7 +27,7 @@ email more than once per month.
 ## Installation
 
     install.packages("devtools")
-    devtools::install_github("UI-Research/urbnthemes", build_vignettes = TRUE)
+    devtools::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
 
 ## Fonts
 
@@ -57,7 +57,13 @@ library(tidyverse)
 library(urbnthemes)
 
 set_urbn_defaults(style = "print")
+```
 
+    #> Warning: New theme missing the following elements: axis.ticks.length.x,
+    #> axis.ticks.length.x.top, axis.ticks.length.x.bottom, axis.ticks.length.y,
+    #> axis.ticks.length.y.left, axis.ticks.length.y.right
+
+``` r
 ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
@@ -159,7 +165,13 @@ library(gridExtra)
 
 ``` r
 set_urbn_defaults()
+```
 
+    #> Warning: New theme missing the following elements: axis.ticks.length.x,
+    #> axis.ticks.length.x.top, axis.ticks.length.x.bottom, axis.ticks.length.y,
+    #> axis.ticks.length.y.left, axis.ticks.length.y.right
+
+``` r
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
