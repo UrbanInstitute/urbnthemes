@@ -6,7 +6,7 @@
 #' @return one plot made from many grobs
 #' @export
 #'
-urbn_plot <- function(..., heights) {
+urbn_plot <- function(..., heights = 1) {
   grid.arrange(...,
                heights = heights)
 }

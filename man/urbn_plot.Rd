@@ -4,7 +4,7 @@
 \alias{urbn_plot}
 \title{urbn_plot}
 \usage{
-urbn_plot(..., heights)
+urbn_plot(..., heights = 1)
 }
 \arguments{
 \item{...}{urbn plot objects or grobs}

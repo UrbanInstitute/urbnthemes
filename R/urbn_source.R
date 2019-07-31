@@ -14,12 +14,12 @@ urbn_source <- function(string, size = 8) {
              y = unit(1, "npc"),
              hjust = 0,
              vjust = 1,
-             gp = gpar(fontsize = 8, fontfamily = "Lato", fontface = "bold")),
+             gp = gpar(fontsize = size, fontfamily = "Lato", fontface = "bold")),
     grid::textGrob(string,
              x = unit(0, "npc") + grobWidth("source1"),
              y = unit(1, "npc"),
              hjust = 0,
              vjust = 1,
-             gp = gpar(fontsize = 8, fontfamily = "Lato"))
+             gp = gpar(fontsize = size, fontfamily = "Lato"))
   )
 }
