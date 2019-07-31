@@ -14,10 +14,13 @@ Imports:
     ggplot2 (>= 3.0.0),
     extrafont,
     ggrepel,
+    grid,
     gridExtra,
     scales,
     conflicted,
-    tibble
+    tibble,
+    purrr,
+    stringr
 License: GPL-3
 URL: https://github.com/UI-Research/urbnthemes
 BugReports: https://github.com/UI-Research/urbnthemes/issues
