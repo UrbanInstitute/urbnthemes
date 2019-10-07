@@ -30,8 +30,13 @@ Sign up [here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343b
 ## Installation
 
 ```
+<<<<<<< HEAD
 install.packages("devtools")
 devtools::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
+=======
+install.packages("remotes")
+remotes::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
+>>>>>>> master
 ```
 
 ## Fonts
