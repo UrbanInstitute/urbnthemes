@@ -112,7 +112,7 @@ theme_urbn_print <- function(base_size = 8.5, base_family = "Lato",
     legend.key.width = NULL,
 
     legend.text = ggplot2::element_text(size = base_size * 9.5 / 8.5,
-                                        vjust = 1),
+                                        vjust = 0.5),
     legend.text.align = NULL,
     legend.title = ggplot2::element_blank(),
     legend.title.align = NULL,
