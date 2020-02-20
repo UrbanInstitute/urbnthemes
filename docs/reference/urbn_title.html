@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The Urban Institute ggplot2 theme — remove_axis • urbnthemes</title>
+<title>urbn_title — urbn_title • urbnthemes</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="The Urban Institute ggplot2 theme — remove_axis" />
-<meta property="og:description" content="Removes axes and axes labels" />
+<meta property="og:title" content="urbn_title — urbn_title" />
+<meta property="og:description" content="urbn_title" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,36 +120,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The Urban Institute ggplot2 theme</h1>
-    <small class="dont-index">Source: <a href='https://github.com/UrbanInstitute/urbnthemes/blob/master/R/remove_axis.R'><code>R/remove_axis.R</code></a></small>
-    <div class="hidden name"><code>remove_axis.Rd</code></div>
+    <h1>urbn_title</h1>
+    <small class="dont-index">Source: <a href='https://github.com/UrbanInstitute/urbnthemes/blob/master/R/urbn_title.R'><code>R/urbn_title.R</code></a></small>
+    <div class="hidden name"><code>urbn_title.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Removes axes and axes labels</p>
+    <p>urbn_title</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_axis</span>(<span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"y"</span>, <span class='kw'>flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>urbn_title</span>(<span class='no'>string</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>68</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>axis</th>
-      <td><p>Axis to drop. "x", "y", or "both"</p></td>
+      <th>string</th>
+      <td><p>character string for a title</p></td>
     </tr>
     <tr>
-      <th>flip</th>
-      <td><p>TRUE/FALSE is <code>coord_flip()</code> is used</p></td>
+      <th>size</th>
+      <td><p>font size for the title</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>a number of characters to allow before a character return</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a grob formatted for a source in a ggplot</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>
