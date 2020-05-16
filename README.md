@@ -57,19 +57,15 @@ library(tidyverse)
 library(urbnthemes)
 
 set_urbn_defaults(style = "print")
-```
 
-    #> Warning: New theme missing the following elements: axis.ticks.length.x,
-    #> axis.ticks.length.x.top, axis.ticks.length.x.bottom, axis.ticks.length.y,
-    #> axis.ticks.length.y.left, axis.ticks.length.y.right
-
-``` r
 ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
   labs(x = "Number of Cylinders",
        y = "Count") +
-  remove_ticks()
+  remove_ticks() +
+  labs(title = "Most Cars Have 8 Cylinders",
+       subtitle = "1974 Motor Trend US magazine")
 ```
 
 ![](man/figures/README-example-1.png)<!-- -->
@@ -77,10 +73,10 @@ ggplot(data = mtcars, mapping = aes(factor(cyl))) +
 ``` r
 ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
   geom_point() +
-  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+  scale_x_continuous(expand = expansion(mult = c(0.002, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.002)), 
                      limits = c(0, 40),
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds)",
@@ -95,10 +91,10 @@ mtcars %>%
   mutate(cyl = paste(cyl, "cylinders")) %>%
   ggplot(aes(x = wt, y = mpg, color = cyl)) +
   geom_point() +
-  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+  scale_x_continuous(expand = expansion(mult = c(0.002, 0)), 
                      limits = c(0, 6),
                      breaks = 0:6) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.002)), 
                      limits = c(0, 40),
                      breaks = 0:8 * 5) +
   labs(x = "Weight (thousands of pounds)",
@@ -116,10 +112,10 @@ gapminder %>%
   mutate(country = factor(country, levels = c("Canada", "Australia", "New Zealand"))) %>%
   ggplot(aes(year, gdpPercap, color = country)) +
   geom_line() +
-  scale_x_continuous(expand = expand_scale(mult = c(0.002, 0)), 
+  scale_x_continuous(expand = expansion(mult = c(0.002, 0)), 
                      breaks = c(1952 + 0:12 * 5), 
                      limits = c(1952, 2007)) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.002)), 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.002)), 
                      breaks = 0:8 * 5000,
                      labels = scales::dollar, 
                      limits = c(0, 40000)) +
@@ -136,10 +132,10 @@ txhousing %>%
   summarize(sales = sum(sales)) %>%
   ggplot(aes(x = year, y = sales, fill = city)) +
   geom_area(position = "stack") +
-  scale_x_continuous(expand = expand_scale(mult = c(0, 0)),
+  scale_x_continuous(expand = expansion(mult = c(0, 0)),
                      limits = c(2000, 2015),
                      breaks = 2000 + 0:15) +  
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.2)), 
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2)), 
                      labels = scales::comma) +
   labs(x = "Year",
        y = "Home sales")
@@ -152,34 +148,17 @@ txhousing %>%
 ``` r
 library(ggplot2)
 library(urbnthemes)
-library(grid)
-library(gridExtra)
-```
 
-    #> 
-    #> Attaching package: 'gridExtra'
-
-    #> The following object is masked from 'package:dplyr':
-    #> 
-    #>     combine
-
-``` r
 set_urbn_defaults()
-```
 
-    #> Warning: New theme missing the following elements: axis.ticks.length.x,
-    #> axis.ticks.length.x.top, axis.ticks.length.x.bottom, axis.ticks.length.y,
-    #> axis.ticks.length.y.left, axis.ticks.length.y.right
-
-``` r
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
   labs(x = "Number of Cylinders",
        y = "Count") +
   remove_ticks()
 
-grid.arrange(plot, urbn_logo_text(), ncol = 1, heights = c(30, 1))
+urbn_plot(plot, urbn_logo_text(), ncol = 1, heights = c(30, 1))
 ```
 
 ![](man/figures/README-example2-1.png)<!-- -->
@@ -192,12 +171,34 @@ Core themes:
 
 Formatting functions:
 
+  - `urbn_plot()`
+  - `urbn_title()`
+  - `urbn_subtitle()`
+  - `urbn_y_title()`
+  - `urbn_note()`
+  - `urbn_source()`
   - `urbn_logo_text()`
-  - `remove_ticks()`
-  - `remove_axis()`
   - `scatter_grid()`
+  - `remove_ticks()`
   - `add_axis()`
+  - `remove_axis()`
+  - `get_legend()`
+  - `remove_legend()`
   - `urbn_geofacet`
+
+Palette functions:
+
+  - `palette_urbn_main`
+  - `palette_urbn_diverging`
+  - `palette_urbn_quintile`
+  - `palette_urbn_politics`
+  - `palette_urbn_cyan`
+  - `palette_urbn_gray`
+  - `palette_urbn_yellow`
+  - `palette_urbn_magenta`
+  - `palette_urbn_green`
+  - `palette_urbn_spacegray`
+  - `palette_urbn_red`
 
 Utility functions:
 

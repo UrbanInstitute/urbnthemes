@@ -4,7 +4,9 @@
 \name{palette_urbn}
 \alias{palette_urbn}
 \title{The Urban Institute [ggplot2] theme}
-\format{A \code{list}.}
+\format{
+A \code{list}.
+}
 \usage{
 palette_urbn
 }
