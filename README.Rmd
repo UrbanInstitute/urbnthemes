@@ -200,7 +200,7 @@ In development:
 
 ## Getting help
 
-Contact [Aaron Williams](awilliams@urban.org) or [Kyle Ueyama](kueyama@urban.org) with feedback or questions. 
+Contact [Aaron R. Williams](awilliams@urban.org) or [Kyle Ueyama](kueyama@urban.org) with feedback or questions. 
 
 ## Code of conduct
 

@@ -4,10 +4,19 @@
 \alias{set_urbn_defaults}
 \title{The Urban Institute \link{ggplot2} theme}
 \usage{
-set_urbn_defaults(style = "print")
+set_urbn_defaults(
+  style = "print",
+  base_size = 8.5,
+  base_family = "Lato",
+  base_line_size = 0.5,
+  base_rect_size = 0.5,
+  scale = "continuous"
+)
 }
 \arguments{
 \item{style}{The default theme style for the R session. "print" or "map".}
+
+\item{scale}{For \code{theme_urbn_map()}. Should the legend theme be continuous or discrete?}
 }
 \description{
 \code{set_urbn_defaults} provides a \link{ggplot2} theme formatted according to the

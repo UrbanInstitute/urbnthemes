@@ -141,6 +141,8 @@ txhousing %>%
        y = "Home sales")
 ```
 
+    #> `summarise()` regrouping output by 'city' (override with `.groups` argument)
+
 ![](man/figures/README-area-plot-1.png)<!-- -->
 
 ## Branding

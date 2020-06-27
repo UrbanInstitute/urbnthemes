@@ -4,31 +4,55 @@
 #' Urban Institute style guide, with sensible defaults.
 #'
 #' @param style The default theme style for the R session. "print" or "map".
+#' @param base_size
+#' @param base_family
+#' @param base_line_size
+#' @param base_rect_size
+#' @param scale For `theme_urbn_map()`. Should the legend theme be continuous or discrete?
+#'
 #' @import extrafont
 #' @import ggrepel
 #' @md
 #' @export
-set_urbn_defaults <- function(style = "print") {
+set_urbn_defaults <- function(style = "print",
+                              base_size = 8.5,
+                              base_family = "Lato",
+                              base_line_size = 0.5,
+                              base_rect_size = 0.5,
+                              scale = "continuous") {
 
-  # set deault theme to theme_urbn_*() --------------------------------------
+  # set default theme to theme_urbn_*() --------------------------------------
 
   if (style == "print") {
-    ggplot2::theme_set(theme_urbn_print())
+
+    ggplot2::theme_set(theme_urbn_print(base_size = base_size,
+                                        base_family = base_family,
+                                        base_line_size = base_line_size,
+                                        base_rect_size = base_rect_size))
+
   } else if (style == "map") {
-    ggplot2::theme_set(theme_urbn_map())
+
+    ggplot2::theme_set(theme_urbn_map(base_size = base_size,
+                                      base_family = base_family,
+                                      base_line_size = base_line_size,
+                                      base_rect_size = base_rect_size,
+                                      scale = scale))
+
   } else {
+
     stop('Invalid "style" argument. Valid styles are: ',
          '"print" and "map".',
          call. = FALSE
     )
+
   }
 
-  # add Lato font to text and label geoms ---------------------------
+  # add base_family font to text and label geoms ---------------------------
 
-  ggplot2::update_geom_defaults("text", list(family = "Lato"))
-  ggplot2::update_geom_defaults("label", list(family = "Lato"))
-  ggplot2::update_geom_defaults("text_repel", list(family = "Lato"))
-  ggplot2::update_geom_defaults("label_repel", list(family = "Lato"))
+  ggplot2::update_geom_defaults("text", list(family = base_family))
+  ggplot2::update_geom_defaults("label", list(family = base_family))
+  ggplot2::update_geom_defaults("text_repel", list(family = base_family))
+  ggplot2::update_geom_defaults("label_repel", list(family = base_family))
 
   # set default color scales for continuous variables -----------------------
 

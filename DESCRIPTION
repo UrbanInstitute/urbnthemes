@@ -3,9 +3,9 @@ Type: Package
 Title: Additional theme and utilities for "ggplot2" in the Urban Institute style
 Version: 0.0.2
 Authors@R: c(
-    person("Aaron", "Williams", email = "awilliams@urban.org", role = c("aut", "cre")),
-    person("Kyle", "Ueyama", email = "kueyama@urban.org", role = "aut"),
-    person("Ben", "Chartoff", email = "bchartoff@urban.org", role = "aut")
+    person(given = "Aaron", family = "Williams", middle = "R.", email = "awilliams@urban.org", role = c("aut", "cre")),
+    person(given = "Kyle", family = "Ueyama", email = "kueyama@urban.org", role = "aut"),
+    person(given = "Ben", family = "Chartoff", email = "bchartoff@urban.org", role = "aut")
     )
 Description: Align "ggplot2" output more closely with the Urban Institute
     Data Visualization style guide <https://urbaninstitute.github.io/r-at-urban/graphics-guide.html>.
