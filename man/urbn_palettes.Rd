@@ -14,7 +14,29 @@
 \alias{palette_urbn_spacegray}
 \alias{palette_urbn_red}
 \title{Urban Institute palettes}
-\format{An object of class \code{character} of length 8.}
+\format{
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 5.
+
+An object of class \code{character} of length 2.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+
+An object of class \code{character} of length 8.
+}
 \source{
 Urban Institute Data Visualization Style Guide
  \url{http://urbaninstitute.github.io/graphics-styleguide/}

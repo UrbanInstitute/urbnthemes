@@ -19,6 +19,8 @@ view_palette <- function(palette = palette_urbn_main) {
 
   color_palette <- unname(rev(palette))
 
+  print(paste0("c(", paste(color_palette, collapse = ", "), ")"))
+
   data <- tibble::tibble(x = 1,
          y = 1:length(color_palette),
          colors = factor(color_palette, levels = color_palette))
