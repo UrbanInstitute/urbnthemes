@@ -27,7 +27,7 @@ email more than once per month.
 ## Installation
 
     install.packages("remotes")
-    remotes::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
+    remotes::install_github("UrbanInstitute/urbnthemes")
 
 ## Fonts
 
