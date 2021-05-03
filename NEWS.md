@@ -1,3 +1,7 @@
+# urbnthemes 0.0.3
+
+* Change `lato_install()` to `lato_import()` and use `library(systemfonts)` to resolve issues across operating systems. 
+
 # urbnthemes 0.0.1
 
 ## Updates because of ggplot2 3.0.0
