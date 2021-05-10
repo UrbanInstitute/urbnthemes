@@ -9,5 +9,5 @@ lato_install()
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{lato_install()} has been deprecated because its name was ambiguous. Please use \code{lato_import()}.
+\code{lato_install()} was deprecated because its name was ambiguous. Please use \code{lato_import()}.
 }

@@ -7,9 +7,16 @@
 #' @md
 #' @export
 lato_test <- function() {
+
   if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
+
     "Lato is imported and registered."
+
   } else {
-    "Lato isn't imported and registered. Install from Google Fonts and import and register using lato_import()."
+
+    "Lato isn't imported and registered. Install the Lato font from Google
+    Fonts and import using lato_import(). See ?lato_import for more
+    information."
+
   }
 }

@@ -39,7 +39,7 @@ An object of class \code{character} of length 8.
 }
 \source{
 Urban Institute Data Visualization Style Guide
- \url{http://urbaninstitute.github.io/graphics-styleguide/}
+\url{http://urbaninstitute.github.io/graphics-styleguide/}
 }
 \usage{
 palette_urbn_main
