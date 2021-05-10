@@ -13,7 +13,7 @@
 #'
 #' @md
 #' @export
-lato_install <- function() {
+lato_import <- function() {
 
   if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
 

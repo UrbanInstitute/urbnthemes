@@ -16,6 +16,17 @@ set_urbn_defaults(
 \arguments{
 \item{style}{The default theme style for the R session. "print" or "map".}
 
+\item{base_size}{The base font size for the theme. All fonts are relative to
+this value.}
+
+\item{base_family}{The base font family for the theme.}
+
+\item{base_line_size}{The base line size for the theme. All line sizes are
+relative to this value.}
+
+\item{base_rect_size}{The base rect size for the theme. All rect sizes are
+relative to this value.}
+
 \item{scale}{For \code{theme_urbn_map()}. Should the legend theme be continuous or discrete?}
 }
 \description{

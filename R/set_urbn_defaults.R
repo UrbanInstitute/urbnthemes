@@ -4,10 +4,13 @@
 #' Urban Institute style guide, with sensible defaults.
 #'
 #' @param style The default theme style for the R session. "print" or "map".
-#' @param base_size
-#' @param base_family
-#' @param base_line_size
-#' @param base_rect_size
+#' @param base_size The base font size for the theme. All fonts are relative to
+#' this value.
+#' @param base_family The base font family for the theme.
+#' @param base_line_size The base line size for the theme. All line sizes are
+#' relative to this value.
+#' @param base_rect_size The base rect size for the theme. All rect sizes are
+#' relative to this value.
 #' @param scale For `theme_urbn_map()`. Should the legend theme be continuous or discrete?
 #'
 #' @import extrafont
