@@ -4,12 +4,16 @@
 \alias{urbn_source}
 \title{urbn_source}
 \usage{
-urbn_source(string, size = 8)
+urbn_source(text, size = 8, width = 132, plural = FALSE)
 }
 \arguments{
-\item{string}{character string for a source statement}
+\item{text}{character string for a source}
 
 \item{size}{font size for the source}
+
+\item{width}{a number of characters to allow before a character return}
+
+\item{plural}{If `TRUE`, will change "Source:" to "Sources:"}
 }
 \value{
 a grob formatted for a source in a ggplot
