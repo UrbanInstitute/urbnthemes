@@ -4,14 +4,16 @@
 \alias{urbn_note}
 \title{urbn_note}
 \usage{
-urbn_note(note, size = 8, width = 132)
+urbn_note(text, size = 8, width = 132, plural = FALSE)
 }
 \arguments{
-\item{note}{character string for a note}
+\item{text}{character string for a note}
 
 \item{size}{font size for the note}
 
 \item{width}{a number of characters to allow before a character return}
+
+\item{plural}{If `TRUE`, will change "Note:" to "Notes:"}
 }
 \value{
 a grob formatted for a source in a ggplot

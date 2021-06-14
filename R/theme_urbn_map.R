@@ -17,9 +17,10 @@ theme_urbn_map <- function(scale = "continuous",
                             base_line_size = 0.5,
                             base_rect_size = 0.5) {
 
-  gg <- theme_urbn_print(base_size = 8.5, base_family = "Lato",
-                  base_line_size = 0.5,
-                  base_rect_size = 0.5)
+  gg <- theme_urbn_print(base_size = base_size,
+                         base_family = base_family,
+                         base_line_size = base_line_size,
+                         base_rect_size = base_rect_size)
 
   gg <- gg +  ggplot2::theme(
 
