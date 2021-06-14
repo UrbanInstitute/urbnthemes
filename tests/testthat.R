@@ -1,4 +1,7 @@
 library(testthat)
-library(tidysynth)
+library(ggplot2)
+library(urbnthemes)
 
-test_check("tidysynth")
+set_urbn_defaults(style = "print")
+
+test_check("urbnthemes")

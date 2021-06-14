@@ -10,35 +10,80 @@ urbn_color_pal <- function(palette = "categorical") {
   types <- palette_list[[palette]]
 
   function(n) {
+
+    if (n > 8) {
+
+      stop(
+        paste(
+          "Error: urbnthemes allows for a max of 8 colors. Your code asked for",
+          n,
+          "colors.",
+          "If you need more than 8 colors for exploratory purposes, use",
+          "ggplot2::scale_fill_discrete() or ggplot2::scale_color_discrete()."
+        )
+      )
+
+    }
+
     types[[n]]
   }
 }
 
 #' Discrete color scale that aligns with the Urban Institute style
 #'
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_fill_discrete().
+#'
 #' @md
 #' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_color_discrete <- function(...) {
-  ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
+  ggplot2::discrete_scale(
+    aesthetics = "colour",
+    scale_name = "urbn",
+    palette = urbn_color_pal("categorical"),
+    ...
+  )
 }
 
 #' Discrete color scale that aligns with the Urban Institute style
+#'
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_color_discrete().
 #'
 #' @md
 #' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_colour_discrete <- function(...) {
-  ggplot2::discrete_scale("colour", "urbn", urbn_color_pal("categorical"), ...)
+  ggplot2::discrete_scale(
+    aesthetics = "colour",
+    scale_name = "urbn",
+    palette = urbn_color_pal("categorical"),
+    ...
+  )
 }
 
 #' Discrete fill scale that aligns with the Urban Institute style
+#'
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_fill_discrete().
 #'
 #' @md
 #' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
 scale_fill_discrete <- function(...) {
-  ggplot2::discrete_scale("fill", "urbn", urbn_color_pal("categorical"), ...)
+  ggplot2::discrete_scale(
+    aesthetics = "colour",
+    scale_name = "urbn",
+    palette = urbn_color_pal("categorical"),
+    ...
+  )
 }
 
 #' Continuous fill scale that aligns with the Urban Institute style
@@ -62,8 +107,14 @@ scale_color_gradientn <- function(...,
 
   colours <- if (missing(colours)) colors else colours
 
-  ggplot2::continuous_scale("colour", "gradientn",
-                   scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
+  ggplot2::continuous_scale(
+    aesthetics = "colour",
+    scale_name = "gradientn",
+    palette = scales::gradient_n_pal(colours, values, space),
+    na.value = na.value,
+    guide = guide,
+    ...
+  )
 }
 
 #' Continuous fill scale that aligns with the Urban Institute style
@@ -100,20 +151,71 @@ scale_fill_gradientn <- function(...,
 
   colours <- if (missing(colours)) colors else colours
 
-  ggplot2::continuous_scale("fill", "gradientn",
-                   scales::gradient_n_pal(colours, values, space), na.value = na.value, guide = guide, ...)
+  ggplot2::continuous_scale(
+    aesthetics = "fill",
+    scale_name = "gradientn",
+    palette = scales::gradient_n_pal(colours, values, space),
+    na.value = na.value,
+    guide = guide,
+    ...
+  )
 }
 
 #' Discrete fill scale for ordinal factors that aligns with the Urban Institute style
 #'
-#' @md
-#' @param ... other arguments passed to \code{discrete_scale()}
-#' @export
-scale_fill_ordinal <- scale_fill_discrete
-
-#' Discrete color scale for ordinal factors that aligns with the Urban Institute style
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_fill_ordinal().
 #'
 #' @md
 #' @param ... other arguments passed to \code{discrete_scale()}
 #' @export
-scale_colour_ordinal <- scale_color_discrete
+scale_fill_ordinal <- function(...) {
+  ggplot2::discrete_scale(
+    aesthetics = "color",
+    scale_name = "urbn",
+    palette = urbn_color_pal("sequential"),
+    ...
+  )
+}
+
+#' Discrete color scale for ordinal factors that aligns with the Urban Institute style
+#'
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_color_ordinal().
+#'
+#' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
+#' @export
+scale_color_ordinal <- function(...) {
+  ggplot2::discrete_scale(
+    aesthetics = "color",
+    scale_name = "urbn",
+    palette = urbn_color_pal("sequential"),
+    ...
+  )
+}
+
+#' Discrete color scale for ordinal factors that aligns with the Urban Institute style
+#'
+#' This function can only handle up to 8 categories/colors.
+#'
+#' If you need more than 8 colors for exploratory purposes, use
+#' ggplot2::scale_colour_ordinal().
+#'
+#' @md
+#' @param ... other arguments passed to \code{discrete_scale()}
+#' @export
+scale_colour_ordinal <- function(...) {
+  ggplot2::discrete_scale(
+    aesthetics = "color",
+    scale_name = "urbn",
+    palette = urbn_color_pal("sequential"),
+    ...
+  )
+}
+
+
