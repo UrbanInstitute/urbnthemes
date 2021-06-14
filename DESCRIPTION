@@ -5,6 +5,7 @@ Version: 0.0.2
 Authors@R: c(
     person(given = "Aaron", family = "Williams", middle = "R.", email = "awilliams@urban.org", role = c("aut", "cre")),
     person(given = "Kyle", family = "Ueyama", email = "kueyama@urban.org", role = "aut"),
+    person(given = "Ajjit", family = "Narayanan", email = "anarayanan@urban.org", role = "aut"),
     person(given = "Ben", family = "Chartoff", email = "bchartoff@urban.org", role = "aut")
     )
 Description: Align "ggplot2" output more closely with the Urban Institute
@@ -16,11 +17,13 @@ Imports:
     ggrepel,
     grid,
     gridExtra,
+    lifecycle,
     scales,
     conflicted,
     tibble,
     purrr,
-    stringr
+    stringr,
+    systemfonts
 License: GPL-3
 URL: https://github.com/UrbanInstitute/urbnthemes
 BugReports: https://github.com/UrbanInstitute/urbnthemes/issues
@@ -30,3 +33,4 @@ RoxygenNote: 7.1.1
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

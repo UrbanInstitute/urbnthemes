@@ -2,7 +2,7 @@
 % Please edit documentation in R/scales.R
 \name{urbn_color_pal}
 \alias{urbn_color_pal}
-\title{The Urban Institute [ggplot2] theme}
+\title{The Urban Institute \link{ggplot2} theme}
 \usage{
 urbn_color_pal(palette = "categorical")
 }

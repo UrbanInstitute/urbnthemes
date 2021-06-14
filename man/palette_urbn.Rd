@@ -3,7 +3,7 @@
 \docType{data}
 \name{palette_urbn}
 \alias{palette_urbn}
-\title{The Urban Institute [ggplot2] theme}
+\title{The Urban Institute \link{ggplot2} theme}
 \format{
 A \code{list}.
 }

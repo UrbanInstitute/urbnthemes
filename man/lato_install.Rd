@@ -7,10 +7,7 @@
 lato_install()
 }
 \description{
-\code{lato_install} tests to see if Lato is imported and registered. If Lato, isn't imported and registered, then \code{lato_install} imports and registers Lato with \href{https://github.com/wch/extrafont}{library(extrafont)}.
-}
-\details{
-Note: Lato must be installed on your computer for \code{lato_install} to work. Lato is the Urban Institute's main font and can be installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Test to see if Lato is imported and registered with \code{lato_test()}.
+\code{lato_install()} was deprecated because its name was ambiguous. Please use \code{lato_import()}.
 }
