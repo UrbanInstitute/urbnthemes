@@ -79,7 +79,7 @@ scale_colour_discrete <- function(...) {
 #' @export
 scale_fill_discrete <- function(...) {
   ggplot2::discrete_scale(
-    aesthetics = "colour",
+    aesthetics = "fill",
     scale_name = "urbn",
     palette = urbn_color_pal("categorical"),
     ...
@@ -173,7 +173,7 @@ scale_fill_gradientn <- function(...,
 #' @export
 scale_fill_ordinal <- function(...) {
   ggplot2::discrete_scale(
-    aesthetics = "color",
+    aesthetics = "fill",
     scale_name = "urbn",
     palette = urbn_color_pal("sequential"),
     ...
