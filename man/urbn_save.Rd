@@ -4,7 +4,13 @@
 \alias{urbn_save}
 \title{Save ggplot2 plots in standard Urban Institute sizes}
 \usage{
-urbn_save(filename, plot = ggplot2::last_plot(), size = "medium", dpi = 300)
+urbn_save(
+  filename,
+  plot = ggplot2::last_plot(),
+  size = "medium",
+  dpi = 300,
+  height = NULL
+)
 }
 \arguments{
 \item{filename}{File name to create on disk.}

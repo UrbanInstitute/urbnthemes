@@ -30,7 +30,8 @@
 urbn_save <- function(filename,
                       plot = ggplot2::last_plot(),
                       size = "medium",
-                      dpi = 300) {
+                      dpi = 300,
+                      height = NULL) {
 
   stopifnot(is.character(filename))
 
@@ -40,11 +41,19 @@ urbn_save <- function(filename,
 
   }
 
-  sizes <- list(
-    small = c(width = 3.25, height = 2),
-    medium = c(width = 6.5, height = 4),
-    large = c(width = 9, height = 6.5)
-  )
+  if (is.null(height)){
+    sizes <- list(
+      small = c(width = 3.12, height = 2),
+      medium = c(width = 6.25, height = 4),
+      large = c(width = 8.75, height = 6.5)
+    )
+  } else {
+    sizes <- list(
+      small = c(width = 3.12, height = height),
+      medium = c(width = 6.25, height = height),
+      large = c(width = 8.75, height = height)
+    )
+  }
 
   selected_size <- sizes[[size]]
 
