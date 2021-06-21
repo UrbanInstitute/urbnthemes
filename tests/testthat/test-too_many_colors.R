@@ -2,7 +2,7 @@ context("urbnthemes - too many colors")
 
 test_that("Including more than 8 categories for color and fill throws an error ", {
 
-  set_urbn_defaults(style = "print")
+  # set_urbn_defaults(style = "print", base_family = "Calibri")
 
 
   broken_plot_too_many_colors <- ggplot2::ggplot(
@@ -23,7 +23,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     ggplot2::scale_color_discrete()
 
 
-  expect_success(
+  expect_silent(
     print(working_plot)
   )
 
@@ -44,7 +44,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     geom_col() +
     ggplot2::scale_fill_discrete()
 
-  expect_success(
+  expect_silent(
     print(working_plot2)
   )
 
