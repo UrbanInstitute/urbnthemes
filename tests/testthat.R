@@ -1,4 +1,4 @@
 library(testthat)
-library(urbnthemes)
+library(tidysynth)
 
-test_check("urbnthemes")
+test_check("tidysynth")
