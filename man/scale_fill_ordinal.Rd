@@ -10,5 +10,9 @@ scale_fill_ordinal(...)
 \item{...}{other arguments passed to \code{discrete_scale()}}
 }
 \description{
-Discrete fill scale for ordinal factors that aligns with the Urban Institute style
+This function can only handle up to 8 categories/colors.
+}
+\details{
+If you need more than 8 colors for exploratory purposes, use
+ggplot2::scale_fill_ordinal().
 }

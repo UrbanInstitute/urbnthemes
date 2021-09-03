@@ -3,9 +3,6 @@
 
 # urbnthemes <a href="https://UrbanInstitute.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
-
 ## Overview
 
 `urbnthemes` is a set of tools for creating Urban Institute-themed plots

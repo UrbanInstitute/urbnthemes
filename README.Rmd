@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(warning = FALSE)
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
 
 ## Overview
 
