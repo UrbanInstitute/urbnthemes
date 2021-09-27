@@ -9,7 +9,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     ggplot2::mpg,
     ggplot2::aes(cty, hwy, color = manufacturer)
   ) +
-    urbnthemes::geom_point()
+    ggplot2::geom_point()
 
   expect_error(
     print(broken_plot_too_many_colors)
@@ -19,7 +19,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     ggplot2::mpg,
     ggplot2::aes(cty, hwy, color = manufacturer)
   ) +
-    geom_point() +
+    ggplot2::geom_point() +
     ggplot2::scale_color_discrete()
 
 
@@ -31,7 +31,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     ggplot2::mpg,
     ggplot2::aes(manufacturer, hwy, fill = manufacturer)
   ) +
-    geom_col()
+    urbnthemes::geom_col()
 
   expect_error(
     print(broken_plot2_too_many_colors)
@@ -41,7 +41,7 @@ test_that("Including more than 8 categories for color and fill throws an error "
     ggplot2::mpg,
     ggplot2::aes(manufacturer, hwy, fill = manufacturer)
   ) +
-    geom_col() +
+    urbnthemes::geom_col() +
     ggplot2::scale_fill_discrete()
 
   expect_silent(
