@@ -1,8 +1,11 @@
 #' get_legend
 #'
+#' Extract just the legend from a ggplot2 object.
+#'
 #' @param ggplot_object a ggplot
 #'
 #' @return a ggplot legend
+#'
 #' @export
 #'
 get_legend <- function(ggplot_object) {

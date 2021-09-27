@@ -1,4 +1,4 @@
-#' Urban Institute geofacet template
+#' Dataset used for creating geofacetted plots in the Urban Institute style.
 #'
 #' @format Data frame with columns
 #' \describe{

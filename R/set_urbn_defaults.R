@@ -15,8 +15,9 @@
 #'
 #' @import extrafont
 #' @import ggrepel
-#' @md
+#'
 #' @export
+#'
 set_urbn_defaults <- function(style = "print",
                               base_size = 8.5,
                               base_family = "Lato",

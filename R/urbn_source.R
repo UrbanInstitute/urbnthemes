@@ -1,11 +1,14 @@
 #' urbn_source
 #'
+#' Add a source section to the bottom of a plot created with \code{urbn_plot()}.
+#'
 #' @param text character string for a source
 #' @param size font size for the source
 #' @param width a number of characters to allow before a character return
 #' @param plural If `TRUE`, will change "Source:" to "Sources:"
 #'
 #' @return a grob formatted for a source in a ggplot
+#'
 #' @export
 #'
 urbn_source <- function(text, size = 8, width = 132, plural = FALSE) {
