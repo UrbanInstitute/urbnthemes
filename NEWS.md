@@ -1,6 +1,8 @@
 # urbnthemes 0.0.3
 
 * Change `lato_install()` to `lato_import()` and use `library(systemfonts)` to resolve issues across operating systems. 
+* Move `geom_*()` defaults from geoms.R to `ggplot2::update_geom_defaults()` in `set_urbn_defaults()`. 
+* Set default color ("white") and size (0.1) for `geom_sf()`. 
 
 # urbnthemes 0.0.1
 
