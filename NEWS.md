@@ -1,6 +1,16 @@
 # urbnthemes 0.0.3
-
 * Change `lato_install()` to `lato_import()` and use `library(systemfonts)` to resolve issues across operating systems. 
+* Set default color (`"white"`) and size (`0.1`) for `geom_sf()`. 
+* Deprecate `lato_install()` as the function was a little misleading. Users have to manually install Lato on their computer
+  first before importing the font into R with `lato_import()`.
+* Add helpful error message when there are more than 8 groups for `fill` and
+  `color` operations.
+* Add `urbn_save()` function to export images in some default small, medium, and
+  large sizes which will work well in Urban publications. 
+* Move `geom_*()` defaults from geoms.R to `ggplot2::update_geom_defaults()` in `set_urbn_defaults()`. 
+If you want to set size to be an aesthetic mapping say in `geom_point()`, you no longer need to call `ggplot2::geom_point()`. 
+Now you can just use `geom_point()` from `library(ggplot2)` for everything.
+
 
 # urbnthemes 0.0.1
 
