@@ -4,8 +4,8 @@
 #' \describe{
 #' \item{row}{Row in geofacet}
 #' \item{col}{Column in geofacet}
-#' \item{state_abbv}{State abbreviation}
-#' \item{state_name}{State name}
+#' \item{code}{State abbreviation}
+#' \item{name}{State name}
 #' }
 "urbn_geofacet"
 
