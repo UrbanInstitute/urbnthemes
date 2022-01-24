@@ -13,5 +13,5 @@ remove_legend(ggplot_object)
 a ggplot without a legend
 }
 \description{
-remove_legend
+Remove just the legend from a ggplot2 object.
 }
