@@ -7,5 +7,6 @@
 scatter_grid()
 }
 \description{
-Adds vertical grid lines to plots for scatter plots
+Adds vertical grid lines to plots for scatter plots. This is useful for
+scatter plots because urbnthemes only supplies horizontal grid lines.
 }

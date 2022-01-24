@@ -13,5 +13,5 @@ get_legend(ggplot_object)
 a ggplot legend
 }
 \description{
-get_legend
+Extract just the legend from a ggplot2 object.
 }

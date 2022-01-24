@@ -3,20 +3,20 @@
 \docType{data}
 \name{urbn_geofacet}
 \alias{urbn_geofacet}
-\title{Urban Institute geofacet template}
+\title{Dataset used for creating geofacetted plots in the Urban Institute style.}
 \format{
 Data frame with columns
 \describe{
 \item{row}{Row in geofacet}
 \item{col}{Column in geofacet}
-\item{state_abbv}{State abbreviation}
-\item{state_name}{State name}
+\item{code}{State abbreviation}
+\item{name}{State name}
 }
 }
 \usage{
 urbn_geofacet
 }
 \description{
-Urban Institute geofacet template
+Dataset used for creating geofacetted plots in the Urban Institute style.
 }
 \keyword{datasets}

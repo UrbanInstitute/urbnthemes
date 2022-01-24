@@ -31,6 +31,20 @@ lato_import <- function() {
     # create a vector of directories where Lato fonts are located
     lato_directories <- unique(gsub("[Ll]ato.*\\.ttf", "", lato_fonts$path))
 
+    # add a warning for unix users about Rttf2pt1 version
+    if (.Platform$OS.type == "unix") {
+
+      print(
+        paste(
+            "Unix (Mac) users may experience errors if the library(Rttf2pt1)",
+            "version is >= 1.3.9. Restart R. Run",
+            "remotes::install_version('Rttf2pt1', version = '1.3.8').",
+            "Restart R. Then try lato_import() again."
+        )
+      )
+
+    }
+
     # import the Lato fonts
     extrafont::font_import(paths = lato_directories, pattern = "[Ll]ato")
 
