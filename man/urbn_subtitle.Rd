@@ -15,5 +15,5 @@ urbn_subtitle(string, size = 9.5)
 a grob formatted for a subtitle in a ggplot
 }
 \description{
-urbn_subtitle
+Add a subtitle to a plot created with \code{urbn_plot()}.
 }

@@ -19,5 +19,5 @@ urbn_source(text, size = 8, width = 132, plural = FALSE)
 a grob formatted for a source in a ggplot
 }
 \description{
-urbn_source
+Add a source section to the bottom of a plot created with \code{urbn_plot()}.
 }

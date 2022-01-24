@@ -3,9 +3,6 @@
 
 # urbnthemes <a href="https://UrbanInstitute.github.io/urbnthemes/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
-
 ## Overview
 
 `urbnthemes` is a set of tools for creating Urban Institute-themed plots
@@ -37,10 +34,10 @@ font for publications. After installing `urbnthemes`, submit
 
 If Lato isn’t imported and registered, install
 [Lato](https://fonts.google.com/specimen/Lato) and then submit
-`urbnthemes::lato_install()`. If you are on a Windows, you may need to
+`urbnthemes::lato_import()`. If you are on a Windows, you may need to
 install [ghostscript](https://www.ghostscript.com/download.html) and
 then submit `Sys.setenv(R_GSCMD = "link to the ghostscript .exe")`
-before running `urbnthemes::lato_install()`.
+before running `urbnthemes::lato_import()`.
 
 Waffle charts with glyphs require fontawesome. `fontawesome_test()` and
 `fontawesome_install()` are the fontawesome versions of the above
@@ -235,11 +232,12 @@ Palette functions:
 
 Utility functions:
 
--   `lato_test()`
--   `lato_install()`
--   `fontawesome_test()`
--   `fontawesome_install()`
--   `view_palette()`
+
+  - `lato_test()`
+  - `lato_import()`
+  - `fontawesome_test()`
+  - `fontawesome_install()`
+  - `view_palette()`
 
 In development:
 

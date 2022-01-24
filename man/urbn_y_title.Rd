@@ -15,5 +15,5 @@ urbn_y_title(string, size = 8.5)
 a grob formatted for a y-axis title in a ggplot
 }
 \description{
-urbn_y_title
+Add a horizontal y axis title to a plot created with \code{urbn_plot()}.
 }

@@ -17,5 +17,5 @@ urbn_title(string, size = 12, width = 68)
 a grob formatted for a source in a ggplot
 }
 \description{
-urbn_title
+Add a title to a plot created with \code{urbn_plot()}.
 }

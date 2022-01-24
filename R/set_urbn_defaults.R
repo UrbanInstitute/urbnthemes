@@ -15,8 +15,9 @@
 #'
 #' @import extrafont
 #' @import ggrepel
-#' @md
+#'
 #' @export
+#'
 set_urbn_defaults <- function(style = "print",
                               base_size = 8.5,
                               base_family = "Lato",
@@ -52,10 +53,10 @@ set_urbn_defaults <- function(style = "print",
 
   # add base_family font to text and label geoms ---------------------------
 
-  ggplot2::update_geom_defaults("text", list(family = base_family))
-  ggplot2::update_geom_defaults("label", list(family = base_family))
-  ggplot2::update_geom_defaults("text_repel", list(family = base_family))
-  ggplot2::update_geom_defaults("label_repel", list(family = base_family))
+  ggplot2::update_geom_defaults("text", list(family = base_family, size = 1 / 0.352777778))
+  ggplot2::update_geom_defaults("label", list(family = base_family, size = 1 / 0.352777778))
+  ggplot2::update_geom_defaults("text_repel", list(family = base_family, size = 1 / 0.352777778))
+  ggplot2::update_geom_defaults("label_repel", list(family = base_family, size = 1 / 0.352777778))
 
   # set default color scales for continuous variables -----------------------
 
@@ -64,19 +65,21 @@ set_urbn_defaults <- function(style = "print",
     ggplot2.continuous.fill = "gradient"
   )
 
-  # set default colors for monochromatic geoms ------------------------------
+
+  # set defaults for geoms --------------------------------------------------
 
   ggplot2::update_geom_defaults("bar", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("col", list(fill = "#1696d2"))
-  ggplot2::update_geom_defaults("point", list(colour = "#1696d2"))
-  ggplot2::update_geom_defaults("line", list(colour = "#1696d2"))
-  ggplot2::update_geom_defaults("step", list(colour = "#1696d2"))
-  ggplot2::update_geom_defaults("path", list(colour = "#1696d2"))
+  ggplot2::update_geom_defaults("point", list(colour = "#1696d2", size = 3))
+  ggplot2::update_geom_defaults("line", list(colour = "#1696d2", size = 1))
+  ggplot2::update_geom_defaults("step", list(colour = "#1696d2", size = 1))
+  ggplot2::update_geom_defaults("path", list(colour = "#1696d2", size = 1))
   ggplot2::update_geom_defaults("boxplot", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("density", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("violin", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("sf", list(fill = "#1696d2", color = "white", size = 0.1))
 
-  # set default colors for monochromatic stats ------------------------------
+  # set defaults for stats --------------------------------------------------
 
   ggplot2::update_stat_defaults("count", list(fill = "#1696d2"))
   ggplot2::update_stat_defaults("boxplot", list(fill = "#1696d2"))

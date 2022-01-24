@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(warning = FALSE)
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnthemes.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnthemes)
 
 ## Overview
 
@@ -39,7 +38,7 @@ remotes::install_github("UrbanInstitute/urbnthemes", build_vignettes = TRUE)
 
 The Urban Institute uses [Lato](https://fonts.google.com/specimen/Lato) font for publications. After installing `urbnthemes`, submit `urbnthemes::lato_test()` to see if Lato is imported and registered. 
 
-If Lato isn't imported and registered, install [Lato](https://fonts.google.com/specimen/Lato) and then submit `urbnthemes::lato_install()`. If you are on a Windows, you may need to install [ghostscript](https://www.ghostscript.com/download.html) and then submit `Sys.setenv(R_GSCMD = "link to the ghostscript .exe")` before running `urbnthemes::lato_install()`.
+If Lato isn't imported and registered, install [Lato](https://fonts.google.com/specimen/Lato) and then submit `urbnthemes::lato_import()`. If you are on a Windows, you may need to install [ghostscript](https://www.ghostscript.com/download.html) and then submit `Sys.setenv(R_GSCMD = "link to the ghostscript .exe")` before running `urbnthemes::lato_import()`.
 
 Waffle charts with glyphs require fontawesome. `fontawesome_test()` and `fontawesome_install()` are the fontawesome versions of the above functions. Be sure to install fontawesome from [here](https://github.com/hrbrmstr/waffle/tree/master/inst/fonts).
 

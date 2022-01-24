@@ -19,5 +19,5 @@ urbn_note(text, size = 8, width = 132, plural = FALSE)
 a grob formatted for a source in a ggplot
 }
 \description{
-urbn_note
+Add a notes section to the bottom of a plot created with \code{urbn_plot()}.
 }

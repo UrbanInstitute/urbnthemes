@@ -1,9 +1,12 @@
 #' urbn_y_title
 #'
+#' Add a horizontal y axis title to a plot created with \code{urbn_plot()}.
+#'
 #' @param string character string for a y-axis title
 #' @param size font size for the y-axis title
 #'
 #' @return a grob formatted for a y-axis title in a ggplot
+#'
 #' @export
 #'
 urbn_y_title <- function(string, size = 8.5) {
