@@ -55,7 +55,7 @@ set_urbn_defaults(style = "print")
 ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = "Count") +
   remove_ticks() +
   labs(title = "Most Cars Have 8 Cylinders",
@@ -139,7 +139,7 @@ set_urbn_defaults()
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = "Count") +
   remove_ticks()
 
@@ -158,7 +158,7 @@ set_urbn_defaults()
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = NULL) +
   remove_ticks()
 
