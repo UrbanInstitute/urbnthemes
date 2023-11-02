@@ -13,7 +13,7 @@ urbn_source(text, size = 8, width = 132, plural = FALSE)
 
 \item{width}{a number of characters to allow before a character return}
 
-\item{plural}{If `TRUE`, will change "Source:" to "Sources:"}
+\item{plural}{If \code{TRUE}, will change "Source:" to "Sources:"}
 }
 \value{
 a grob formatted for a source in a ggplot

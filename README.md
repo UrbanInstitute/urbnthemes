@@ -58,7 +58,7 @@ set_urbn_defaults(style = "print")
 ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = "Count") +
   remove_ticks() +
   labs(title = "Most Cars Have 8 Cylinders",
@@ -138,7 +138,8 @@ txhousing %>%
        y = "Home sales")
 ```
 
-    #> `summarise()` has grouped output by 'city'. You can override using the `.groups` argument.
+    #> `summarise()` has grouped output by 'city'. You can override using the
+    #> `.groups` argument.
 
 ![](man/figures/README-area-plot-1.png)<!-- -->
 
@@ -153,7 +154,7 @@ set_urbn_defaults()
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = "Count") +
   remove_ticks()
 
@@ -173,7 +174,7 @@ set_urbn_defaults()
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
-  labs(x = "Number of Cylinders",
+  labs(x = "Number of cylinders",
        y = NULL) +
   remove_ticks()
 
@@ -195,54 +196,53 @@ urbn_plot(
 
 Core themes:
 
--   `set_urbn_defaults()`
--   `theme_urbn_print()`
--   `theme_urbn_map()`
+- `set_urbn_defaults()`
+- `theme_urbn_print()`
+- `theme_urbn_map()`
 
 Formatting functions:
 
--   `urbn_plot()`
--   `urbn_title()`
--   `urbn_subtitle()`
--   `urbn_y_title()`
--   `urbn_note()`
--   `urbn_source()`
--   `urbn_logo_text()`
--   `scatter_grid()`
--   `remove_ticks()`
--   `add_axis()`
--   `remove_axis()`
--   `get_legend()`
--   `remove_legend()`
--   `urbn_geofacet`
+- `urbn_plot()`
+- `urbn_title()`
+- `urbn_subtitle()`
+- `urbn_y_title()`
+- `urbn_note()`
+- `urbn_source()`
+- `urbn_logo_text()`
+- `scatter_grid()`
+- `remove_ticks()`
+- `add_axis()`
+- `remove_axis()`
+- `get_legend()`
+- `remove_legend()`
+- `urbn_geofacet`
 
 Palette functions:
 
--   `palette_urbn_main`
--   `palette_urbn_diverging`
--   `palette_urbn_quintile`
--   `palette_urbn_politics`
--   `palette_urbn_cyan`
--   `palette_urbn_gray`
--   `palette_urbn_yellow`
--   `palette_urbn_magenta`
--   `palette_urbn_green`
--   `palette_urbn_spacegray`
--   `palette_urbn_red`
+- `palette_urbn_main`
+- `palette_urbn_diverging`
+- `palette_urbn_quintile`
+- `palette_urbn_politics`
+- `palette_urbn_cyan`
+- `palette_urbn_gray`
+- `palette_urbn_yellow`
+- `palette_urbn_magenta`
+- `palette_urbn_green`
+- `palette_urbn_spacegray`
+- `palette_urbn_red`
 
 Utility functions:
 
-
-  - `lato_test()`
-  - `lato_import()`
-  - `fontawesome_test()`
-  - `fontawesome_install()`
-  - `view_palette()`
+- `lato_test()`
+- `lato_install()`
+- `fontawesome_test()`
+- `fontawesome_install()`
+- `view_palette()`
 
 In development:
 
--   `undo_urbn_defaults()`
--   `save_urbn_print()`
+- `undo_urbn_defaults()`
+- `save_urbn_print()`
 
 ## Getting help
 
