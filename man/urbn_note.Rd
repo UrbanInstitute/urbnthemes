@@ -13,7 +13,7 @@ urbn_note(text, size = 8, width = 132, plural = FALSE)
 
 \item{width}{a number of characters to allow before a character return}
 
-\item{plural}{If `TRUE`, will change "Note:" to "Notes:"}
+\item{plural}{If \code{TRUE}, will change "Note:" to "Notes:"}
 }
 \value{
 a grob formatted for a source in a ggplot
