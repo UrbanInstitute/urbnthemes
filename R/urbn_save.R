@@ -43,15 +43,15 @@ urbn_save <- function(filename,
 
   if (is.null(height)){
     sizes <- list(
-      small = c(width = 3.12, height = 2),
-      medium = c(width = 6.25, height = 4),
-      large = c(width = 8.75, height = 6.5)
+      small = c(width = 3.25, height = 2),
+      medium = c(width = 6.5, height = 4),
+      large = c(width = 9, height = 6.5)
     )
   } else {
     sizes <- list(
-      small = c(width = 3.12, height = height),
-      medium = c(width = 6.25, height = height),
-      large = c(width = 8.75, height = height)
+      small = c(width = 3.25, height = height),
+      medium = c(width = 6.5, height = height),
+      large = c(width = 9, height = height)
     )
   }
 
@@ -61,7 +61,8 @@ urbn_save <- function(filename,
     filename = filename,
     plot = plot,
     width = selected_size["width"],
-    height = selected_size["height"]
+    height = selected_size["height"],
+    dpi = dpi
   )
 
 }
