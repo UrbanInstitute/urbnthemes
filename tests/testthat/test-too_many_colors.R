@@ -1,18 +1,19 @@
 context("urbnthemes - too many colors")
 
-test_that("Including more than 8 categories for color and fill throws an error ", {
+test_that("Including more than 8 categories for color and fill issues a warning", {
 
   # set_urbn_defaults(style = "print", base_family = "Calibri")
 
 
-  broken_plot_too_many_colors <- ggplot2::ggplot(
+  plot_too_many_colors <- ggplot2::ggplot(
     ggplot2::mpg,
     ggplot2::aes(cty, hwy, color = manufacturer)
   ) +
     ggplot2::geom_point()
 
-  expect_error(
-    print(broken_plot_too_many_colors)
+  expect_warning(
+    print(plot_too_many_colors),
+    "urbnthemes is designed for a max of 8 colors"
   )
 
   working_plot <- ggplot2::ggplot(
@@ -27,14 +28,15 @@ test_that("Including more than 8 categories for color and fill throws an error "
     print(working_plot)
   )
 
-  broken_plot2_too_many_colors <- ggplot2::ggplot(
+  plot2_too_many_colors <- ggplot2::ggplot(
     ggplot2::mpg,
     ggplot2::aes(manufacturer, hwy, fill = manufacturer)
   ) +
     urbnthemes::geom_col()
 
-  expect_error(
-    print(broken_plot2_too_many_colors)
+  expect_warning(
+    print(plot2_too_many_colors),
+    "urbnthemes is designed for a max of 8 colors"
   )
 
   working_plot2 <- ggplot2::ggplot(

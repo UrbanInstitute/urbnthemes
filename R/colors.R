@@ -11,14 +11,15 @@
 #' @rdname urbn_palettes
 #' @export
 palette_urbn_main <- c(
-  cyan = "#1696d2",
-  yellow = "#fdbf11",
-  black = "#000000",
-  gray = "#d2d2d2",
-  magenta = "#ec008b",
-  green = "#55b748",
-  `space gray` = "#5c5859",
-  red = "#db2b27")
+  "#1696d2",  # cyan
+  "#fdbf11",  # yellow
+  "#000000",  # black
+  "#d2d2d2",  # gray
+  "#ec008b",  # magenta
+  "#55b748",  # green
+  "#5c5859",  # space gray
+  "#db2b27"   # red
+)
 
 #' @rdname urbn_palettes
 #' @export

@@ -5,11 +5,10 @@
 \title{Continuous fill scale that aligns with the Urban Institute style}
 \usage{
 scale_colour_gradientn(
+  palette = "cyan",
   ...,
-  colours = c("#CFE8F3", "#A2D4EC", "#73BFE2", "#46ABDB", "#1696D2", "#12719E",
-    "#0A4C6A", "#062635"),
-  colors = c("#CFE8F3", "#A2D4EC", "#73BFE2", "#46ABDB", "#1696D2", "#12719E", "#0A4C6A",
-    "#062635"),
+  colours,
+  colors,
   values = NULL,
   space = "Lab",
   na.value = "grey50",
@@ -17,6 +16,11 @@ scale_colour_gradientn(
 )
 }
 \arguments{
+\item{palette}{Name of the Urban Institute palette to use for the gradient.
+Options: "cyan" (default), "gray", "yellow", "magenta", "green",
+"spacegray", "red", "diverging". Ignored if \code{colours} or \code{colors}
+is specified.}
+
 \item{...}{other arguments passed to \code{discrete_scale()}}
 
 \item{colours}{vector of colours}

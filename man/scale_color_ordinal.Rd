@@ -4,15 +4,16 @@
 \alias{scale_color_ordinal}
 \title{Discrete color scale for ordinal factors that aligns with the Urban Institute style}
 \usage{
-scale_color_ordinal(...)
+scale_color_ordinal(palette = "cyan", ...)
 }
 \arguments{
+\item{palette}{Name of the Urban Institute palette to use. Options:
+"cyan" (default), "gray", "yellow", "magenta", "green",
+"spacegray", "red", "diverging"}
+
 \item{...}{other arguments passed to \code{discrete_scale()}}
 }
 \description{
-This function can only handle up to 8 categories/colors.
-}
-\details{
-If you need more than 8 colors for exploratory purposes, use
-ggplot2::scale_color_ordinal().
+This function is designed for ordinal/sequential data with up to 8 categories.
+Uses sequential palettes (light to dark) by default.
 }
