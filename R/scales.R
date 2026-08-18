@@ -640,7 +640,6 @@ scale_fill_binned <- function(palette = "cyan",
   # function with its own default n (5), silently ignoring a baked-in n.
   ggplot2::binned_scale(
     aesthetics = "fill",
-    scale_name = "urbn_binned",
     palette = binned_pal_func,
     n.breaks = n.breaks,
     nice.breaks = nice.breaks,
@@ -692,13 +691,13 @@ scale_color_binned <- function(palette = "cyan",
     pal_func(length(x))
   }
 
+
   # Pass n.breaks through to binned_scale() directly rather than baking it
   # into a breaks_pretty() closure -- ScaleBinned$get_breaks() only reads
   # n.breaks from the scale object itself, and re-calls any custom breaks
   # function with its own default n (5), silently ignoring a baked-in n.
   ggplot2::binned_scale(
     aesthetics = "colour",
-    scale_name = "urbn_binned",
     palette = binned_pal_func,
     n.breaks = n.breaks,
     nice.breaks = nice.breaks,
