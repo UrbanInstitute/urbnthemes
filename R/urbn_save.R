@@ -57,7 +57,7 @@ urbn_save <- function(filename,
 
   selected_size <- sizes[[size]]
 
-  ggsave(
+  ggplot2::ggsave(
     filename = filename,
     plot = plot,
     width = selected_size["width"],
