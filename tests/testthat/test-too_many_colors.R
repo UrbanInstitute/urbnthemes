@@ -2,8 +2,10 @@ context("urbnthemes - too many colors")
 
 test_that("Including more than 8 categories for color and fill throws an error ", {
 
-  # set_urbn_defaults(style = "print", base_family = "Calibri")
-
+  # Use a universally-available font family to avoid errors with what the `pdf()` 
+  # reader can access during `devtools::check()``.  
+  set_urbn_defaults(style = "print", base_family = "sans")
+  on.exit(set_urbn_defaults(style = "print", base_family = "Calibri"), add = TRUE)
 
   broken_plot_too_many_colors <- ggplot2::ggplot(
     ggplot2::mpg,

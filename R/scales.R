@@ -42,7 +42,6 @@ urbn_color_pal <- function(palette = "categorical") {
 scale_color_discrete <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "colour",
-    scale_name = "urbn",
     palette = urbn_color_pal("categorical"),
     ...
   )
@@ -61,7 +60,6 @@ scale_color_discrete <- function(...) {
 scale_colour_discrete <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "colour",
-    scale_name = "urbn",
     palette = urbn_color_pal("categorical"),
     ...
   )
@@ -80,7 +78,6 @@ scale_colour_discrete <- function(...) {
 scale_fill_discrete <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "fill",
-    scale_name = "urbn",
     palette = urbn_color_pal("categorical"),
     ...
   )
@@ -109,7 +106,6 @@ scale_color_gradientn <- function(...,
 
   ggplot2::continuous_scale(
     aesthetics = "colour",
-    scale_name = "gradientn",
     palette = scales::gradient_n_pal(colours, values, space),
     na.value = na.value,
     guide = guide,
@@ -153,7 +149,6 @@ scale_fill_gradientn <- function(...,
 
   ggplot2::continuous_scale(
     aesthetics = "fill",
-    scale_name = "gradientn",
     palette = scales::gradient_n_pal(colours, values, space),
     na.value = na.value,
     guide = guide,
@@ -174,7 +169,6 @@ scale_fill_gradientn <- function(...,
 scale_fill_ordinal <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "fill",
-    scale_name = "urbn",
     palette = urbn_color_pal("sequential"),
     ...
   )
@@ -193,7 +187,6 @@ scale_fill_ordinal <- function(...) {
 scale_color_ordinal <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "color",
-    scale_name = "urbn",
     palette = urbn_color_pal("sequential"),
     ...
   )
@@ -212,7 +205,6 @@ scale_color_ordinal <- function(...) {
 scale_colour_ordinal <- function(...) {
   ggplot2::discrete_scale(
     aesthetics = "color",
-    scale_name = "urbn",
     palette = urbn_color_pal("sequential"),
     ...
   )

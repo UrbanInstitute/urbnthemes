@@ -10,6 +10,8 @@
 #' "medium" (6.5 x 4 inches), or "large" (9 x 6.5 inches).
 #' @param dpi Plot resolution. Also accepts a string input: "retina" (320),
 #' "print" (300), or "screen" (72). Applies only to raster output types.
+#' @param height User-specified figure height, in inches. NULL by default, which 
+#' produces default sizes listed under `size`.  
 #'
 #' @examples
 #'
@@ -57,7 +59,7 @@ urbn_save <- function(filename,
 
   selected_size <- sizes[[size]]
 
-  ggsave(
+  ggplot2::ggsave(
     filename = filename,
     plot = plot,
     width = selected_size["width"],
@@ -65,5 +67,4 @@ urbn_save <- function(filename,
   )
 
 }
-
 

@@ -22,6 +22,9 @@ urbn_save(
 
 \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
 "print" (300), or "screen" (72). Applies only to raster output types.}
+
+\item{height}{User-specified figure height, in inches. NULL by default, which
+produces default sizes listed under \code{size}.}
 }
 \description{
 This is a function to save standardized images for Urban Institute

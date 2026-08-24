@@ -131,11 +131,6 @@ txhousing %>%
 ## Branding
 
 ```{r branding}
-library(ggplot2)
-library(urbnthemes)
-
-set_urbn_defaults()
-
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
@@ -150,11 +145,6 @@ urbn_plot(plot, urbn_logo_text(), ncol = 1, heights = c(30, 1))
 ## Notes and Sources
 
 ```{r notes-and-sources}
-library(ggplot2)
-library(urbnthemes)
-
-set_urbn_defaults()
-
 plot <- ggplot(data = mtcars, mapping = aes(factor(cyl))) +
   geom_bar() + 
   scale_y_continuous(expand = expansion(mult = c(0, 0.1))) +
@@ -221,11 +211,8 @@ Utility functions:
 * `fontawesome_test()`
 * `fontawesome_install()`
 * `view_palette()`
-
-In development:
-
+* `urbn_save()`
 * `undo_urbn_defaults()`
-* `save_urbn_print()`
 
 ## Getting help
 
