@@ -2,9 +2,6 @@ context("urbnthemes - too many colors")
 
 test_that("Including more than 8 categories for color and fill issues a warning", {
 
-  # set_urbn_defaults(style = "print", base_family = "Calibri")
-
-
   plot_too_many_colors <- ggplot2::ggplot(
     ggplot2::mpg,
     ggplot2::aes(cty, hwy, color = manufacturer)

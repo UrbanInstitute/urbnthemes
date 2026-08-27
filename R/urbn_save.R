@@ -10,6 +10,9 @@
 #' "medium" (6.5 x 4 inches), or "large" (9 x 6.5 inches).
 #' @param dpi Plot resolution. Also accepts a string input: "retina" (320),
 #' "print" (300), or "screen" (72). Applies only to raster output types.
+#' @param height Optional height in inches to override the default height
+#' for the selected \code{size}. Width is unaffected and still determined
+#' by \code{size}. Defaults to \code{NULL}, which uses the standard height.
 #'
 #' @examples
 #'

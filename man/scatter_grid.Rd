@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatter_grid.R
 \name{scatter_grid}
 \alias{scatter_grid}
-\title{The Urban Institute \link{ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
 \usage{
 scatter_grid()
 }
