@@ -4,15 +4,17 @@
 \alias{scale_color_discrete}
 \title{Discrete color scale that aligns with the Urban Institute style}
 \usage{
-scale_color_discrete(...)
+scale_color_discrete(palette = "main", ...)
 }
 \arguments{
+\item{palette}{Name of the Urban Institute palette to use. Options:
+"main" (default), "cyan", "gray", "yellow", "magenta", "green",
+"spacegray", "red", "diverging", "politics", "quintile"}
+
 \item{...}{other arguments passed to \code{discrete_scale()}}
 }
 \description{
-This function can only handle up to 8 categories/colors.
-}
-\details{
-If you need more than 8 colors for exploratory purposes, use
-ggplot2::scale_fill_discrete().
+This function is designed for up to 8 categories/colors. If more than 8
+colors are requested, a warning will be issued and colors will be
+interpolated, which may not meet Urban Institute style guidelines.
 }
