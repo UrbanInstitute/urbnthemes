@@ -2,15 +2,18 @@
 % Please edit documentation in R/lato_test.R
 \name{lato_test}
 \alias{lato_test}
-\title{Test for Lato import and registration}
+\title{Test for Lato font availability}
 \usage{
 lato_test()
 }
-\description{
-\code{lato_test} tests to see if Lato is imported and registered. Lato is
-the Urban Institute's main font and can be installed from
-\href{https://fonts.google.com/specimen/Lato}{Google fonts}.
+\value{
+Logical \code{TRUE} if Lato is available, \code{FALSE} otherwise
 }
-\details{
-Import and register Lato in R with lato_install().
+\description{
+\code{lato_test()} checks if Lato is installed on your system using
+\code{systemfonts}. Lato is the Urban Institute's main font and can be
+installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
+}
+\seealso{
+\code{\link{lato_import}} for installation instructions
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/urbn_logo_text.R
 \name{urbn_logo_text}
 \alias{urbn_logo_text}
-\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2]{ggplot2} theme}
 \usage{
 urbn_logo_text()
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/view_palette.R
 \name{view_palette}
 \alias{view_palette}
-\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2]{ggplot2} theme}
 \usage{
 view_palette(palette = palette_urbn_main)
 }

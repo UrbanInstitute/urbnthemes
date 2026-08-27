@@ -2,21 +2,32 @@
 % Please edit documentation in R/lato_import.R
 \name{lato_import}
 \alias{lato_import}
-\title{Import and register Lato font}
+\title{Check Lato font availability}
 \usage{
 lato_import()
 }
 \description{
-\code{lato_import()} tests to see if Lato is imported and registered. If
-Lato, isn't imported and registered, then \code{lato_import()} imports and
-registers Lato with
-\href{https://github.com/wch/extrafont}{library(extrafont)}.
+\code{lato_import()} checks if Lato is installed on your system using
+\code{systemfonts}. If Lato is found, it confirms availability. If not,
+it provides installation instructions.
 }
 \details{
+With modern R graphics (using \code{ragg} or \code{systemfonts}), fonts
+no longer need to be "imported" or "registered" - they work automatically
+if installed on your system.
+
 Note: Lato must be installed on your computer for \code{lato_import()} to
 work. Lato is the Urban Institute's main font. To install, visit
 \href{https://fonts.google.com/specimen/Lato}{Google fonts} and click
 "Download family". Unzip and open each of the .ttf files and click install.
+
+For best results, use the \code{ragg} graphics device in your RMarkdown
+or Quarto documents by adding to your YAML header:
+\preformatted{
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+}
 
 Test to see if Lato is imported and registered with \code{lato_test()}.
 }
