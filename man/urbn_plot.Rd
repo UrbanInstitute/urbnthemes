@@ -4,10 +4,12 @@
 \alias{urbn_plot}
 \title{urbn_plot}
 \usage{
-urbn_plot(..., heights = 1)
+urbn_plot(..., ncol = 1, heights = 1)
 }
 \arguments{
 \item{...}{urbn plot objects or grobs}
+
+\item{ncol}{number of columns to arrange objects into}
 
 \item{heights}{relative heights of each object in the final plot}
 }
@@ -19,4 +21,7 @@ Combine elements from \code{urbn_title}, \code{urbn_subtitle},
 \code{urbn_y_title}, \code{get_legend}, \code{remove_legend},
 \code{urbn_notes}, \code{urbn_source}, and \code{ggplot2} into
 one formatted plot.
+}
+\details{
+This function requires the \code{patchwork} package.
 }

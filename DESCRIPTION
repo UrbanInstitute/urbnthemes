@@ -15,7 +15,6 @@ Imports:
     ggplot2 (>= 3.3.0),
     ggrepel,
     grid,
-    gridExtra,
     lifecycle,
     scales,
     conflicted,
@@ -30,6 +29,8 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
     knitr,
+    patchwork,
+    png,
     ragg,
     rmarkdown,
     testthat
