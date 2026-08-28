@@ -1,4 +1,6 @@
-# R CMD check runs tests against a pdf() device, which needs Lato registered
-# as a PDF font via extrafont; interactive sessions resolve it from system
-# fonts directly and don't hit this path.
-try(extrafont::loadfonts(device = "pdf", quiet = TRUE), silent = TRUE)
+# The default pdf() device used by R CMD check can't resolve system fonts
+# like Lato and errors with "invalid font type". ragg's device resolves fonts
+# via systemfonts, so use it as the default graphics device during tests.
+if (requireNamespace("ragg", quietly = TRUE)) {
+  options(device = function(...) ragg::agg_png(tempfile(fileext = ".png"), ...))
+}

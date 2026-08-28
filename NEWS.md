@@ -1,3 +1,10 @@
+# urbnthemes 0.1.0
+
+* Create `urbn_save` function with prescriptive height and width. (#69)
+* Clean up and expand color palettes. (#55, #89, #96)
+* Remove `extrafront` dependency.
+* Replace `gridExtra` with `patchwork` and add `add_urbn_logo()` function. (#102)
+
 # urbnthemes 0.0.3
 
 * Change `lato_install()` to `lato_import()` and use `library(systemfonts)` to resolve issues across operating systems. 

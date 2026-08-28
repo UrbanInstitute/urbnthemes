@@ -1,14 +1,25 @@
-#' Import and register Lato font
+#' Check Lato font availability
 #'
-#' \code{lato_import()} tests to see if Lato is imported and registered. If
-#' Lato, isn't imported and registered, then \code{lato_import()} imports and
-#' registers Lato with
-#' \href{https://github.com/wch/extrafont}{library(extrafont)}.
+#' \code{lato_import()} checks if Lato is installed on your system using
+#' \code{systemfonts}. If Lato is found, it confirms availability. If not,
+#' it provides installation instructions.
+#'
+#' With modern R graphics (using \code{ragg} or \code{systemfonts}), fonts
+#' no longer need to be "imported" or "registered" - they work automatically
+#' if installed on your system.
 #'
 #' Note: Lato must be installed on your computer for \code{lato_import()} to
 #' work. Lato is the Urban Institute's main font. To install, visit
 #' \href{https://fonts.google.com/specimen/Lato}{Google fonts} and click
 #' "Download family". Unzip and open each of the .ttf files and click install.
+#'
+#' For best results, use the \code{ragg} graphics device in your RMarkdown
+#' or Quarto documents by adding to your YAML header:
+#' \preformatted{
+#' knitr:
+#'   opts_chunk:
+#'     dev: "ragg_png"
+#' }
 #'
 #' Test to see if Lato is imported and registered with \code{lato_test()}.
 #'
@@ -16,43 +27,31 @@
 #' @export
 lato_import <- function() {
 
-  if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
+  fonts <- systemfonts::system_fonts()
+  lato_available <- any(grepl("[Ll]ato", fonts$family))
 
-    "Lato is already imported and registered."
+  if (lato_available) {
+
+    message("Lato is installed and available!")
+    message("\nTo use Lato in your plots, use the ragg graphics device:")
+    message("  - In RMarkdown/Quarto: add `dev: ragg_png` to chunk options")
+    message("  - In scripts: use ragg::agg_png() or set options(device = ragg::agg_png)")
+
+    invisible(TRUE)
 
   } else {
 
-    # get a list of all fonts on the machine
-    local_fonts <- systemfonts::system_fonts()
+    message("Lato is NOT installed on your system.")
+    message("\nTo install Lato:")
+    message("1. Visit https://fonts.google.com/specimen/Lato")
+    message("2. Click 'Download family'")
+    message("3. Unzip and install the .ttf files:")
+    message("   - macOS: Double-click each .ttf file and click 'Install Font'")
+    message("   - Windows: Right-click each .ttf file and select 'Install'")
+    message("   - Linux: Copy .ttf files to ~/.fonts/ and run fc-cache -fv")
+    message("\nAfter installing, restart R and run lato_test() to verify.")
 
-    # subset the list to just Lato fonts
-    lato_fonts <- local_fonts[grepl(pattern = "[Ll]ato", x = local_fonts$family), ]
-
-    # create a vector of directories where Lato fonts are located
-    lato_directories <- unique(gsub("[Ll]ato.*\\.ttf", "", lato_fonts$path))
-
-    # add a warning for unix users about Rttf2pt1 version
-    if (.Platform$OS.type == "unix") {
-
-      print(
-        paste(
-            "Unix (Mac) users may experience errors if the library(Rttf2pt1)",
-            "version is >= 1.3.9. Restart R. Run",
-            "remotes::install_version('Rttf2pt1', version = '1.3.8').",
-            "Restart R. Then try lato_import() again."
-        )
-      )
-
-    }
-
-    # import the Lato fonts
-    extrafont::font_import(paths = lato_directories, pattern = "[Ll]ato")
-
-    # register the fonts
-    extrafont::loadfonts()
-
-    # test to confirm that Lato is imported and registered
-    lato_test()
+    invisible(FALSE)
 
   }
 

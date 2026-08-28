@@ -3,7 +3,7 @@
 #' \code{theme_urban} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for web, with sensible defaults.
 #'
-#' @import extrafont
+#' @import systemfonts
 #' @import ggrepel
 #' @md
 #' @param base_family,base_size base font family and size
