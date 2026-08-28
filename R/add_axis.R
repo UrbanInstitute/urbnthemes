@@ -11,7 +11,7 @@ add_axis <- function(axis = "y") {
   if (axis == "x") {
 
     ggplot2::theme(axis.line.x = ggplot2::element_line(colour = NULL,
-                                                       size = NULL,
+                                                       linewidth = NULL,
                                                        linetype = NULL,
                                                        lineend = NULL),
                    axis.line.y = ggplot2::element_blank())
@@ -20,7 +20,7 @@ add_axis <- function(axis = "y") {
 
     ggplot2::theme(axis.line.x = ggplot2::element_blank(),
                    axis.line.y = ggplot2::element_line(colour = NULL,
-                                                       size = NULL,
+                                                       linewidth = NULL,
                                                        linetype = NULL,
                                                        lineend = NULL)
                    )
@@ -28,11 +28,11 @@ add_axis <- function(axis = "y") {
   } else if (axis == "both") {
 
     ggplot2::theme(axis.line.x = ggplot2::element_line(colour = NULL,
-                                                       size = NULL,
+                                                       linewidth = NULL,
                                                        linetype = NULL,
                                                        lineend = NULL),
                    axis.line.y = ggplot2::element_line(colour = NULL,
-                                                       size = NULL,
+                                                       linewidth = NULL,
                                                        linetype = NULL,
                                                        lineend = NULL)
                    )

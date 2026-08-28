@@ -22,7 +22,7 @@ remove_axis <- function(axis = "y", flip = FALSE) {
                      axis.line.x = ggplot2::element_blank(),
                      axis.ticks = ggplot2::element_blank(),
                      axis.line.y = ggplot2::element_line(colour = NULL,
-                                                         size = NULL,
+                                                         linewidth = NULL,
                                                          linetype = NULL,
                                                          lineend = NULL))
 

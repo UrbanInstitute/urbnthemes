@@ -12,12 +12,12 @@ remove_legend <- function(ggplot_object) {
 
   ggplot_object +
     ggplot2::guides(
-      color = FALSE,
-      fill = FALSE,
-      alpha = FALSE,
-      size = FALSE,
-      shape = FALSE,
-      linetype = FALSE
+      color = "none",
+      fill = "none",
+      alpha = "none",
+      size = "none",
+      shape = "none",
+      linetype = "none"
     )
 
 }

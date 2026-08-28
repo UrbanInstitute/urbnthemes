@@ -13,6 +13,7 @@
 #' view_palette(palette_urbn_cyan)
 #'
 #' @md
+#' @importFrom rlang .data
 #'
 #' @export
 view_palette <- function(palette = palette_urbn_main) {
@@ -26,11 +27,11 @@ view_palette <- function(palette = palette_urbn_main) {
          colors = factor(color_palette, levels = color_palette))
 
   ggplot2::ggplot(data = data) +
-    ggplot2::geom_point(ggplot2::aes_string("x", "y", color = "colors"), size = 15) +
-    ggplot2::geom_text(ggplot2::aes_string(2, "y"), label = color_palette) +
+    ggplot2::geom_point(ggplot2::aes(.data$x, .data$y, color = .data$colors), size = 15) +
+    ggplot2::geom_text(ggplot2::aes(2, .data$y), label = color_palette) +
     ggplot2::scale_color_manual(values = color_palette) +
     ggplot2::scale_x_continuous(limits = c(0, 3)) +
     theme_urbn_map() +
-    ggplot2::guides(color = FALSE)
+    ggplot2::guides(color = "none")
 
 }
