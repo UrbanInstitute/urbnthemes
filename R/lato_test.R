@@ -1,24 +1,24 @@
-#' Test for Lato import and registration
+#' Test for Lato font availability
 #'
-#' \code{lato_test} tests to see if Lato is imported and registered. Lato is
-#' the Urban Institute's main font and can be installed from
-#' \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
+#' \code{lato_test()} checks if Lato is installed on your system using
+#' \code{systemfonts}. Lato is the Urban Institute's main font and can be
+#' installed from \href{https://fonts.google.com/specimen/Lato}{Google fonts}.
 #'
-#' Import and register Lato in R with lato_install().
-#'
+#' @return Logical \code{TRUE} if Lato is available, \code{FALSE} otherwise
+#' @seealso \code{\link{lato_import}} for installation instructions
 #' @export
 #'
 lato_test <- function() {
 
-  if (sum(grepl("[Ll]ato$", extrafont::fonts())) > 0) {
+  fonts <- systemfonts::system_fonts()
+  lato_available <- any(grepl("[Ll]ato", fonts$family))
 
-    "Lato is imported and registered."
-
+  if (lato_available) {
+    message("Lato is installed and ready to use.")
+    invisible(TRUE)
   } else {
-
-    "Lato isn't imported and registered. Install the Lato font from Google
-    Fonts and import using lato_import(). See ?lato_import for more
-    information."
-
+    message("Lato is NOT installed. Run lato_import() for installation instructions.")
+    invisible(FALSE)
   }
+
 }

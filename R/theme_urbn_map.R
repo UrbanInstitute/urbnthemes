@@ -3,7 +3,7 @@
 #' \code{theme_urban} provides a [ggplot2] theme formatted according to the
 #' Urban Institute style guide for maps, with sensible defaults.
 #'
-#' @import extrafont
+#' @import systemfonts
 #' @import ggrepel
 #' @md
 #' @param scale "continuous" creates a vertical legend to the right of the map. "discrete" creates a horizontal legend above the map.

@@ -1,15 +1,21 @@
-#' Test for FontAwesome import and registration
+#' Test for FontAwesome font availability
 #'
-#' \code{fontawesome_test} tests to see if FontAwesome is imported and registered. FontAwesome is used for glyphs with \code{library(waffle)} and can be installed from \href{https://github.com/hrbrmstr/waffle/tree/master/inst/fonts}{Bob Rudis's GitHub}.
+#' \code{fontawesome_test()} checks if FontAwesome is installed on your system.
+#' FontAwesome is used for glyphs with \code{library(waffle)}.
 #'
-#' Import and register FontAwesome in R with fontawesome_install().
-#'
+#' @return Logical \code{TRUE} if FontAwesome is available, \code{FALSE} otherwise
 #' @md
 #' @export
 fontawesome_test <- function() {
-  if (sum(grepl("FontAwesome", extrafont::fonts())) > 0) {
-    "FontAwesome is imported and registered."
+
+  fonts <- systemfonts::system_fonts()
+  fa_available <- any(grepl("FontAwesome|Font Awesome", fonts$family, ignore.case = TRUE))
+
+  if (fa_available) {
+    message("FontAwesome is installed and ready to use.")
+    invisible(TRUE)
   } else {
-    "FontAwesome isn't imported and registered. Install from GitHub and import and register using fontawesome_install()."
+    message("FontAwesome is NOT installed. See ?fontawesome_install for instructions.")
+    invisible(FALSE)
   }
 }

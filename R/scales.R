@@ -110,7 +110,6 @@ scale_color_discrete <- function(palette = "main", ...) {
 
   ggplot2::discrete_scale(
     aesthetics = "colour",
-    scale_name = "urbn",
     palette = pal_func,
     ...
   )
@@ -168,7 +167,6 @@ scale_fill_discrete <- function(palette = "main", ...) {
 
   ggplot2::discrete_scale(
     aesthetics = "fill",
-    scale_name = "urbn",
     palette = pal_func,
     ...
   )
@@ -207,7 +205,6 @@ scale_color_gradientn <- function(palette = "cyan",
 
   ggplot2::continuous_scale(
     aesthetics = "colour",
-    scale_name = "gradientn",
     palette = scales::gradient_n_pal(colours, values, space),
     na.value = na.value,
     guide = guide,
@@ -265,7 +262,6 @@ scale_fill_gradientn <- function(palette = "cyan",
 
   ggplot2::continuous_scale(
     aesthetics = "fill",
-    scale_name = "gradientn",
     palette = scales::gradient_n_pal(colours, values, space),
     na.value = na.value,
     guide = guide,
@@ -307,7 +303,6 @@ scale_fill_ordinal <- function(palette = "cyan", ...) {
 
   ggplot2::discrete_scale(
     aesthetics = "fill",
-    scale_name = "urbn",
     palette = pal_func,
     ...
   )
@@ -347,7 +342,6 @@ scale_color_ordinal <- function(palette = "cyan", ...) {
 
   ggplot2::discrete_scale(
     aesthetics = "color",
-    scale_name = "urbn",
     palette = pal_func,
     ...
   )
@@ -404,7 +398,6 @@ scale_fill_gradient <- function(palette = "cyan",
 
   ggplot2::continuous_scale(
     aesthetics = "fill",
-    scale_name = "gradient",
     palette = scales::gradient_n_pal(c(low, high), NULL, space),
     na.value = na.value,
     guide = guide,
@@ -448,7 +441,6 @@ scale_color_gradient <- function(palette = "cyan",
 
   ggplot2::continuous_scale(
     aesthetics = "colour",
-    scale_name = "gradient",
     palette = scales::gradient_n_pal(c(low, high), NULL, space),
     na.value = na.value,
     guide = guide,
@@ -513,7 +505,6 @@ scale_fill_gradient2 <- function(palette = "diverging",
 
   ggplot2::continuous_scale(
     aesthetics = "fill",
-    scale_name = "gradient2",
     palette = scales::div_gradient_pal(low, mid, high, space),
     na.value = na.value,
     guide = guide,
@@ -575,7 +566,6 @@ scale_color_gradient2 <- function(palette = "diverging",
 
   ggplot2::continuous_scale(
     aesthetics = "colour",
-    scale_name = "gradient2",
     palette = scales::div_gradient_pal(low, mid, high, space),
     na.value = na.value,
     guide = guide,

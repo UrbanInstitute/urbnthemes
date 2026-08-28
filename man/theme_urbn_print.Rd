@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_urbn_print.R
 \name{theme_urbn_print}
 \alias{theme_urbn_print}
-\title{A \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme formatted in the Urban Institute style}
+\title{A \link[ggplot2:ggplot2]{ggplot2} theme formatted in the Urban Institute style}
 \usage{
 theme_urbn_print(
   base_size = 8.5,
@@ -17,6 +17,6 @@ theme_urbn_print(
 \item{base_line_size, base_rect_size}{base line and rectangle sizes}
 }
 \description{
-\code{theme_urban} provides a \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme formatted according to the
+\code{theme_urban} provides a \link[ggplot2:ggplot2]{ggplot2} theme formatted according to the
 Urban Institute style guide for web, with sensible defaults.
 }

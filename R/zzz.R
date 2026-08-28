@@ -1,19 +1,5 @@
 .onAttach <- function(libname, pkgname) {
 
-  # set os options
-  if (.Platform$OS.type == "windows") {
-    packageStartupMessage("Setting Windows options...")
-    grDevices::windows.options(width = 8.33333333333333,
-                               height = 5.55555555555556)
-    grDevices::windowsFonts(Lato = grDevices::windowsFont("Lato"))
-    grDevices::windowsFonts(FontAwesome = grDevices::windowsFont("FontAwesome"))
-  } else {
-    packageStartupMessage("Setting Mac/Linux options...")
-    grDevices::quartz.options(width = 8.33333333333333,
-                              height = 5.55555555555556,
-                              dpi = 72)
-  }
-
   # check ggplot2 version
   if (unlist(utils::packageVersion("ggplot2"))[1] < 3) {
     packageStartupMessage(
@@ -28,4 +14,22 @@
     )
   }
 
+  # check for Lato font availability
+  fonts <- systemfonts::system_fonts()
+  lato_available <- any(grepl("[Ll]ato", fonts$family))
+
+  if (!lato_available) {
+    packageStartupMessage(
+      "Note: Lato font not found. Run lato_import() for installation instructions."
+    )
+  }
+
+  # recommend ragg for best font rendering
+  if (!requireNamespace("ragg", quietly = TRUE)) {
+    packageStartupMessage(
+      "Tip: Install the 'ragg' package for better font rendering: install.packages('ragg')"
+    )
+  }
+
 }
+

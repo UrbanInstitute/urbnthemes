@@ -3,7 +3,6 @@
 #' Creates a grid object with the Urban Institute logo
 #'
 #' @import grid
-#' @import gridExtra
 #' @md
 #' @export
 urbn_logo_text <- function() {

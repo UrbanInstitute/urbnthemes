@@ -29,8 +29,9 @@ by \code{size}. Defaults to \code{NULL}, which uses the standard height.}
 }
 \description{
 This is a function to save standardized images for Urban Institute
-publications. For more functionality like custom widths and heights, use
-ggsave() directly.
+publications. For PNG files, uses the ragg package (if available) for
+better font rendering. For more functionality like custom widths and
+heights, use ggsave() directly.
 }
 \examples{
 

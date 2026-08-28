@@ -13,7 +13,7 @@
 #' relative to this value.
 #' @param scale For `theme_urbn_map()`. Should the legend theme be continuous or discrete?
 #'
-#' @import extrafont
+#' @import systemfonts
 #' @import ggrepel
 #'
 #' @export
@@ -61,23 +61,25 @@ set_urbn_defaults <- function(style = "print",
   # set default color scales for continuous variables -----------------------
 
   options(
-    ggplot2.continuous.colour = "gradient",
-    ggplot2.continuous.fill = "gradient"
+    ggplot2.continuous.colour = scale_color_gradientn,
+    ggplot2.continuous.fill = scale_fill_gradientn,
+    ggplot2.binned.colour = scale_color_binned,
+    ggplot2.binned.fill = scale_fill_binned
   )
-
 
   # set defaults for geoms --------------------------------------------------
 
   ggplot2::update_geom_defaults("bar", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("col", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("point", list(colour = "#1696d2", size = 3))
-  ggplot2::update_geom_defaults("line", list(colour = "#1696d2", size = 1))
-  ggplot2::update_geom_defaults("step", list(colour = "#1696d2", size = 1))
-  ggplot2::update_geom_defaults("path", list(colour = "#1696d2", size = 1))
+  ggplot2::update_geom_defaults("line", list(colour = "#1696d2", linewidth = 1))
+  ggplot2::update_geom_defaults("step", list(colour = "#1696d2", linewidth = 1))
+  ggplot2::update_geom_defaults("path", list(colour = "#1696d2", linewidth = 1))
   ggplot2::update_geom_defaults("boxplot", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("density", list(fill = "#1696d2"))
   ggplot2::update_geom_defaults("violin", list(fill = "#1696d2"))
-  ggplot2::update_geom_defaults("sf", list(fill = "#1696d2", color = "white", size = 0.1))
+  ggplot2::update_geom_defaults("area", list(fill = "#1696d2"))
+  ggplot2::update_geom_defaults("sf", list(fill = "#1696d2", color = "white", linewidth = 0.1))
 
   # set defaults for stats --------------------------------------------------
 

@@ -1,8 +1,9 @@
 #' Save ggplot2 plots in standard Urban Institute sizes
 #'
 #' This is a function to save standardized images for Urban Institute
-#' publications. For more functionality like custom widths and heights, use
-#' ggsave() directly.
+#' publications. For PNG files, uses the ragg package (if available) for
+#' better font rendering. For more functionality like custom widths and
+#' heights, use ggsave() directly.
 #'
 #' @param filename File name to create on disk.
 #' @param plot Plot to save, defaults to last plot displayed.
@@ -60,11 +61,18 @@ urbn_save <- function(filename,
 
   selected_size <- sizes[[size]]
 
+  # use ragg for better font rendering if available
+  device <- NULL
+  if (requireNamespace("ragg", quietly = TRUE) && grepl("\\.png$", filename, ignore.case = TRUE)) {
+    device <- ragg::agg_png
+  }
+
   ggplot2::ggsave(
     filename = filename,
     plot = plot,
     width = selected_size["width"],
     height = selected_size["height"],
+    device = device,
     dpi = dpi
   )
 
