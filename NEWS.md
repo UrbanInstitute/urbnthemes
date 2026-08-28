@@ -2,7 +2,7 @@
 
 * Create `urbn_save` function with prescriptive height and width. (#69)
 * Clean up and expand color palettes. (#55, #89, #96)
-* Remove `extrafront` dependency.
+* Remove `extrafront` dependency. (#103)
 * Replace `gridExtra` with `patchwork` and add `add_urbn_logo()` function. (#102)
 * Update the `themes` functions and remove deprecated syntax. (#104)
 * Add knitr helper function to update defaults in RMarkdown and Quarto.
