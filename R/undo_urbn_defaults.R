@@ -3,7 +3,7 @@
 #' Resets all the [ggplot2] theme to its default settings
 #'
 #'
-#' @import extrafont
+#' @import systemfonts
 #' @import ggrepel
 #' @md
 #' @export

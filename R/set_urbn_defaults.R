@@ -13,7 +13,7 @@
 #' relative to this value.
 #' @param scale For `theme_urbn_map()`. Should the legend theme be continuous or discrete?
 #'
-#' @import extrafont
+#' @import systemfonts
 #' @import ggrepel
 #'
 #' @export

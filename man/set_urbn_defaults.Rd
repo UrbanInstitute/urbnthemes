@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_urbn_defaults.R
 \name{set_urbn_defaults}
 \alias{set_urbn_defaults}
-\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2]{ggplot2} theme}
 \usage{
 set_urbn_defaults(
   style = "print",
@@ -30,6 +30,6 @@ relative to this value.}
 \item{scale}{For \code{theme_urbn_map()}. Should the legend theme be continuous or discrete?}
 }
 \description{
-\code{set_urbn_defaults} provides a \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme formatted according to the
+\code{set_urbn_defaults} provides a \link[ggplot2:ggplot2]{ggplot2} theme formatted according to the
 Urban Institute style guide, with sensible defaults.
 }

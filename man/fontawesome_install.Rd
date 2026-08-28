@@ -2,15 +2,20 @@
 % Please edit documentation in R/fontawesome_install.R
 \name{fontawesome_install}
 \alias{fontawesome_install}
-\title{Import and register Lato font}
+\title{Check FontAwesome font availability}
 \usage{
 fontawesome_install()
 }
+\value{
+A message indicating whether FontAwesome is available
+}
 \description{
-\code{fontawesome_install} tests to see if FontAwesome is imported and registered. If FontAwesome, isn't imported and registered, then \code{fontawesome_install} imports and registers FontAwesome with \href{https://github.com/wch/extrafont}{library(extrafont)}.
+\code{fontawesome_install()} checks if FontAwesome is installed on your system
+and provides installation instructions if not.
 }
 \details{
-Note: FontAwesome must be installed on your computer for \code{fontawesome_install} to work.
-
-Test to see if FontAwesome is imported and registered with \code{fontawesome_test()}.
+Note: FontAwesome must be installed on your computer.
+}
+\seealso{
+\code{\link{fontawesome_test}}
 }

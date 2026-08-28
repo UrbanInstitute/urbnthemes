@@ -2,10 +2,10 @@
 % Please edit documentation in R/undo_urbn_defaults.R
 \name{undo_urbn_defaults}
 \alias{undo_urbn_defaults}
-\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2]{ggplot2} theme}
 \usage{
 undo_urbn_defaults()
 }
 \description{
-Resets all the \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme to its default settings
+Resets all the \link[ggplot2:ggplot2]{ggplot2} theme to its default settings
 }

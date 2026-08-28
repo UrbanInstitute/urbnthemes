@@ -2,7 +2,7 @@
 % Please edit documentation in R/remove_axis.R
 \name{remove_axis}
 \alias{remove_axis}
-\title{The Urban Institute \link[ggplot2:ggplot2-package]{ggplot2::ggplot2} theme}
+\title{The Urban Institute \link[ggplot2:ggplot2]{ggplot2} theme}
 \usage{
 remove_axis(axis = "y", flip = FALSE)
 }
